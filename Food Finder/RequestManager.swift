@@ -16,7 +16,7 @@ class RequestManager {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
-    func getRestuarants(with location: String, term: String = "Restaurant", price: String = "1,2,3,4", completion: @escaping([Restaurant]) -> ()){
+    func getRestuarants(_ location: String, term: String = "vietnamese", price: String = "1,2,3,4", completion: @escaping([Restaurant]) -> ()){
         
         var restaurantArray = [Restaurant]()
         let config = URLSessionConfiguration.default
@@ -52,11 +52,12 @@ class RequestManager {
                 let newRestaurant = Restaurant(context: self.context)
                 
                 guard let locationDict = restaurant["location"] as? Dictionary<String,Any?>, let address = locationDict["address1"] else { return }
+                let rating = restaurant["rating"] as? Double
                 newRestaurant.id = restaurant["id"] as? String
                 newRestaurant.imageURL = restaurant["image_url"] as? String
                 newRestaurant.name = restaurant["name"] as? String
                 newRestaurant.phone = restaurant["display_phone"] as? String
-                newRestaurant.rating = (restaurant["rating"] as? Int64)!
+                newRestaurant.rating = Double(rating!)
                 newRestaurant.url = restaurant["url"] as? String
                 newRestaurant.address = address as? String
                 
