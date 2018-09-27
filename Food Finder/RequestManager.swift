@@ -10,13 +10,13 @@ import UIKit
 import CoreLocation
 
 
-
 class RequestManager {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
-    func getRestuarants(_ location: String, term: String = "vietnamese", price: String = "1,2,3,4", completion: @escaping([Restaurant]) -> ()){
+    func getRestuarants(_ location: String? = nil, latitude: String? = nil, longitude: String? = nil, term: String = "vietnamese", price: String = "1,2,3,4", completion: @escaping([Restaurant]) -> ()){
+        
         
         var restaurantArray = [Restaurant]()
         let config = URLSessionConfiguration.default
@@ -30,7 +30,10 @@ class RequestManager {
         let termQueryItem = URLQueryItem(name: "term", value: term)
         let priceQueryItem = URLQueryItem(name: "price", value: price)
         let radiusQueryItem = URLQueryItem(name: "radius", value: "2500")
-        components.queryItems = [locationQueryItem,termQueryItem,priceQueryItem, radiusQueryItem]
+        let latitudeQueryItem = URLQueryItem(name: "latitude", value: latitude)
+        let longitudeQueryItem = URLQueryItem(name: "longitude", value: longitude)
+        let limitQueryItem = URLQueryItem(name: "limit", value: "20")
+        components.queryItems = [locationQueryItem,termQueryItem,priceQueryItem, radiusQueryItem, latitudeQueryItem, longitudeQueryItem, limitQueryItem]
         
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
@@ -56,7 +59,7 @@ class RequestManager {
                 newRestaurant.id = restaurant["id"] as? String
                 newRestaurant.imageURL = restaurant["image_url"] as? String
                 newRestaurant.name = restaurant["name"] as? String
-                newRestaurant.phone = restaurant["display_phone"] as? String
+                newRestaurant.phone = restaurant["phone"] as? String
                 newRestaurant.rating = Double(rating!)
                 newRestaurant.url = restaurant["url"] as? String
                 newRestaurant.address = address as? String
