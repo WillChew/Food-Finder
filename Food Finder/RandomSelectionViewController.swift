@@ -23,7 +23,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
     var longitude: String!
     private let locationManager = CLLocationManager()
     
-    @IBOutlet weak var phoneImage: UIImageView!
+    
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -49,7 +49,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
         phoneButton.isHidden = true
         nameLabel.text = "Find a random restaurant"
         addressLabel.text = ""
-        phoneImage.isHidden = true
+       
         requestManager = RequestManager()
         locationTextField.delegate = self
 
@@ -143,7 +143,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
     
     func changeDisplays() {
         phoneButton.isHidden = false
-        phoneImage.isHidden = false
+        
         let randomNumberi32 = arc4random_uniform(UInt32(self.restaruantArray.count))
         let randomNumberInt = Int(randomNumberi32)
         let randomRestaurant = self.restaruantArray[randomNumberInt]
@@ -159,8 +159,24 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
         } else {
             guard let numberBefore = randomRestaurant.phone else { return }
             phoneNumber = String(numberBefore.dropFirst(2))
-            self.phoneButton.titleLabel?.text = "Call the restaurant"
-            phoneButton.setTitle(phoneNumber, for: .normal)
+            
+            
+            
+            
+            let areaCode = phoneNumber.index(phoneNumber.startIndex, offsetBy: 0) ..< phoneNumber.index(phoneNumber.endIndex, offsetBy: -7)
+            let middleThree = phoneNumber.index(phoneNumber.startIndex, offsetBy: 3) ..< phoneNumber.index(phoneNumber.endIndex, offsetBy: -4)
+            let lastFour = phoneNumber.index(phoneNumber.startIndex, offsetBy: 6) ..< phoneNumber.endIndex
+            
+            let areaCodeStr = String(phoneNumber[areaCode])
+            let middleStr = String(phoneNumber[middleThree])
+            let lastFourStr = String(phoneNumber[lastFour])
+            
+            
+            let displayNumber = String(format: "(%@) %@ - %@", areaCodeStr, middleStr, lastFourStr)
+            
+            //6479751430
+            
+            phoneButton.setTitle(displayNumber, for: .normal)
             
         }
         
