@@ -15,7 +15,7 @@ class RequestManager {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
-    func getRestuarants(_ location: String? = nil, latitude: String? = nil, longitude: String? = nil, term: String = "vietnamese", price: String = "1,2,3,4", completion: @escaping([Restaurant]) -> ()){
+    func getRestuarants(_ location: String? = nil, latitude: String? = nil, longitude: String? = nil, term: String = "restaurant", price: String = "1,2,3,4", completion: @escaping([Restaurant]) -> ()){
         
         
         var restaurantArray = [Restaurant]()
@@ -54,15 +54,18 @@ class RequestManager {
             for restaurant in restaurants {
                 let newRestaurant = Restaurant(context: self.context)
                 
-                guard let locationDict = restaurant["location"] as? Dictionary<String,Any?>, let address = locationDict["address1"] else { return }
-                let rating = restaurant["rating"] as? Double
+                guard let locationDict = restaurant["location"] as? Dictionary<String,Any?>, let address = locationDict["address1"], let coordinates = restaurant["coordinates"] as? Dictionary<String,Any?>, let latitude = coordinates["latitude"] as? Double, let longitude = coordinates["longitude"] as? Double, let rating = restaurant["rating"] as? Double else { return }
+//                let rating = restaurant["rating"] as? Double
                 newRestaurant.id = restaurant["id"] as? String
                 newRestaurant.imageURL = restaurant["image_url"] as? String
                 newRestaurant.name = restaurant["name"] as? String
                 newRestaurant.phone = restaurant["phone"] as? String
-                newRestaurant.rating = Double(rating!)
+                newRestaurant.rating = rating
                 newRestaurant.url = restaurant["url"] as? String
                 newRestaurant.address = address as? String
+                newRestaurant.latitude = latitude
+                newRestaurant.longitude = longitude
+                
                 
                 restaurantArray.append(newRestaurant)
               

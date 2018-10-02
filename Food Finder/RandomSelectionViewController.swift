@@ -9,39 +9,54 @@
 import UIKit
 import CoreGraphics
 import CoreLocation
+import GoogleMaps
 
-class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate {
+class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     var requestManager: RequestManager!
     var restaruantArray = [Restaurant]()
-    var locationManager: CLLocationManager!
     var currentLocation: CLLocation!
+    var phoneNumber: String!
 //    var locationAddress: String!
 //    lazy var geoCoder = CLGeocoder()
     var latitude: String!
     var longitude: String!
+    private let locationManager = CLLocationManager()
     
-    
+    @IBOutlet weak var phoneImage: UIImageView!
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var restaurantImage: UIImageView!
+    @IBOutlet weak var theMapView: GMSMapView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var ratingImage: UIImageView!
     @IBOutlet weak var locationTextField: UITextField!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.distanceFilter = 200
         
+        
+       
+        
+        
+        phoneButton.isHidden = true
+        nameLabel.text = "Find a random restaurant"
+        addressLabel.text = ""
+        phoneImage.isHidden = true
         requestManager = RequestManager()
         locationTextField.delegate = self
 
-        restaurantImage.layer.borderWidth = 5
-        restaurantImage.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
+        theMapView.layer.borderWidth = 5
+        theMapView.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
         
         
-        fetchCurrentLocation()
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,67 +64,34 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: CLLocationManagerDelegate
     
-    @IBAction func selectRestaurantButtonPressed(_ sender: UIButton) {
-    }
     
-    @IBAction func tryAgainButtonPressed(_ sender: UIButton) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status == .authorizedWhenInUse else { return }
         
-    }
-    
-    @IBAction func makeCallButtonPressed(_ sender: UIButton) {
-        print("Button pressed")
+        locationManager.startUpdatingLocation()
         
-    }
-    @IBAction func searchButtonPressed(_ sender: UIButton) {
-        locationTextField.resignFirstResponder()
+        theMapView.isMyLocationEnabled = true
+        theMapView.settings.myLocationButton = true
         
-        if locationTextField.text == "" {
-            requestManager.getRestuarants(latitude: latitude, longitude: longitude) { (restaurants) in
-                self.restaruantArray = restaurants
-                
-                DispatchQueue.main.async {
-                    self.changeDisplays()
-                }
-            }
-            
-        } else {
-            
-            requestManager.getRestuarants(locationTextField.text!) { (restaurants) in
-                self.restaruantArray = restaurants
-                
-                
-                DispatchQueue.main.async {
-                    
-                    self.changeDisplays()
-
-                }
-            }
-        }
         
     }
-    
-    func fetchCurrentLocation(){
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.distanceFilter = 200
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
-        }
-        
-    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         manager.startMonitoringSignificantLocationChanges()
-        currentLocation = locations[0] as CLLocation
+        guard let location = locations.first else {
+            return
+        }
+        
+        theMapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 13, bearing: 0, viewingAngle: 0)
+        
+        currentLocation = location as CLLocation
         latitude = String(currentLocation.coordinate.latitude)
         longitude = String(currentLocation.coordinate.longitude)
         
-
     }
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(#line, "Failed to get location")
@@ -160,6 +142,8 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
     }
     
     func changeDisplays() {
+        phoneButton.isHidden = false
+        phoneImage.isHidden = false
         let randomNumberi32 = arc4random_uniform(UInt32(self.restaruantArray.count))
         let randomNumberInt = Int(randomNumberi32)
         let randomRestaurant = self.restaruantArray[randomNumberInt]
@@ -167,32 +151,87 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
         let restaurantRating = randomRestaurant.rating
         self.nameLabel.text = randomRestaurant.name
         self.addressLabel.text = randomRestaurant.address
-        self.phoneButton.titleLabel?.text = randomRestaurant.phone
         self.getRatingImage(restaurantRating)
         
-        guard let imageURL = randomRestaurant.imageURL else { return }
-        downloadImage(from: imageURL)
+        if randomRestaurant.phone == "" {
+            phoneButton.titleLabel?.text = "No number available"
+            phoneButton.isEnabled = false
+        } else {
+            guard let numberBefore = randomRestaurant.phone else { return }
+            phoneNumber = String(numberBefore.dropFirst(2))
+            self.phoneButton.titleLabel?.text = "Call the restaurant"
+            phoneButton.setTitle(phoneNumber, for: .normal)
+            
+        }
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: randomRestaurant.latitude, longitude: randomRestaurant.longitude)
+        marker.title = randomRestaurant.name
+        marker.snippet = randomRestaurant.address
+        marker.map = theMapView
+        
+    }
+//        guard let imageURL = randomRestaurant.imageURL else { return }
+//        downloadImage(from: imageURL)
+    
+    
+    //MARK: - IGNORE (download images)
+//    func getData(from urlString: String, completion: @escaping(Data?, URLResponse?, Error?) -> () ) {
+//        guard let imageURL = URL(string: urlString) else { return }
+//        URLSession.shared.dataTask(with: imageURL, completionHandler: completion).resume()
+//    }
+//
+//    func downloadImage(from urlString: String) {
+//        getData(from: urlString) { (data, response, error) in
+//            guard let data = data, error == nil else { return }
+//            DispatchQueue.main.async {
+//                self.restaurantImage.image = UIImage(data: data)
+//            }
+//        }
+//    }
+    
+    //PRAGMA MARK: Button Actions
+    
+    @IBAction func selectRestaurantButtonPressed(_ sender: UIButton) {
     }
     
-    func getData(from urlString: String, completion: @escaping(Data?, URLResponse?, Error?) -> () ) {
-        guard let imageURL = URL(string: urlString) else { return }
-        URLSession.shared.dataTask(with: imageURL, completionHandler: completion).resume()
+    @IBAction func makeCallButtonPressed(_ sender: UIButton) {
+        
+        guard let number = URL(string: "tel://" + phoneNumber) else { return }
+        UIApplication.shared.open(number)
+        
     }
-    
-    func downloadImage(from urlString: String) {
-        getData(from: urlString) { (data, response, error) in
-            guard let data = data, error == nil else { return }
-            DispatchQueue.main.async {
-                self.restaurantImage.image = UIImage(data: data)
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+        locationTextField.resignFirstResponder()
+        
+        if locationTextField.text == "" {
+            requestManager.getRestuarants(latitude: latitude, longitude: longitude) { (restaurants) in
+                self.restaruantArray = restaurants
+                
+                DispatchQueue.main.async {
+                    self.changeDisplays()
+                }
+            }
+        } else {
+            
+            requestManager.getRestuarants(locationTextField.text!) { (restaurants) in
+                self.restaruantArray = restaurants
+                
+                DispatchQueue.main.async {
+                    self.changeDisplays()
+
+                }
             }
         }
+        
     }
     
-//    func makePhoneCall(call number: String){
-//        let url: NSURL = URL(string: <#T##String#>)
-//    }
+
+    
 
 }
+
+
 extension RandomSelectionViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
