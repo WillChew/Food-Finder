@@ -17,8 +17,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
     var restaruantArray = [Restaurant]()
     var currentLocation: CLLocation!
     var phoneNumber: String!
-//    var locationAddress: String!
-//    lazy var geoCoder = CLGeocoder()
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var latitude: String!
     var longitude: String!
     private let locationManager = CLLocationManager()
@@ -37,24 +36,23 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 200
         
-        
-       
-        
-        
         phoneButton.isHidden = true
         nameLabel.text = "Find a random restaurant"
         addressLabel.text = ""
-       
+        
         requestManager = RequestManager()
         locationTextField.delegate = self
-
+        
         theMapView.layer.borderWidth = 5
         theMapView.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
+        theMapView.addSubview(activityIndicator)
+        activityIndicator.bounds = theMapView.bounds
         
         
     }
@@ -143,6 +141,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
     
     func changeDisplays() {
         phoneButton.isHidden = false
+        theMapView.clear()
         
         let randomNumberi32 = arc4random_uniform(UInt32(self.restaruantArray.count))
         let randomNumberInt = Int(randomNumberi32)
@@ -161,8 +160,6 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
             phoneNumber = String(numberBefore.dropFirst(2))
             
             
-            
-            
             let areaCode = phoneNumber.index(phoneNumber.startIndex, offsetBy: 0) ..< phoneNumber.index(phoneNumber.endIndex, offsetBy: -7)
             let middleThree = phoneNumber.index(phoneNumber.startIndex, offsetBy: 3) ..< phoneNumber.index(phoneNumber.endIndex, offsetBy: -4)
             let lastFour = phoneNumber.index(phoneNumber.startIndex, offsetBy: 6) ..< phoneNumber.endIndex
@@ -170,11 +167,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
             let areaCodeStr = String(phoneNumber[areaCode])
             let middleStr = String(phoneNumber[middleThree])
             let lastFourStr = String(phoneNumber[lastFour])
-            
-            
-            let displayNumber = String(format: "(%@) %@ - %@", areaCodeStr, middleStr, lastFourStr)
-            
-            //6479751430
+            let displayNumber = String(format: "(%@) %@-%@", areaCodeStr, middleStr, lastFourStr)
             
             phoneButton.setTitle(displayNumber, for: .normal)
             
@@ -186,29 +179,32 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
         marker.snippet = randomRestaurant.address
         marker.map = theMapView
         
+        getRoute(from: currentLocation.coordinate, to: CLLocationCoordinate2D(latitude: randomRestaurant.latitude, longitude: randomRestaurant.longitude))
+        
     }
-//        guard let imageURL = randomRestaurant.imageURL else { return }
-//        downloadImage(from: imageURL)
+    //        guard let imageURL = randomRestaurant.imageURL else { return }
+    //        downloadImage(from: imageURL)
     
     
     //MARK: - IGNORE (download images)
-//    func getData(from urlString: String, completion: @escaping(Data?, URLResponse?, Error?) -> () ) {
-//        guard let imageURL = URL(string: urlString) else { return }
-//        URLSession.shared.dataTask(with: imageURL, completionHandler: completion).resume()
-//    }
-//
-//    func downloadImage(from urlString: String) {
-//        getData(from: urlString) { (data, response, error) in
-//            guard let data = data, error == nil else { return }
-//            DispatchQueue.main.async {
-//                self.restaurantImage.image = UIImage(data: data)
-//            }
-//        }
-//    }
+    //    func getData(from urlString: String, completion: @escaping(Data?, URLResponse?, Error?) -> () ) {
+    //        guard let imageURL = URL(string: urlString) else { return }
+    //        URLSession.shared.dataTask(with: imageURL, completionHandler: completion).resume()
+    //    }
+    //
+    //    func downloadImage(from urlString: String) {
+    //        getData(from: urlString) { (data, response, error) in
+    //            guard let data = data, error == nil else { return }
+    //            DispatchQueue.main.async {
+    //                self.restaurantImage.image = UIImage(data: data)
+    //            }
+    //        }
+    //    }
     
     //PRAGMA MARK: Button Actions
     
     @IBAction func selectRestaurantButtonPressed(_ sender: UIButton) {
+        
     }
     
     @IBAction func makeCallButtonPressed(_ sender: UIButton) {
@@ -235,18 +231,93 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
                 
                 DispatchQueue.main.async {
                     self.changeDisplays()
-
+                    
                 }
             }
         }
+    }
+    
+    func getRoute(from start:CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, mode: String? = "walking") {
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let url = URL(string: "https://maps.googleapis.com")!
+        
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        components.path = "/maps/api/directions/json"
+        let startQueryItem = URLQueryItem(name: "origin", value: "\(start.latitude), \(start.longitude)")
+        let destinationQueryItem = URLQueryItem(name: "destination", value: "\(destination.latitude), \(destination.longitude)")
+        let sensorQueryItem = URLQueryItem(name: "sensor", value: "true")
+        let keyQueryItem = URLQueryItem(name: "key", value: "AIzaSyC6qrRUA6K4AevKj76c8tKPBmIEbY5xcGc")
+        components.queryItems = [startQueryItem, destinationQueryItem, sensorQueryItem, keyQueryItem]
+        var request = URLRequest(url: components.url!)
+        request.httpMethod = "GET"
+        
+        let task = session.dataTask(with: request, completionHandler: {
+            (data, response, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+                self.activityIndicator.stopAnimating()
+            }
+            else {
+                do {
+                    if let json : [String : Any] = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String : Any] {
+                        
+                        guard let routes = json["routes"] as? Array<Dictionary<String,Any?>> else {
+                            DispatchQueue.main.async {
+                                self.activityIndicator.stopAnimating()
+                                
+                            }
+                            return
+                        }
+                        
+                        
+                        if (routes.count > 0 ){
+                            let overview_polyline = routes[0] as NSDictionary
+                            let dictPolyline = overview_polyline["overview_polyline"] as? NSDictionary
+                            
+                            let points = dictPolyline?.object(forKey: "points") as? String
+                            self.showPath(polyStr: points!)
+                            
+                            DispatchQueue.main.async {
+                                self.activityIndicator.stopAnimating()
+                                
+                                let bounds = GMSCoordinateBounds(coordinate: start, coordinate: destination)
+                                let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsetsMake(170,30,30,30))
+                                self.theMapView.moveCamera(update)
+                            }
+                        }
+                        else {
+                            DispatchQueue.main.async {
+                                self.activityIndicator.stopAnimating()
+                                
+                                
+                            }
+                        }
+                    }
+                }
+                catch {
+                    print("error in JSONSerialization")
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        
+                        
+                    }
+                }
+            }
+        })
+        task.resume()
         
     }
     
-
+    func showPath(polyStr: String) {
+        let path = GMSPath(fromEncodedPath: polyStr)
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeWidth = 3.0
+        polyline.map = theMapView
+    }
     
-
 }
-
 
 extension RandomSelectionViewController: UITextFieldDelegate {
     
