@@ -55,6 +55,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
         activityIndicator.bounds = theMapView.bounds
         
         
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -142,6 +143,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
     func changeDisplays() {
         phoneButton.isHidden = false
         theMapView.clear()
+        activityIndicator.startAnimating()
         
         let randomNumberi32 = arc4random_uniform(UInt32(self.restaruantArray.count))
         let randomNumberInt = Int(randomNumberi32)
@@ -256,8 +258,8 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
         let task = session.dataTask(with: request, completionHandler: {
             (data, response, error) in
             if error != nil {
-                print(error?.localizedDescription)
-                self.activityIndicator.stopAnimating()
+                print(error!.localizedDescription)
+                
             }
             else {
                 do {
@@ -276,10 +278,13 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
                             let overview_polyline = routes[0] as NSDictionary
                             let dictPolyline = overview_polyline["overview_polyline"] as? NSDictionary
                             
-                            let points = dictPolyline?.object(forKey: "points") as? String
-                            self.showPath(polyStr: points!)
-                            
+                            guard let points = dictPolyline?.object(forKey: "points") as? String else { return }
+
                             DispatchQueue.main.async {
+                                
+                                // if simulator put here:
+                                 self.showPath(polyStr: points)
+
                                 self.activityIndicator.stopAnimating()
                                 
                                 let bounds = GMSCoordinateBounds(coordinate: start, coordinate: destination)
@@ -300,8 +305,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
                     print("error in JSONSerialization")
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
-                        
-                        
+
                     }
                 }
             }
@@ -314,6 +318,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
         let path = GMSPath(fromEncodedPath: polyStr)
         let polyline = GMSPolyline(path: path)
         polyline.strokeWidth = 3.0
+        polyline.strokeColor = .red
         polyline.map = theMapView
     }
     
