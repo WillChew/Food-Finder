@@ -11,8 +11,9 @@ import CoreGraphics
 import CoreLocation
 import GoogleMaps
 
-class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
+class RandomSelectionViewController: UIViewController {
     
+    //MARK: Global vars & outlets
     var requestManager: RequestManager!
     var restaruantArray = [Restaurant]()
     var currentLocation: CLLocation!
@@ -63,39 +64,8 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: CLLocationManagerDelegate
-    
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        guard status == .authorizedWhenInUse else { return }
-        
-        locationManager.startUpdatingLocation()
-        
-        theMapView.isMyLocationEnabled = true
-        theMapView.settings.myLocationButton = true
-        
-        
-    }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        manager.startMonitoringSignificantLocationChanges()
-        guard let location = locations.first else {
-            return
-        }
-        
-        theMapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 13, bearing: 0, viewingAngle: 0)
-        
-        currentLocation = location as CLLocation
-        latitude = String(currentLocation.coordinate.latitude)
-        longitude = String(currentLocation.coordinate.longitude)
-        
-    }
-    
-    
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(#line, "Failed to get location")
-    }
-    
+
+    //MARK: Functions 
     func getRatingImage(_ restaurantRating: Double) {
         switch restaurantRating {
         case 1 :
@@ -279,12 +249,12 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
                             let dictPolyline = overview_polyline["overview_polyline"] as? NSDictionary
                             
                             guard let points = dictPolyline?.object(forKey: "points") as? String else { return }
-
+                            
                             DispatchQueue.main.async {
                                 
-                                // if simulator put here:
-                                 self.showPath(polyStr: points)
-
+                                
+                                self.showPath(polyStr: points)
+                                
                                 self.activityIndicator.stopAnimating()
                                 
                                 let bounds = GMSCoordinateBounds(coordinate: start, coordinate: destination)
@@ -305,7 +275,7 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
                     print("error in JSONSerialization")
                     DispatchQueue.main.async {
                         self.activityIndicator.stopAnimating()
-
+                        
                     }
                 }
             }
@@ -322,6 +292,39 @@ class RandomSelectionViewController: UIViewController, CLLocationManagerDelegate
         polyline.map = theMapView
     }
     
+}
+
+//MARK: Map and location delegate methods
+extension RandomSelectionViewController: CLLocationManagerDelegate, GMSMapViewDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status == .authorizedWhenInUse else { return }
+        
+        locationManager.startUpdatingLocation()
+        
+        theMapView.isMyLocationEnabled = true
+        theMapView.settings.myLocationButton = true
+        
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        manager.startMonitoringSignificantLocationChanges()
+        guard let location = locations.first else {
+            return
+        }
+        
+        theMapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 13, bearing: 0, viewingAngle: 0)
+        
+        currentLocation = location as CLLocation
+        latitude = String(currentLocation.coordinate.latitude)
+        longitude = String(currentLocation.coordinate.longitude)
+        
+    }
+    
+    
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(#line, "Failed to get location")
+    }
 }
 
 extension RandomSelectionViewController: UITextFieldDelegate {
