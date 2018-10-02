@@ -24,6 +24,8 @@ class RandomSelectionViewController: UIViewController {
     private let locationManager = CLLocationManager()
     
     
+    @IBOutlet weak var selectButton: UIButton!
+    @IBOutlet weak var tryAgainButton: UIButton!
     @IBOutlet weak var phoneButton: UIButton!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -55,6 +57,14 @@ class RandomSelectionViewController: UIViewController {
         theMapView.addSubview(activityIndicator)
         activityIndicator.bounds = theMapView.bounds
         
+        selectButton.layer.cornerRadius = 10
+        selectButton.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
+        selectButton.layer.borderWidth = 3
+        
+        tryAgainButton.layer.cornerRadius = 10
+        tryAgainButton.layer.borderWidth = 3
+        tryAgainButton.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
+        
         
         
     }
@@ -65,7 +75,7 @@ class RandomSelectionViewController: UIViewController {
     }
     
 
-    //MARK: Functions 
+    //MARK: Functions
     func getRatingImage(_ restaurantRating: Double) {
         switch restaurantRating {
         case 1 :

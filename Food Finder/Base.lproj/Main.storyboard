@@ -133,7 +133,9 @@
                         <outlet property="phoneButton" destination="bJg-BF-2ii" id="fGt-Gr-fY7"/>
                         <outlet property="ratingImage" destination="ofo-94-zGX" id="yH0-Fo-yIO"/>
                         <outlet property="searchButton" destination="hZ5-qq-M0R" id="Pbe-UT-70k"/>
+                        <outlet property="selectButton" destination="gry-IR-r2G" id="Rgm-tz-j09"/>
                         <outlet property="theMapView" destination="Ggs-SX-jCD" id="GmM-o8-ggV"/>
+                        <outlet property="tryAgainButton" destination="Ty0-Cv-aeJ" id="r6S-6W-Ahb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
