@@ -32,7 +32,7 @@ class RequestManager {
         let radiusQueryItem = URLQueryItem(name: "radius", value: "2500")
         let latitudeQueryItem = URLQueryItem(name: "latitude", value: latitude)
         let longitudeQueryItem = URLQueryItem(name: "longitude", value: longitude)
-        let limitQueryItem = URLQueryItem(name: "limit", value: "20")
+        let limitQueryItem = URLQueryItem(name: "limit", value: "50")
         components.queryItems = [locationQueryItem,termQueryItem,priceQueryItem, radiusQueryItem, latitudeQueryItem, longitudeQueryItem, limitQueryItem]
         
         var request = URLRequest(url: components.url!)

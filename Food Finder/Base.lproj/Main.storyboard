@@ -52,6 +52,7 @@
                             </button>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Ggs-SX-jCD" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="88.000000000000028" width="375" height="405.66666666666674"/>
+                                <gestureRecognizers/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="large_0" translatesAutoresizingMaskIntoConstraints="NO" id="ofo-94-zGX">
                                 <rect key="frame" x="121.66666666666669" y="618" width="132" height="30"/>
@@ -187,11 +188,28 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="WG2-kZ-Vdc"/>
+                        <segue destination="t4L-Ml-lkf" kind="relationship" relationship="viewControllers" id="6jk-8y-T6h"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sq4-3G-gGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.00492610837438"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="i4C-eL-geV">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aAv-0c-0bf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="t4L-Ml-lkf" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FgC-oy-ci5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="XcU-vd-fFC"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="jvN-tY-VIw"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1051" y="397"/>
         </scene>
     </scenes>
     <resources>

@@ -42,9 +42,6 @@ class RandomSelectionViewController: UIViewController {
         super.viewDidLoad()
 
         
-        
-        
-        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
@@ -57,17 +54,16 @@ class RandomSelectionViewController: UIViewController {
         requestManager = RequestManager()
         locationTextField.delegate = self
         
-        //        theMapView.layer.borderWidth = 5
-        theMapView.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
+
         theMapView.addSubview(activityIndicator)
         activityIndicator.bounds = theMapView.bounds
         
         selectButton.layer.cornerRadius = 10
         selectButton.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
-        selectButton.layer.borderWidth = 3
+        selectButton.layer.borderWidth = 2
         
         tryAgainButton.layer.cornerRadius = 10
-        tryAgainButton.layer.borderWidth = 3
+        tryAgainButton.layer.borderWidth = 2
         tryAgainButton.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
         
         
@@ -322,9 +318,9 @@ class RandomSelectionViewController: UIViewController {
         findRestaurants()
     }
    
+
     
 }
-
 //MARK: Map and location delegate methods
 extension RandomSelectionViewController: CLLocationManagerDelegate, GMSMapViewDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
