@@ -33,11 +33,16 @@ class RandomSelectionViewController: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var ratingImage: UIImageView!
     @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var searchStackView: UIStackView!
+    @IBOutlet weak var magnifyingGlassButton: UIButton!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+        
         
         
         locationManager.delegate = self
@@ -46,13 +51,13 @@ class RandomSelectionViewController: UIViewController {
         locationManager.distanceFilter = 200
         
         phoneButton.isHidden = true
-        nameLabel.text = "Find a random restaurant"
+        nameLabel.text = "Find a restaurant"
         addressLabel.text = ""
         
         requestManager = RequestManager()
         locationTextField.delegate = self
         
-        theMapView.layer.borderWidth = 5
+        //        theMapView.layer.borderWidth = 5
         theMapView.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
         theMapView.addSubview(activityIndicator)
         activityIndicator.bounds = theMapView.bounds
@@ -69,12 +74,9 @@ class RandomSelectionViewController: UIViewController {
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  
     
-
+    
     //MARK: Functions
     func getRatingImage(_ restaurantRating: Double) {
         switch restaurantRating {
@@ -120,84 +122,8 @@ class RandomSelectionViewController: UIViewController {
         }
     }
     
-    func changeDisplays() {
-        phoneButton.isHidden = false
-        theMapView.clear()
-        activityIndicator.startAnimating()
-        
-        let randomNumberi32 = arc4random_uniform(UInt32(self.restaruantArray.count))
-        let randomNumberInt = Int(randomNumberi32)
-        let randomRestaurant = self.restaruantArray[randomNumberInt]
-        
-        let restaurantRating = randomRestaurant.rating
-        self.nameLabel.text = randomRestaurant.name
-        self.addressLabel.text = randomRestaurant.address
-        self.getRatingImage(restaurantRating)
-        
-        if randomRestaurant.phone == "" {
-            phoneButton.titleLabel?.text = "No number available"
-            phoneButton.isEnabled = false
-        } else {
-            guard let numberBefore = randomRestaurant.phone else { return }
-            phoneNumber = String(numberBefore.dropFirst(2))
-            
-            
-            let areaCode = phoneNumber.index(phoneNumber.startIndex, offsetBy: 0) ..< phoneNumber.index(phoneNumber.endIndex, offsetBy: -7)
-            let middleThree = phoneNumber.index(phoneNumber.startIndex, offsetBy: 3) ..< phoneNumber.index(phoneNumber.endIndex, offsetBy: -4)
-            let lastFour = phoneNumber.index(phoneNumber.startIndex, offsetBy: 6) ..< phoneNumber.endIndex
-            
-            let areaCodeStr = String(phoneNumber[areaCode])
-            let middleStr = String(phoneNumber[middleThree])
-            let lastFourStr = String(phoneNumber[lastFour])
-            let displayNumber = String(format: "(%@) %@-%@", areaCodeStr, middleStr, lastFourStr)
-            
-            phoneButton.setTitle(displayNumber, for: .normal)
-            
-        }
-        
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: randomRestaurant.latitude, longitude: randomRestaurant.longitude)
-        marker.title = randomRestaurant.name
-        marker.snippet = randomRestaurant.address
-        marker.map = theMapView
-        
-        getRoute(from: currentLocation.coordinate, to: CLLocationCoordinate2D(latitude: randomRestaurant.latitude, longitude: randomRestaurant.longitude))
-        
-    }
-    //        guard let imageURL = randomRestaurant.imageURL else { return }
-    //        downloadImage(from: imageURL)
     
-    
-    //MARK: - IGNORE (download images)
-    //    func getData(from urlString: String, completion: @escaping(Data?, URLResponse?, Error?) -> () ) {
-    //        guard let imageURL = URL(string: urlString) else { return }
-    //        URLSession.shared.dataTask(with: imageURL, completionHandler: completion).resume()
-    //    }
-    //
-    //    func downloadImage(from urlString: String) {
-    //        getData(from: urlString) { (data, response, error) in
-    //            guard let data = data, error == nil else { return }
-    //            DispatchQueue.main.async {
-    //                self.restaurantImage.image = UIImage(data: data)
-    //            }
-    //        }
-    //    }
-    
-    //PRAGMA MARK: Button Actions
-    
-    @IBAction func selectRestaurantButtonPressed(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func makeCallButtonPressed(_ sender: UIButton) {
-        
-        guard let number = URL(string: "tel://" + phoneNumber) else { return }
-        UIApplication.shared.open(number)
-        
-    }
-    @IBAction func searchButtonPressed(_ sender: UIButton) {
-        locationTextField.resignFirstResponder()
-        
+    func findRestaurants() {
         if locationTextField.text == "" {
             requestManager.getRestuarants(latitude: latitude, longitude: longitude) { (restaurants) in
                 self.restaruantArray = restaurants
@@ -218,6 +144,7 @@ class RandomSelectionViewController: UIViewController {
             }
         }
     }
+    
     
     func getRoute(from start:CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, mode: String? = "walking") {
         
@@ -302,6 +229,100 @@ class RandomSelectionViewController: UIViewController {
         polyline.map = theMapView
     }
     
+    
+    func changeDisplays() {
+        phoneButton.isHidden = false
+        theMapView.clear()
+        activityIndicator.startAnimating()
+        
+        let randomNumberi32 = arc4random_uniform(UInt32(self.restaruantArray.count))
+        let randomNumberInt = Int(randomNumberi32)
+        let randomRestaurant = self.restaruantArray[randomNumberInt]
+        
+        let restaurantRating = randomRestaurant.rating
+        self.nameLabel.text = randomRestaurant.name
+        self.addressLabel.text = randomRestaurant.address
+        self.getRatingImage(restaurantRating)
+        
+        if randomRestaurant.phone == "" {
+            phoneButton.titleLabel?.text = "No number available"
+            phoneButton.isEnabled = false
+        } else {
+            guard let numberBefore = randomRestaurant.phone else { return }
+            phoneNumber = String(numberBefore.dropFirst(2))
+            
+            
+            let areaCode = phoneNumber.index(phoneNumber.startIndex, offsetBy: 0) ..< phoneNumber.index(phoneNumber.endIndex, offsetBy: -7)
+            let middleThree = phoneNumber.index(phoneNumber.startIndex, offsetBy: 3) ..< phoneNumber.index(phoneNumber.endIndex, offsetBy: -4)
+            let lastFour = phoneNumber.index(phoneNumber.startIndex, offsetBy: 6) ..< phoneNumber.endIndex
+            
+            let areaCodeStr = String(phoneNumber[areaCode])
+            let middleStr = String(phoneNumber[middleThree])
+            let lastFourStr = String(phoneNumber[lastFour])
+            let displayNumber = String(format: "(%@) %@-%@", areaCodeStr, middleStr, lastFourStr)
+            
+            phoneButton.setTitle(displayNumber, for: .normal)
+            
+        }
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: randomRestaurant.latitude, longitude: randomRestaurant.longitude)
+        marker.title = randomRestaurant.name
+        marker.snippet = randomRestaurant.address
+        marker.map = theMapView
+        
+        getRoute(from: currentLocation.coordinate, to: CLLocationCoordinate2D(latitude: randomRestaurant.latitude, longitude: randomRestaurant.longitude))
+        
+    }
+    
+    
+    //        guard let imageURL = randomRestaurant.imageURL else { return }
+    //        downloadImage(from: imageURL)
+    
+    
+    //MARK: - IGNORE (download images)
+    //    func getData(from urlString: String, completion: @escaping(Data?, URLResponse?, Error?) -> () ) {
+    //        guard let imageURL = URL(string: urlString) else { return }
+    //        URLSession.shared.dataTask(with: imageURL, completionHandler: completion).resume()
+    //    }
+    //
+    //    func downloadImage(from urlString: String) {
+    //        getData(from: urlString) { (data, response, error) in
+    //            guard let data = data, error == nil else { return }
+    //            DispatchQueue.main.async {
+    //                self.restaurantImage.image = UIImage(data: data)
+    //            }
+    //        }
+    //    }
+    
+    //PRAGMA MARK: Button Actions
+    
+    @IBAction func magnifyingGlassButtonPressed(_ sender: UIButton) {
+        
+        magnifyingGlassButton.isHidden = true
+        searchStackView.isHidden = false
+    }
+    @IBAction func selectRestaurantButtonPressed(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func makeCallButtonPressed(_ sender: UIButton) {
+        
+        guard let number = URL(string: "tel://" + phoneNumber) else { return }
+        UIApplication.shared.open(number)
+        
+    }
+    
+    
+    @IBAction func searchButtonPressed(_ sender: UIButton) {
+        locationTextField.resignFirstResponder()
+        magnifyingGlassButton.isHidden = false
+        searchStackView.isHidden = true
+        
+        findRestaurants()
+    }
+   
+    
 }
 
 //MARK: Map and location delegate methods
@@ -341,7 +362,9 @@ extension RandomSelectionViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
+        findRestaurants()
+        magnifyingGlassButton.isHidden = false
+        searchStackView.isHidden = true
         return true
     }
     
