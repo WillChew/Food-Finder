@@ -10,6 +10,7 @@ import UIKit
 import CoreGraphics
 import CoreLocation
 import GoogleMaps
+import SafariServices
 
 class RandomSelectionViewController: UIViewController {
     
@@ -21,6 +22,7 @@ class RandomSelectionViewController: UIViewController {
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var latitude: String!
     var longitude: String!
+    var selectedRestaurant: Restaurant!
     private let locationManager = CLLocationManager()
     
     
@@ -234,8 +236,9 @@ class RandomSelectionViewController: UIViewController {
         let randomNumberi32 = arc4random_uniform(UInt32(self.restaruantArray.count))
         let randomNumberInt = Int(randomNumberi32)
         let randomRestaurant = self.restaruantArray[randomNumberInt]
-        
         let restaurantRating = randomRestaurant.rating
+        selectedRestaurant = randomRestaurant
+        
         self.nameLabel.text = randomRestaurant.name
         self.addressLabel.text = randomRestaurant.address
         self.getRatingImage(restaurantRating)
@@ -299,7 +302,7 @@ class RandomSelectionViewController: UIViewController {
         searchStackView.isHidden = false
     }
     @IBAction func selectRestaurantButtonPressed(_ sender: UIButton) {
-        
+        showYelpPage(selectedRestaurant.url!)
     }
     
     @IBAction func makeCallButtonPressed(_ sender: UIButton) {
@@ -352,6 +355,14 @@ extension RandomSelectionViewController: CLLocationManagerDelegate, GMSMapViewDe
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(#line, "Failed to get location")
     }
+    
+    func showYelpPage(_ url: String){
+       
+        guard let yelpUrl = URL(string: url) else { return }
+        let vc = SFSafariViewController(url: yelpUrl)
+        present(vc, animated: true, completion: nil)
+    }
+    
 }
 
 extension RandomSelectionViewController: UITextFieldDelegate {
