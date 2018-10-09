@@ -73,10 +73,10 @@
 				212EFDAF216C069100B0A4EA /* SelectWithOptionsViewController.swift */,
 				21EECFB9215A01F40068AEF3 /* AppDelegate.swift */,
 				21EECFC3215A01F70068AEF3 /* Assets.xcassets */,
+				21EECFBD215A01F40068AEF3 /* Main.storyboard */,
 				21EECFC8215A01F70068AEF3 /* Info.plist */,
 				21EECFCE215A25020068AEF3 /* RequestManager.swift */,
 				212EFDB1216C097100B0A4EA /* RestaurantCellTableViewCell.swift */,
-				21EECFBD215A01F40068AEF3 /* Main.storyboard */,
 				21EECFC5215A01F70068AEF3 /* LaunchScreen.storyboard */,
 				21EECFC0215A01F40068AEF3 /* DataModel.xcdatamodeld */,
 			);

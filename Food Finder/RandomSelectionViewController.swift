@@ -132,7 +132,7 @@ class RandomSelectionViewController: UIViewController {
             }
         } else {
             
-            requestManager.getRestuarants(locationTextField.text!) { (restaurants) in
+            requestManager.getRestuarants(near: locationTextField.text!) { (restaurants) in
                 self.restaruantArray = restaurants
                 
                 DispatchQueue.main.async {
@@ -337,7 +337,7 @@ extension RandomSelectionViewController: CLLocationManagerDelegate, GMSMapViewDe
         
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        manager.startMonitoringSignificantLocationChanges()
+        
         guard let location = locations.first else {
             return
         }

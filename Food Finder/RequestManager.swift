@@ -15,7 +15,7 @@ class RequestManager {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
-    func getRestuarants(_ location: String? = nil, latitude: String? = nil, longitude: String? = nil, term: String = "restaurant", price: String = "1,2,3,4", completion: @escaping([Restaurant]) -> ()){
+    func getRestuarants(near location: String? = nil, latitude: String? = nil, longitude: String? = nil, term: String? = "food", price: String? = "1,2,3,4", completion: @escaping([Restaurant]) -> ()){
         
         
         var restaurantArray = [Restaurant]()
