@@ -15,7 +15,7 @@ class RequestManager {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
-    func getRestuarants(near location: String? = nil, latitude: String? = nil, longitude: String? = nil, term: String? = "food", price: String? = "1,2,3,4", completion: @escaping([Restaurant]) -> ()){
+    func getRestuarants(near location: String? = "  ", latitude: String? = nil, longitude: String? = nil, term: String? = "food", price: String? = "1,2,3,4", completion: @escaping([Restaurant]) -> ()){
         
         
         var restaurantArray = [Restaurant]()
@@ -32,7 +32,7 @@ class RequestManager {
         let radiusQueryItem = URLQueryItem(name: "radius", value: "2500")
         let latitudeQueryItem = URLQueryItem(name: "latitude", value: latitude)
         let longitudeQueryItem = URLQueryItem(name: "longitude", value: longitude)
-        let limitQueryItem = URLQueryItem(name: "limit", value: "50")
+        let limitQueryItem = URLQueryItem(name: "limit", value: "20")
         components.queryItems = [locationQueryItem,termQueryItem,priceQueryItem, radiusQueryItem, latitudeQueryItem, longitudeQueryItem, limitQueryItem]
         
         var request = URLRequest(url: components.url!)

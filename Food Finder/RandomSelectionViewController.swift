@@ -19,7 +19,7 @@ class RandomSelectionViewController: UIViewController {
     var restaruantArray = [Restaurant]()
     var currentLocation: CLLocation!
     var phoneNumber: String!
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
     var latitude: String!
     var longitude: String!
     var selectedRestaurant: Restaurant!
@@ -63,6 +63,9 @@ class RandomSelectionViewController: UIViewController {
         selectButton.layer.cornerRadius = 10
         selectButton.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
         selectButton.layer.borderWidth = 2
+        if selectedRestaurant == nil {
+            selectButton.isHidden = true
+        } 
         
         tryAgainButton.layer.cornerRadius = 10
         tryAgainButton.layer.borderWidth = 2
@@ -193,7 +196,7 @@ class RandomSelectionViewController: UIViewController {
                                 self.activityIndicator.stopAnimating()
                                 
                                 let bounds = GMSCoordinateBounds(coordinate: start, coordinate: destination)
-                                let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsetsMake(170,30,30,30))
+                                let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets.init(top: 170,left: 30,bottom: 30,right: 30))
                                 self.theMapView.moveCamera(update)
                             }
                         }

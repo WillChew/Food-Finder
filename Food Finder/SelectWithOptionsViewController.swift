@@ -21,6 +21,7 @@ class SelectWithOptionsViewController: UIViewController {
     
     
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var searchTermTextField: UITextField!
     @IBOutlet weak var oneDollarSignButton: UIButton!
@@ -36,6 +37,14 @@ class SelectWithOptionsViewController: UIViewController {
         self.locationTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKB))
         view.addGestureRecognizer(tap)
+        restaurantTableView.delegate = self
+        spinner.isHidden = true
+        priceButtonArray.append(oneDollarSignButton)
+        priceButtonArray.append(twoDollarSignsButton)
+        priceButtonArray.append(threeDollarSignsButton)
+        priceButtonArray.append(fourDollarSignsButton)
+        
+        
         
         // Do any additional setup after loading the view.
     }
@@ -51,7 +60,7 @@ class SelectWithOptionsViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-
+    
     
     @IBAction func priceButtonPressed(_ sender: UIButton) {
         
@@ -77,7 +86,8 @@ class SelectWithOptionsViewController: UIViewController {
     }
     
     @IBAction func decideButtonPressed(_ sender: UIButton) {
-        
+        self.spinner.isHidden = false
+        self.spinner.startAnimating()
         priceArray.removeAll()
         for button in priceButtonArray {
             if button.isSelected {
@@ -85,7 +95,11 @@ class SelectWithOptionsViewController: UIViewController {
             }
         }
         
-        let priceAsString = priceArray.map(String.init).joined(separator: ",")
+        
+        var priceAsString = priceArray.map(String.init).joined(separator: ", ")
+        if priceAsString == "" {
+            priceAsString = "1,2,3,4"
+        }
         let latitudeStr = String(currentLocation.coordinate.latitude)
         let longitudeStr = String(currentLocation.coordinate.longitude)
         
@@ -95,6 +109,8 @@ class SelectWithOptionsViewController: UIViewController {
                 self.restaurantsArray = restaurants
                 
                 DispatchQueue.main.async {
+                    self.spinner.stopAnimating()
+                    self.spinner.isHidden = true
                     self.restaurantTableView.reloadData()
                 }
             }
@@ -104,6 +120,8 @@ class SelectWithOptionsViewController: UIViewController {
                 self.restaurantsArray = restaurants
                 
                 DispatchQueue.main.async {
+                    self.spinner.stopAnimating()
+                    self.spinner.isHidden = true
                     self.restaurantTableView.reloadData()
                 }
                 
@@ -113,13 +131,15 @@ class SelectWithOptionsViewController: UIViewController {
                 self.restaurantsArray = restaurants
                 
                 DispatchQueue.main.async {
+                    self.spinner.stopAnimating()
+                    self.spinner.isHidden = true
                     self.restaurantTableView.reloadData()
                 }
             }
         }
     }
     
-
+    
 }
 
 extension SelectWithOptionsViewController: CLLocationManagerDelegate, UITextFieldDelegate {
@@ -185,14 +205,19 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
         }
         
         cell.restaurantImage.image = getPic(indexPath)
+        
         cell.accessoryType = restaurant.selected == true ? .checkmark : .none
+        
         return cell
     }
- 
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         restaurantsArray[indexPath.row].selected = !restaurantsArray[indexPath.row].selected
-        restaurantTableView.deselectRow(at: indexPath, animated: true)
+        tableView.reloadData()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    
     
     
     

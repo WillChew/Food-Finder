@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         GMSServices.provideAPIKey("AIzaSyDyzUyoVZhSaSCjlmI0xeGtx6pYVihCXDk")
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let status = UIApplication.shared.value(forKey: "statusBar") as? UIView {
             status.backgroundColor = .black
         }
-        UIApplication.shared.statusBarStyle = .lightContent
+        
 
         
         return true
