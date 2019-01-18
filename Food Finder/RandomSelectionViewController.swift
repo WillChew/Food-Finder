@@ -50,7 +50,7 @@ class RandomSelectionViewController: UIViewController {
         locationManager.distanceFilter = 200
         
         phoneButton.isHidden = true
-        nameLabel.text = "Find a restaurant"
+        nameLabel.text = "No restaurant selected"
         addressLabel.text = ""
         
         requestManager = RequestManager()
@@ -65,7 +65,7 @@ class RandomSelectionViewController: UIViewController {
         selectButton.layer.borderWidth = 2
         if selectedRestaurant == nil {
             selectButton.isHidden = true
-        } 
+        }
         
         tryAgainButton.layer.cornerRadius = 10
         tryAgainButton.layer.borderWidth = 2
@@ -233,6 +233,7 @@ class RandomSelectionViewController: UIViewController {
     
     func changeDisplays() {
         phoneButton.isHidden = false
+        selectButton.isHidden = false
         theMapView.clear()
         activityIndicator.startAnimating()
         

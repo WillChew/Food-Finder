@@ -88,6 +88,7 @@ class SelectWithOptionsViewController: UIViewController {
     @IBAction func decideButtonPressed(_ sender: UIButton) {
         self.spinner.isHidden = false
         self.spinner.startAnimating()
+        
         priceArray.removeAll()
         for button in priceButtonArray {
             if button.isSelected {
