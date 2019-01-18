@@ -186,11 +186,76 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="WG2-kZ-Vdc"/>
                         <segue destination="t4L-Ml-lkf" kind="relationship" relationship="viewControllers" id="6jk-8y-T6h"/>
+                        <segue destination="gZk-Rh-bdi" kind="relationship" relationship="viewControllers" id="Sju-Wi-qyl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sq4-3G-gGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.00492610837438"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="rMU-6M-mbv">
+            <objects>
+                <viewController id="gZk-Rh-bdi" customClass="HistoryViewController" customModule="Food_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="soa-7z-hXo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c6G-ug-UMc">
+                                <rect key="frame" x="0.0" y="80" width="375" height="649"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryCell" id="6rT-kv-pas" customClass="HistoryCellTableViewCell" customModule="Food_Finder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6rT-kv-pas" id="eGk-14-yrc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fu9-hv-voV">
+                                                    <rect key="frame" x="166" y="12" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="testLabel" destination="Fu9-hv-voV" id="Hhq-az-1aJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="gZk-Rh-bdi" id="fXx-n3-no0"/>
+                                    <outlet property="delegate" destination="gZk-Rh-bdi" id="DeO-43-9Se"/>
+                                </connections>
+                            </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="23U-2G-MtE">
+                                <rect key="frame" x="127" y="44" width="121" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="c6G-ug-UMc" firstAttribute="trailing" secondItem="TIR-DC-Ncy" secondAttribute="trailing" id="5ax-9r-AVf"/>
+                            <constraint firstItem="TIR-DC-Ncy" firstAttribute="trailing" secondItem="23U-2G-MtE" secondAttribute="trailing" constant="127" id="CT0-lb-nEs"/>
+                            <constraint firstItem="c6G-ug-UMc" firstAttribute="bottom" secondItem="TIR-DC-Ncy" secondAttribute="bottom" id="Ckv-df-C9R"/>
+                            <constraint firstItem="23U-2G-MtE" firstAttribute="top" secondItem="TIR-DC-Ncy" secondAttribute="top" id="dVh-bF-1Nx"/>
+                            <constraint firstItem="23U-2G-MtE" firstAttribute="leading" secondItem="TIR-DC-Ncy" secondAttribute="leading" constant="127" id="eGM-ZR-26B"/>
+                            <constraint firstItem="c6G-ug-UMc" firstAttribute="leading" secondItem="TIR-DC-Ncy" secondAttribute="leading" id="fHV-gO-fq6"/>
+                            <constraint firstItem="c6G-ug-UMc" firstAttribute="top" secondItem="23U-2G-MtE" secondAttribute="bottom" constant="8" id="poU-jy-zwZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="TIR-DC-Ncy"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="32I-er-Aco"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JEs-Bf-OqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="124" y="812.807881773399"/>
         </scene>
         <!--Item-->
         <scene sceneID="i4C-eL-geV">
@@ -385,4 +450,5 @@
         <image name="large_0" width="132" height="24"/>
         <image name="magnifying_glass" width="37.5" height="37.5"/>
     </resources>
+    <color key="tintColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

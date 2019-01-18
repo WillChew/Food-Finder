@@ -21,9 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey("AIzaSyDyzUyoVZhSaSCjlmI0xeGtx6pYVihCXDk")
         
-        if let status = UIApplication.shared.value(forKey: "statusBar") as? UIView {
-            status.backgroundColor = .black
-        }
+        
         
 
         
