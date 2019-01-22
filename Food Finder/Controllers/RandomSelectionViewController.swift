@@ -16,7 +16,7 @@ class RandomSelectionViewController: UIViewController {
     
     //MARK: Global vars & outlets
     var requestManager: RequestManager!
-    var restaruantArray = [Restaurant]()
+    var restaurantArray = [Restaurant]()
     var currentLocation: CLLocation!
     var phoneNumber: String!
     let activityIndicator = UIActivityIndicatorView(style: .gray)
@@ -136,7 +136,8 @@ class RandomSelectionViewController: UIViewController {
     func findRestaurants() {
         if locationTextField.text == "" {
             requestManager.getRestuarants(latitude: latitude, longitude: longitude) { (restaurants) in
-                self.restaruantArray = restaurants
+                self.restaurantArray = restaurants
+                
                 
                 DispatchQueue.main.async {
                     self.changeDisplays()
@@ -145,7 +146,7 @@ class RandomSelectionViewController: UIViewController {
         } else {
             
             requestManager.getRestuarants(near: locationTextField.text!) { (restaurants) in
-                self.restaruantArray = restaurants
+                self.restaurantArray = restaurants
                 
                 DispatchQueue.main.async {
                     self.changeDisplays()
@@ -247,9 +248,9 @@ class RandomSelectionViewController: UIViewController {
         theMapView.clear()
         activityIndicator.startAnimating()
         
-        let randomNumberi32 = arc4random_uniform(UInt32(self.restaruantArray.count))
+        let randomNumberi32 = arc4random_uniform(UInt32(self.restaurantArray.count))
         let randomNumberInt = Int(randomNumberi32)
-        let randomRestaurant = self.restaruantArray[randomNumberInt]
+        let randomRestaurant = self.restaurantArray[randomNumberInt]
         let restaurantRating = randomRestaurant.rating
         selectedRestaurant = randomRestaurant
         
@@ -261,7 +262,7 @@ class RandomSelectionViewController: UIViewController {
             phoneButton.titleLabel?.text = "No number available"
             phoneButton.isEnabled = false
         } else {
-            guard let numberBefore = randomRestaurant.phone else { return }
+            let numberBefore = randomRestaurant.phone
             phoneNumber = String(numberBefore.dropFirst(2))
             
             
@@ -316,7 +317,7 @@ class RandomSelectionViewController: UIViewController {
         searchStackView.isHidden = false
     }
     @IBAction func selectRestaurantButtonPressed(_ sender: UIButton) {
-        showYelpPage(selectedRestaurant.url!)
+        showYelpPage(selectedRestaurant.url)
     }
     
     @IBAction func makeCallButtonPressed(_ sender: UIButton) {

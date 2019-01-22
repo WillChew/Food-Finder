@@ -49,8 +49,9 @@ class SelectWithOptionsViewController: UIViewController {
     }
     
     func getPic(_ indexPath: IndexPath) -> UIImage? {
-        guard let urlStr = restaurantsArray[indexPath.row].imageURL, let url = URL(string: urlStr) else { return nil}
-        let data = try! Data(contentsOf: url)
+        let urlStr = restaurantsArray[indexPath.row].imageURL
+        let url = URL(string: urlStr) 
+        let data = try! Data(contentsOf: url!)
         guard let image = UIImage(data: data) else { return nil}
         return image
     }
