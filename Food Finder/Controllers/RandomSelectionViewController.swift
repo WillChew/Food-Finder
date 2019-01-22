@@ -61,7 +61,7 @@ class RandomSelectionViewController: UIViewController {
         activityIndicator.bounds = theMapView.bounds
         
         selectButton.layer.cornerRadius = 10
-        selectButton.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
+        selectButton.layer.borderColor = UIColor.black.cgColor
         selectButton.layer.borderWidth = 2
         if selectedRestaurant == nil {
             selectButton.isHidden = true
@@ -69,7 +69,7 @@ class RandomSelectionViewController: UIViewController {
         
         tryAgainButton.layer.cornerRadius = 10
         tryAgainButton.layer.borderWidth = 2
-        tryAgainButton.layer.borderColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).cgColor
+        tryAgainButton.layer.borderColor = UIColor.black.cgColor
         
         
         

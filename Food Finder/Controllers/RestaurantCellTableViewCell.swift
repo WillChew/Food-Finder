@@ -18,11 +18,17 @@ class RestaurantCellTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        restaurantImage.layer.borderWidth = 2
+        restaurantImage.layer.borderColor = UIColor.black.cgColor
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+        
 
         // Configure the view for the selected state
     }

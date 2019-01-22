@@ -18,7 +18,11 @@ class SelectWithOptionsViewController: UIViewController {
     var restaurantsArray = [Restaurant]()
     var currentLocation: CLLocation!
     var locationManager = CLLocationManager()
+    var selectedRestaurantsArray = [Restaurant]()
     
+    @IBOutlet weak var decideButton: UIButton!
+    
+    @IBOutlet weak var helperButton: UIButton!
     
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -33,19 +37,15 @@ class SelectWithOptionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getLocationUpdate()
+        
         self.searchTermTextField.delegate = self
         self.locationTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKB))
         view.addGestureRecognizer(tap)
         restaurantTableView.delegate = self
         spinner.isHidden = true
-        priceButtonArray.append(oneDollarSignButton)
-        priceButtonArray.append(twoDollarSignsButton)
-        priceButtonArray.append(threeDollarSignsButton)
-        priceButtonArray.append(fourDollarSignsButton)
         
-        
-        
+ 
         // Do any additional setup after loading the view.
     }
     
@@ -70,19 +70,6 @@ class SelectWithOptionsViewController: UIViewController {
         sender.setTitleColor(.white, for: .normal)
         sender.setTitleColor(.green, for: .selected)
         
-        
-        //        switch sender.tag {
-        //        case 1:
-        //            print("1")
-        //        case 2:
-        //            print("2")
-        //        case 3:
-        //            print("3")
-        //        case 4:
-        //            print("4")
-        //        default:
-        //            return
-        //        }
     }
     
     @IBAction func decideButtonPressed(_ sender: UIButton) {
@@ -163,6 +150,28 @@ extension SelectWithOptionsViewController: CLLocationManagerDelegate, UITextFiel
         return true
     }
     
+    func setupButtons(){
+        
+        
+        decideButton.layer.cornerRadius = 10
+        decideButton.layer.borderColor = UIColor.black.cgColor
+        decideButton.layer.borderWidth = 2
+        decideButton.backgroundColor = .gray
+        
+        priceButtonArray.append(oneDollarSignButton)
+        priceButtonArray.append(twoDollarSignsButton)
+        priceButtonArray.append(threeDollarSignsButton)
+        priceButtonArray.append(fourDollarSignsButton)
+        
+        helperButton.titleLabel?.text = ""
+        helperButton.titleLabel?.textAlignment = .center
+        helperButton.layer.cornerRadius = 10
+        helperButton.layer.borderColor = UIColor.black.cgcolor
+        helperButton.layer.borderWidth = 2
+   
+        
+    }
+    
 }
 
 extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -209,12 +218,24 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
         
         cell.accessoryType = restaurant.selected == true ? .checkmark : .none
         
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         restaurantsArray[indexPath.row].selected = !restaurantsArray[indexPath.row].selected
-        tableView.reloadData()
+        
+        
+        if restaurantsArray[indexPath.row].selected == true {
+            selectedRestaurantsArray.append(restaurantsArray[indexPath.row])
+        } else {
+            selectedRestaurantsArray = selectedRestaurantsArray.filter
+                { $0.selected == true }
+            
+        }
+        
+        helperButton.titleLabel?.text = "Pick From \(selectedRestaurantsArray.count) Restaurants"
+        tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

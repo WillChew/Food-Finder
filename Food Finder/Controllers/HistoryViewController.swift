@@ -10,12 +10,25 @@ import UIKit
 
 class HistoryViewController: UIViewController {
 
+    @IBOutlet weak var pastFutureSegControl: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         // Do any additional setup after loading the view.
     }
-
+    @IBAction func pastFutureSegCPressed(_ sender: UISegmentedControl) {
+        
+        print(pastFutureSegControl.selectedSegmentIndex)
+        
+        if pastFutureSegControl.selectedSegmentIndex == 1 {
+        view.backgroundColor = .red
+        } else {
+            view.backgroundColor = .black
+        }
+    }
+    
 
 }
 
