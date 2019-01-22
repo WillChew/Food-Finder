@@ -12,19 +12,8 @@ import CoreLocation
 class SelectWithOptionsViewController: UIViewController {
     
     @IBOutlet weak var restaurantTableView: UITableView!
-    var priceButtonArray = [UIButton]()
-    var priceArray = [Int]()
-    let requestManager = RequestManager()
-    var restaurantsArray = [Restaurant]()
-    var currentLocation: CLLocation!
-    var locationManager = CLLocationManager()
-    var selectedRestaurantsArray = [Restaurant]()
-    
     @IBOutlet weak var decideButton: UIButton!
-    
     @IBOutlet weak var helperButton: UIButton!
-    
-    
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var searchTermTextField: UITextField!
@@ -33,10 +22,20 @@ class SelectWithOptionsViewController: UIViewController {
     @IBOutlet weak var threeDollarSignsButton: UIButton!
     @IBOutlet weak var fourDollarSignsButton: UIButton!
     
+    var priceButtonArray = [UIButton]()
+    var priceArray = [Int]()
+    let requestManager = RequestManager()
+    var restaurantsArray = [Restaurant]()
+    var currentLocation: CLLocation!
+    var locationManager = CLLocationManager()
+    var selectedRestaurantsArray = [Restaurant]()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getLocationUpdate()
+        setupButtons()
         
         self.searchTermTextField.delegate = self
         self.locationTextField.delegate = self
@@ -56,7 +55,7 @@ class SelectWithOptionsViewController: UIViewController {
         return image
     }
     
-    @objc func dismissKB(sender: UITapGestureRecognizer) {
+    @objc func dismissKB() {
         self.view.endEditing(true)
     }
     
@@ -72,9 +71,17 @@ class SelectWithOptionsViewController: UIViewController {
         
     }
     
+    @IBAction func helperButtonPressed(_ sender: UIButton) {
+        print("Hi")
+    }
+    
+    
     @IBAction func decideButtonPressed(_ sender: UIButton) {
         self.spinner.isHidden = false
         self.spinner.startAnimating()
+        
+        dismissKB()
+        
         
         priceArray.removeAll()
         for button in priceButtonArray {
@@ -121,10 +128,12 @@ class SelectWithOptionsViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.spinner.stopAnimating()
                     self.spinner.isHidden = true
+                    
                     self.restaurantTableView.reloadData()
                 }
             }
         }
+        helperButton.setTitle("Tap And Hold to Select Some Restaurants", for: .normal)
     }
     
     
@@ -163,13 +172,18 @@ extension SelectWithOptionsViewController: CLLocationManagerDelegate, UITextFiel
         priceButtonArray.append(threeDollarSignsButton)
         priceButtonArray.append(fourDollarSignsButton)
         
+        let font = UIFont(name: "MarkerFelt-Wide", size: 14)!
+        
         helperButton.titleLabel?.text = ""
+        helperButton.titleLabel?.font = font
         helperButton.titleLabel?.textAlignment = .center
         helperButton.layer.cornerRadius = 10
-        helperButton.layer.borderColor = UIColor.black.cgcolor
+        helperButton.layer.borderColor = UIColor.black.cgColor
         helperButton.layer.borderWidth = 2
-   
         
+        helperButton.setTitle("Find What You Feel Like Eating First", for: .normal)
+        helperButton.isEnabled = false
+   
     }
     
 }
@@ -186,11 +200,13 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell", for: indexPath) as! RestaurantCellTableViewCell
         let restaurant = restaurantsArray[indexPath.row]
-        
+    
+        if restaurantsArray.count == 0 {
+            cell.restaurantNameLabel.text = "No Restaurants Found"
+            cell.restaurantAddress.text = "Change Search Options and Try Again"
+        } else {
         cell.restaurantNameLabel.text = restaurant.name
         cell.restaurantAddress.text = restaurant.address
-        
-        
         switch restaurantsArray[indexPath.row].rating {
         case 1 :
             cell.restaurantRatingImage.image = UIImage(named: "large_1")
@@ -213,11 +229,10 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
         default:
             cell.restaurantRatingImage.image = UIImage(named: "large_0")
         }
-        
         cell.restaurantImage.image = getPic(indexPath)
         
         cell.accessoryType = restaurant.selected == true ? .checkmark : .none
-        
+        }
         
         return cell
     }
@@ -234,10 +249,23 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
             
         }
         
-        helperButton.titleLabel?.text = "Pick From \(selectedRestaurantsArray.count) Restaurants"
+        
+        if selectedRestaurantsArray.count == 0 {
+            helperButton.setTitle("Tap And Hold to Select Some Restaurants", for: .normal)
+            helperButton.isEnabled = false
+        } else if selectedRestaurantsArray.count == 1 {
+            helperButton.setTitle("Choose This Restaurant", for: .normal)
+            helperButton.isEnabled = true
+        } else {
+            helperButton.setTitle("Pick From \(selectedRestaurantsArray.count) Restaurants", for: .normal)
+            helperButton.isEnabled = true
+        }
+        
         tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+
     
     
     

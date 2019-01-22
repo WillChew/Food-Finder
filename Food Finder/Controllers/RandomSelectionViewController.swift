@@ -42,6 +42,7 @@ class RandomSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupButtons()
 
         
         locationManager.delegate = self
@@ -49,27 +50,15 @@ class RandomSelectionViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 200
         
-        phoneButton.isHidden = true
+        
         nameLabel.text = "No restaurant selected"
         addressLabel.text = ""
         
         requestManager = RequestManager()
         locationTextField.delegate = self
-        
-
         theMapView.addSubview(activityIndicator)
         activityIndicator.bounds = theMapView.bounds
         
-        selectButton.layer.cornerRadius = 10
-        selectButton.layer.borderColor = UIColor.black.cgColor
-        selectButton.layer.borderWidth = 2
-        if selectedRestaurant == nil {
-            selectButton.isHidden = true
-        }
-        
-        tryAgainButton.layer.cornerRadius = 10
-        tryAgainButton.layer.borderWidth = 2
-        tryAgainButton.layer.borderColor = UIColor.black.cgColor
         
         
         
@@ -79,6 +68,26 @@ class RandomSelectionViewController: UIViewController {
     
     
     //MARK: Functions
+    
+    func setupButtons() {
+        
+        tryAgainButton.setTitle("Random Restaurant", for: .normal)
+        
+        
+        phoneButton.isHidden = true
+        selectButton.layer.cornerRadius = 10
+        selectButton.layer.borderColor = UIColor.black.cgColor
+        selectButton.layer.borderWidth = 2
+        if selectedRestaurant == nil {
+            selectButton.isHidden = true
+        }
+        ratingImage.isHidden = true
+        tryAgainButton.layer.cornerRadius = 10
+        tryAgainButton.layer.borderWidth = 2
+        tryAgainButton.layer.borderColor = UIColor.black.cgColor
+        
+        
+    }
     func getRatingImage(_ restaurantRating: Double) {
         switch restaurantRating {
         case 1 :
@@ -234,6 +243,7 @@ class RandomSelectionViewController: UIViewController {
     func changeDisplays() {
         phoneButton.isHidden = false
         selectButton.isHidden = false
+        ratingImage.isHidden = false
         theMapView.clear()
         activityIndicator.startAnimating()
         
@@ -321,6 +331,7 @@ class RandomSelectionViewController: UIViewController {
         locationTextField.resignFirstResponder()
         magnifyingGlassButton.isHidden = false
         searchStackView.isHidden = true
+        tryAgainButton.setTitle("Try Another One", for: .normal)
         
         findRestaurants()
     }

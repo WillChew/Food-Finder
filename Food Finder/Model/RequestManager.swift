@@ -48,9 +48,9 @@ class RequestManager {
                 print(#line, error.localizedDescription)
             }
             
-            guard let data = data else { return }
-            guard let jsonResult = try! JSONSerialization.jsonObject(with: data) as? Dictionary<String,Any?> else { return }
-            let restaurants = jsonResult["businesses"] as! Array<Dictionary<String,Any?>>
+            guard let data = data, let jsonResult = try! JSONSerialization.jsonObject(with: data) as? Dictionary<String,Any?>, let restaurants = jsonResult["businesses"] as? Array<Dictionary<String,Any?>> else { return }
+            
+           
             for restaurant in restaurants {
                 let newRestaurant = Restaurant(context: self.context)
                 
@@ -65,8 +65,6 @@ class RequestManager {
                 newRestaurant.address = address as? String
                 newRestaurant.latitude = latitude
                 newRestaurant.longitude = longitude
-                
-                
                 restaurantArray.append(newRestaurant)
               
                 
