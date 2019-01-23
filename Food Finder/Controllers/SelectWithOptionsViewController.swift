@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import SDWebImage
 
 class SelectWithOptionsViewController: UIViewController {
     
@@ -49,33 +50,7 @@ class SelectWithOptionsViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
-    
-    //    func getPic(_ indexPath: IndexPath) -> UIImage? {
-    //        let urlStr = restaurantsArray[indexPath.row].imageURL
-    //        let url = URL(string: urlStr)
-    //        let data = try! Data(contentsOf: url!)
-    //        guard let image = UIImage(data: data) else { return nil}
-    //        return image
-    //    }
-    
-    
-//    func getPic(_ indexPath: IndexPath, completion: @escaping(UIImage) -> Void) {
-//        guard let url = URL(string: restaurantsArray[indexPath.row].imageURL) else { return }
-//
-//        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
-//
-//            if error != nil {
-//                print(error ?? "No Error")
-//                return
-//            }
-//
-//            guard let image = UIImage(data: data!) else { return }
-//            completion(image)
-//
-//
-//        }).resume()
-//
-//    }
+
     
     @objc func dismissKB() {
         self.view.endEditing(true)
@@ -94,7 +69,7 @@ class SelectWithOptionsViewController: UIViewController {
     }
     
     @IBAction func helperButtonPressed(_ sender: UIButton) {
-        print("Hi")
+        print(selectedRestaurantsArray.count)
     }
     
     
@@ -155,7 +130,16 @@ class SelectWithOptionsViewController: UIViewController {
                 }
             }
         }
-        helperButton.setTitle("Tap And Hold to Select Some Restaurants", for: .normal)
+        if selectedRestaurantsArray.count == 0 {
+            helperButton.setTitle("Tap And Hold to Select Some Restaurants", for: .normal)
+            helperButton.isEnabled = false
+        } else if selectedRestaurantsArray.count == 1 {
+            helperButton.setTitle("Choose Previously Picked Restaurant", for: .normal)
+            helperButton.isEnabled = true
+        } else {
+            helperButton.setTitle("Pick From \(selectedRestaurantsArray.count) Restaurants", for: .normal)
+            helperButton.isEnabled = true
+        }
     }
     
     
@@ -254,16 +238,7 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
             }
             
             
-            DispatchQueue.main.async {
-                if (cell.tag == indexPath.row){
-                    cell.restaurantImage.downloadImageFromURL(self.restaurantsArray[indexPath.row].imageURL) { (image) in
-                self.image2 = image
-            }
-                    
-            }
-                cell.restaurantImage.image = self.image2
-                self.restaurantTableView.reloadData()
-            }
+            cell.restaurantImage.sd_setImage(with:URL(string: restaurantsArray[indexPath.row].imageURL) /*,placeholderImage: UIImage(named: "Telephone")*/)
            
             
             
@@ -305,26 +280,6 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
     
 }
 
-extension UIImageView {
-    
-    
-    func downloadImageFromURL(_ url: String, defaultImage: UIImage? = UIImage(named: "Telephone"), completion: @escaping(UIImage) -> Void)  {
-        
-        guard let url = URL(string: url) else { return }
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
-            
-            if error != nil {
-                print(error ?? "No error")
-            }
-            
-            guard let data = data , let image = UIImage(data: data) else { return }
-            
-            completion(image)
-        }).resume()
-        
-        
-    }
-    
-}
+
 
 
