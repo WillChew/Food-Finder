@@ -29,6 +29,8 @@ class SelectWithOptionsViewController: UIViewController {
     var currentLocation: CLLocation!
     var locationManager = CLLocationManager()
     var selectedRestaurantsArray = [Restaurant]()
+    var image2: UIImage?
+    
     
     
     
@@ -44,17 +46,36 @@ class SelectWithOptionsViewController: UIViewController {
         restaurantTableView.delegate = self
         spinner.isHidden = true
         
- 
+        
         // Do any additional setup after loading the view.
     }
     
-    func getPic(_ indexPath: IndexPath) -> UIImage? {
-        let urlStr = restaurantsArray[indexPath.row].imageURL
-        let url = URL(string: urlStr) 
-        let data = try! Data(contentsOf: url!)
-        guard let image = UIImage(data: data) else { return nil}
-        return image
-    }
+    //    func getPic(_ indexPath: IndexPath) -> UIImage? {
+    //        let urlStr = restaurantsArray[indexPath.row].imageURL
+    //        let url = URL(string: urlStr)
+    //        let data = try! Data(contentsOf: url!)
+    //        guard let image = UIImage(data: data) else { return nil}
+    //        return image
+    //    }
+    
+    
+//    func getPic(_ indexPath: IndexPath, completion: @escaping(UIImage) -> Void) {
+//        guard let url = URL(string: restaurantsArray[indexPath.row].imageURL) else { return }
+//
+//        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
+//
+//            if error != nil {
+//                print(error ?? "No Error")
+//                return
+//            }
+//
+//            guard let image = UIImage(data: data!) else { return }
+//            completion(image)
+//
+//
+//        }).resume()
+//
+//    }
     
     @objc func dismissKB() {
         self.view.endEditing(true)
@@ -184,7 +205,7 @@ extension SelectWithOptionsViewController: CLLocationManagerDelegate, UITextFiel
         
         helperButton.setTitle("Find What You Feel Like Eating First", for: .normal)
         helperButton.isEnabled = false
-   
+        
     }
     
 }
@@ -199,40 +220,56 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell", for: indexPath) as! RestaurantCellTableViewCell
         let restaurant = restaurantsArray[indexPath.row]
-    
+        cell.tag = indexPath.row
         if restaurantsArray.count == 0 {
             cell.restaurantNameLabel.text = "No Restaurants Found"
             cell.restaurantAddress.text = "Change Search Options and Try Again"
         } else {
-        cell.restaurantNameLabel.text = restaurant.name
-        cell.restaurantAddress.text = restaurant.address
-        switch restaurantsArray[indexPath.row].rating {
-        case 1 :
-            cell.restaurantRatingImage.image = UIImage(named: "large_1")
-        case 1.5 :
-            cell.restaurantRatingImage.image = UIImage(named: "large_1_half")
-        case 2 :
-            cell.restaurantRatingImage.image = UIImage(named: "large_2")
-        case 2.5 :
-            cell.restaurantRatingImage.image = UIImage(named: "large_2_half")
-        case 3 :
-            cell.restaurantRatingImage.image = UIImage(named: "large_3")
-        case 3.5 :
-            cell.restaurantRatingImage.image = UIImage(named: "large_3_half")
-        case 4 :
-            cell.restaurantRatingImage.image = UIImage(named: "large_4")
-        case 4.5 :
-            cell.restaurantRatingImage.image = UIImage(named: "large_4_half")
-        case 5 :
-            cell.restaurantRatingImage.image = UIImage(named: "large_5")
-        default:
-            cell.restaurantRatingImage.image = UIImage(named: "large_0")
-        }
-        cell.restaurantImage.image = getPic(indexPath)
-        
-        cell.accessoryType = restaurant.selected == true ? .checkmark : .none
+            cell.restaurantNameLabel.text = restaurant.name
+            cell.restaurantAddress.text = restaurant.address
+            switch restaurantsArray[indexPath.row].rating {
+            case 1 :
+                cell.restaurantRatingImage.image = UIImage(named: "large_1")
+            case 1.5 :
+                cell.restaurantRatingImage.image = UIImage(named: "large_1_half")
+            case 2 :
+                cell.restaurantRatingImage.image = UIImage(named: "large_2")
+            case 2.5 :
+                cell.restaurantRatingImage.image = UIImage(named: "large_2_half")
+            case 3 :
+                cell.restaurantRatingImage.image = UIImage(named: "large_3")
+            case 3.5 :
+                cell.restaurantRatingImage.image = UIImage(named: "large_3_half")
+            case 4 :
+                cell.restaurantRatingImage.image = UIImage(named: "large_4")
+            case 4.5 :
+                cell.restaurantRatingImage.image = UIImage(named: "large_4_half")
+            case 5 :
+                cell.restaurantRatingImage.image = UIImage(named: "large_5")
+            default:
+                cell.restaurantRatingImage.image = UIImage(named: "large_0")
+            }
+            
+            
+            DispatchQueue.main.async {
+                if (cell.tag == indexPath.row){
+                    cell.restaurantImage.downloadImageFromURL(self.restaurantsArray[indexPath.row].imageURL) { (image) in
+                self.image2 = image
+            }
+                    
+            }
+                cell.restaurantImage.image = self.image2
+                self.restaurantTableView.reloadData()
+            }
+           
+            
+            
+            
+            cell.accessoryType = restaurant.selected == true ? .checkmark : .none
+            
         }
         
         return cell
@@ -266,10 +303,28 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+}
 
+extension UIImageView {
     
     
-    
-    
+    func downloadImageFromURL(_ url: String, defaultImage: UIImage? = UIImage(named: "Telephone"), completion: @escaping(UIImage) -> Void)  {
+        
+        guard let url = URL(string: url) else { return }
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
+            
+            if error != nil {
+                print(error ?? "No error")
+            }
+            
+            guard let data = data , let image = UIImage(data: data) else { return }
+            
+            completion(image)
+        }).resume()
+        
+        
+    }
     
 }
+
+
