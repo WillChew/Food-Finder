@@ -313,8 +313,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="4er-Le-Fy5">
-                                                    <rect key="frame" x="102" y="29.666666666666671" width="223" height="20.333333333333329"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="102" y="32" width="223" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -328,7 +328,7 @@
                                                     <rect key="frame" x="102" y="55" width="132" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Bang Bang Ice Cream and Bakery" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V91-Ca-ZVv">
-                                                    <rect key="frame" x="102" y="6.0000000000000018" width="223" height="21.666666666666671"/>
+                                                    <rect key="frame" x="102" y="6" width="223" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -481,6 +481,7 @@
                         <outlet property="helperButton" destination="BUa-dE-nLZ" id="WVV-A8-CwZ"/>
                         <outlet property="locationTextField" destination="rlj-4Q-bl0" id="KzL-B4-SeC"/>
                         <outlet property="oneDollarSignButton" destination="UFy-fe-akQ" id="2nG-6M-68X"/>
+                        <outlet property="popoverView" destination="B86-dC-jeh" id="Eq6-dt-7Xa"/>
                         <outlet property="restaurantTableView" destination="laD-JM-3QC" id="jzm-cq-OVn"/>
                         <outlet property="searchTermTextField" destination="6Ag-2j-fCY" id="0CX-za-Iat"/>
                         <outlet property="spinner" destination="A77-5p-pJ5" id="2Fa-E8-FsY"/>
@@ -489,8 +490,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aAv-0c-0bf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="B86-dC-jeh">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="256"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="UeE-eQ-Ijo"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="1050.4000000000001" y="396.79802955665025"/>
+            <point key="canvasLocation" x="1049" y="595"/>
         </scene>
     </scenes>
     <resources>

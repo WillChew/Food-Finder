@@ -9,8 +9,11 @@
 import UIKit
 import CoreLocation
 import SDWebImage
+import GoogleMaps
+
 
 class SelectWithOptionsViewController: UIViewController {
+    //MARK: Outlets
     
     @IBOutlet weak var restaurantTableView: UITableView!
     @IBOutlet weak var decideButton: UIButton!
@@ -22,7 +25,10 @@ class SelectWithOptionsViewController: UIViewController {
     @IBOutlet weak var twoDollarSignsButton: UIButton!
     @IBOutlet weak var threeDollarSignsButton: UIButton!
     @IBOutlet weak var fourDollarSignsButton: UIButton!
+    @IBOutlet var popoverView: UIView!
     
+    
+    //MARK: Variables
     var priceButtonArray = [UIButton]()
     var priceArray = [Int]()
     let requestManager = RequestManager()
@@ -30,7 +36,8 @@ class SelectWithOptionsViewController: UIViewController {
     var currentLocation: CLLocation!
     var locationManager = CLLocationManager()
     var selectedRestaurantsArray = [Restaurant]()
-    var image2: UIImage?
+    
+    
     
     
     
@@ -39,13 +46,27 @@ class SelectWithOptionsViewController: UIViewController {
         super.viewDidLoad()
         getLocationUpdate()
         setupButtons()
+      
         
         self.searchTermTextField.delegate = self
         self.locationTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKB))
+        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         restaurantTableView.delegate = self
         spinner.isHidden = true
+        
+        
+        
+//
+        
+//
+//
+//
+//
+//
+        
+    
         
         
         // Do any additional setup after loading the view.
@@ -56,7 +77,7 @@ class SelectWithOptionsViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    
+    //MARK: Buttons
     
     @IBAction func priceButtonPressed(_ sender: UIButton) {
         
@@ -168,6 +189,7 @@ extension SelectWithOptionsViewController: CLLocationManagerDelegate, UITextFiel
     func setupButtons(){
         
         
+        
         decideButton.layer.cornerRadius = 10
         decideButton.layer.borderColor = UIColor.black.cgColor
         decideButton.layer.borderWidth = 2
@@ -251,31 +273,84 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        restaurantsArray[indexPath.row].selected = !restaurantsArray[indexPath.row].selected
         
         
-        if restaurantsArray[indexPath.row].selected == true {
-            selectedRestaurantsArray.append(restaurantsArray[indexPath.row])
-        } else {
-            selectedRestaurantsArray = selectedRestaurantsArray.filter
-                { $0.selected == true }
+        popoverView.center = self.view.center
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        popoverView.layer.cornerRadius = 10
+        popoverView.layer.borderColor = UIColor.black.cgColor
+        popoverView.layer.borderWidth = 2
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view.addSubview(blurEffectView)
+        self.view.addSubview(popoverView)
+        
+        
+        var frame2 = CGRect.zero
+        frame2.size.height = 256
+        frame2.size.width = 240
+        
+        var view2 = UIView(frame: frame2)
+        view2.backgroundColor = .black
+        
+        let camera = GMSCameraPosition.camera(withLatitude: restaurantsArray[indexPath.row].latitude, longitude: restaurantsArray[indexPath.row].longitude, zoom: 13.0)
+        let mapView = GMSMapView.map(withFrame: frame2, camera: camera)
+        view2 = mapView
+        
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: restaurantsArray[indexPath.row].latitude, longitude: restaurantsArray[indexPath.row].longitude)
+        marker.title = restaurantsArray[indexPath.row].name
+        marker.snippet = restaurantsArray[indexPath.row].address
+        marker.map = mapView
+        
+        
+        
+        popoverView.addSubview(view2)
+       
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let favourite = UITableViewRowAction(style: .normal
+        , title: "Add/Remove") { (action, indexPath) in
+            
+            
+            self.restaurantsArray[indexPath.row].selected = !self.restaurantsArray[indexPath.row].selected
+            
+            
+            if self.restaurantsArray[indexPath.row].selected == true {
+                self.selectedRestaurantsArray.append(self.restaurantsArray[indexPath.row])
+            } else {
+                self.selectedRestaurantsArray = self.selectedRestaurantsArray.filter
+                    { $0.selected == true }
+                
+            }
+            
+            
+            if self.selectedRestaurantsArray.count == 0 {
+                self.helperButton.setTitle("Tap And Hold to Select Some Restaurants", for: .normal)
+                self.helperButton.isEnabled = false
+            } else if self.selectedRestaurantsArray.count == 1 {
+                self.helperButton.setTitle("Choose This Restaurant", for: .normal)
+                self.helperButton.isEnabled = true
+            } else {
+                self.helperButton.setTitle("Pick From \(self.selectedRestaurantsArray.count) Restaurants", for: .normal)
+                self.helperButton.isEnabled = true
+            }
+            
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            
+            
+            
             
         }
+        favourite.backgroundColor = .darkGray
         
-        
-        if selectedRestaurantsArray.count == 0 {
-            helperButton.setTitle("Tap And Hold to Select Some Restaurants", for: .normal)
-            helperButton.isEnabled = false
-        } else if selectedRestaurantsArray.count == 1 {
-            helperButton.setTitle("Choose This Restaurant", for: .normal)
-            helperButton.isEnabled = true
-        } else {
-            helperButton.setTitle("Pick From \(selectedRestaurantsArray.count) Restaurants", for: .normal)
-            helperButton.isEnabled = true
-        }
-        
-        tableView.reloadRows(at: [indexPath], with: .automatic)
-        tableView.deselectRow(at: indexPath, animated: true)
+        return [favourite]
     }
     
 }

@@ -236,7 +236,7 @@ class RandomSelectionViewController: UIViewController {
         let path = GMSPath(fromEncodedPath: polyStr)
         let polyline = GMSPolyline(path: path)
         polyline.strokeWidth = 3.0
-        polyline.strokeColor = .red
+        polyline.strokeColor = .black
         polyline.map = theMapView
     }
     
