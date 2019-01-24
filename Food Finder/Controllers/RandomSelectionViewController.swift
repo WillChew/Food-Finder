@@ -259,7 +259,7 @@ class RandomSelectionViewController: UIViewController {
         self.getRatingImage(restaurantRating)
         
         if randomRestaurant.phone == "" {
-            phoneButton.titleLabel?.text = "No number available"
+            phoneButton.titleLabel?.text = ""
             phoneButton.isEnabled = false
         } else {
             let numberBefore = randomRestaurant.phone

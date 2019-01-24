@@ -27,6 +27,15 @@ class SelectWithOptionsViewController: UIViewController {
     @IBOutlet weak var fourDollarSignsButton: UIButton!
     @IBOutlet var popoverView: UIView!
     
+    @IBOutlet weak var popoverNameLabel: UILabel!
+    
+    @IBOutlet weak var popoverDismissButton: UIButton!
+    @IBOutlet weak var popoverAddressLabel: UILabel!
+    
+    @IBOutlet weak var popoverAddButton: UIButton!
+    
+    
+    
     
     //MARK: Variables
     var priceButtonArray = [UIButton]()
@@ -36,6 +45,8 @@ class SelectWithOptionsViewController: UIViewController {
     var currentLocation: CLLocation!
     var locationManager = CLLocationManager()
     var selectedRestaurantsArray = [Restaurant]()
+    var blurEffectView = UIVisualEffectView()
+    var selectedRestaurant: Restaurant!
     
     
     
@@ -55,21 +66,7 @@ class SelectWithOptionsViewController: UIViewController {
         view.addGestureRecognizer(tap)
         restaurantTableView.delegate = self
         spinner.isHidden = true
-        
-        
-        
-//
-        
-//
-//
-//
-//
-//
-        
-    
-        
-        
-        // Do any additional setup after loading the view.
+   
     }
 
     
@@ -88,6 +85,23 @@ class SelectWithOptionsViewController: UIViewController {
         sender.setTitleColor(.green, for: .selected)
         
     }
+    
+    @IBAction func popoverDismissButtonPressed(_ sender: UIButton) {
+        popoverView.removeFromSuperview()
+        blurEffectView.removeFromSuperview()
+        
+    }
+    
+    @IBAction func popoverAddButtonPressed(_ sender: UIButton) {
+        selectedRestaurant.selected = true
+        restaurantTableView.reloadData()
+        
+        popoverView.removeFromSuperview()
+        blurEffectView.removeFromSuperview()
+        
+    }
+    
+    
     
     @IBAction func helperButtonPressed(_ sender: UIButton) {
         print(selectedRestaurantsArray.count)
@@ -188,8 +202,6 @@ extension SelectWithOptionsViewController: CLLocationManagerDelegate, UITextFiel
     
     func setupButtons(){
         
-        
-        
         decideButton.layer.cornerRadius = 10
         decideButton.layer.borderColor = UIColor.black.cgColor
         decideButton.layer.borderWidth = 2
@@ -212,6 +224,53 @@ extension SelectWithOptionsViewController: CLLocationManagerDelegate, UITextFiel
         helperButton.setTitle("Find What You Feel Like Eating First", for: .normal)
         helperButton.isEnabled = false
         
+       
+        
+    }
+    
+    fileprivate func setupPopoverView() {
+        popoverView.center = self.view.center
+        popoverView.layer.cornerRadius = 10
+        popoverView.layer.borderColor = UIColor.black.cgColor
+        popoverView.layer.borderWidth = 3
+        let blurEffect = UIBlurEffect(style: .light)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view.addSubview(blurEffectView)
+        self.view.addSubview(popoverView)
+        
+        var frame2 = CGRect.zero
+        frame2.size.height = 256
+        frame2.size.width = 240
+        
+        var GmapView = UIView(frame: frame2)
+        GmapView.backgroundColor = .black
+        
+        let camera = GMSCameraPosition.camera(withLatitude: selectedRestaurant.latitude, longitude: selectedRestaurant.longitude, zoom: 13.0)
+        let mapView = GMSMapView.map(withFrame: frame2, camera: camera)
+        mapView.layer.cornerRadius = 10
+        GmapView = mapView
+        
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: selectedRestaurant.latitude, longitude: selectedRestaurant.longitude)
+        marker.title = selectedRestaurant.name
+        marker.snippet = selectedRestaurant.address
+        marker.map = mapView
+        
+        popoverNameLabel.text = selectedRestaurant.name
+        popoverAddressLabel.text = selectedRestaurant.address
+        
+        popoverDismissButton.layer.cornerRadius = 10
+        popoverDismissButton.layer.borderWidth = 1
+        popoverDismissButton.layer.borderColor = UIColor.black.cgColor
+        
+        popoverAddButton.layer.cornerRadius = 10
+        popoverAddButton.layer.borderWidth = 1
+        popoverAddButton.layer.borderColor = UIColor.black.cgColor
+        
+        popoverView.addSubview(GmapView)
     }
     
 }
@@ -272,50 +331,21 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
         return cell
     }
     
+   
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        selectedRestaurant = restaurantsArray[indexPath.row]
         
-        popoverView.center = self.view.center
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        popoverView.layer.cornerRadius = 10
-        popoverView.layer.borderColor = UIColor.black.cgColor
-        popoverView.layer.borderWidth = 2
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.addSubview(blurEffectView)
-        self.view.addSubview(popoverView)
+         tableView.deselectRow(at: indexPath, animated: true)
         
         
-        var frame2 = CGRect.zero
-        frame2.size.height = 256
-        frame2.size.width = 240
-        
-        var view2 = UIView(frame: frame2)
-        view2.backgroundColor = .black
-        
-        let camera = GMSCameraPosition.camera(withLatitude: restaurantsArray[indexPath.row].latitude, longitude: restaurantsArray[indexPath.row].longitude, zoom: 13.0)
-        let mapView = GMSMapView.map(withFrame: frame2, camera: camera)
-        view2 = mapView
-        
-        
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: restaurantsArray[indexPath.row].latitude, longitude: restaurantsArray[indexPath.row].longitude)
-        marker.title = restaurantsArray[indexPath.row].name
-        marker.snippet = restaurantsArray[indexPath.row].address
-        marker.map = mapView
-        
-        
-        
-        popoverView.addSubview(view2)
+        setupPopoverView()
        
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let favourite = UITableViewRowAction(style: .normal
+        let add = UITableViewRowAction(style: .normal
         , title: "Add/Remove") { (action, indexPath) in
             
             
@@ -348,9 +378,9 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
             
             
         }
-        favourite.backgroundColor = .darkGray
+        add.backgroundColor = .green
         
-        return [favourite]
+        return [add]
     }
     
 }
