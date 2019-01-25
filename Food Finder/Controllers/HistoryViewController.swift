@@ -18,31 +18,42 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var tabBar: UITabBarItem!
     var googleMapView = UIView()
     var mapView: GMSMapView?
-    
-    
+    var screenSize: CGRect!
+    var screenWidth: CGFloat!
+    var screenHeight: CGFloat!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        screenSize = UIScreen.main.bounds
+        screenWidth = screenSize.width
+        screenHeight = screenSize.height
         
         
+        setupMapAndCollectionView()
         
+        // Do any additional setup after loading the view.
+    }
+    
+    //MARK: Functions
+    
+    fileprivate func setupMapAndCollectionView() {
         var mapFrame = CGRect.zero
-        mapFrame.size.height = self.view.frame.height * 0.66
-        mapFrame.size.width = self.view.frame.width
+        mapFrame.size.height = screenHeight * 0.66
+        mapFrame.size.width = screenWidth
         
         
         
-        let camera = GMSCameraPosition.camera(withLatitude: 43.642567, longitude: -79.387054, zoom: 12)
+        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 12)
         mapView = GMSMapView.map(withFrame: mapFrame, camera: camera)
         googleMapView = mapView!
         
-//        let marker = GMSMarker()
-//        marker.position = CLLocationCoordinate2DMake(43.642567, -79.387054)
-//        marker.title = "CN Tower"
-//        marker.snippet = "Toronto"
-//        marker.map = mapView
+        //        let marker = GMSMarker()
+        //        marker.position = CLLocationCoordinate2DMake(43.642567, -79.387054)
+        //        marker.title = "CN Tower"
+        //        marker.snippet = "Toronto"
+        //        marker.map = mapView
         self.view.addSubview(googleMapView)
         
         historyCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,8 +63,8 @@ class HistoryViewController: UIViewController {
         historyCollectionView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: historyCollectionView.frame.width/1.5, height: historyCollectionView.frame.height/1.5)
+        layout.sectionInset = UIEdgeInsets.zero
+        layout.itemSize = CGSize(width: screenWidth/2, height: screenHeight*0.33)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.scrollDirection = .horizontal
@@ -62,8 +73,6 @@ class HistoryViewController: UIViewController {
         
         
         historyCollectionView!.collectionViewLayout = layout
-        
-        // Do any additional setup after loading the view.
     }
     
   
@@ -78,8 +87,8 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCell", for: indexPath) as! HistoryCollectionViewCell
         
-        cell.frame.size.width = historyCollectionView.frame.width/1.5
-        cell.frame.size.height = historyCollectionView.frame.height/1.5
+        cell.frame.size.width = screenWidth/2
+        cell.frame.size.height = screenHeight*0.33
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 1
  
