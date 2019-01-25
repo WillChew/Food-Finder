@@ -12,7 +12,6 @@
 		2146BAC321F27C27006CE7F9 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BAC221F27C27006CE7F9 /* HistoryViewController.swift */; };
 		2146BACA21F72C84006CE7F9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BAC921F72C84006CE7F9 /* Restaurant.swift */; };
 		215C09F621FAD64000826608 /* HistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C09F521FAD64000826608 /* HistoryCollectionViewCell.swift */; };
-		215C09FA21FAE12600826608 /* HistoryCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C09F921FAE12600826608 /* HistoryCollectionReusableView.swift */; };
 		21EECFBA215A01F40068AEF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFB9215A01F40068AEF3 /* AppDelegate.swift */; };
 		21EECFBC215A01F40068AEF3 /* RandomSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFBB215A01F40068AEF3 /* RandomSelectionViewController.swift */; };
 		21EECFBF215A01F40068AEF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EECFBD215A01F40068AEF3 /* Main.storyboard */; };
@@ -29,7 +28,6 @@
 		2146BAC221F27C27006CE7F9 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		2146BAC921F72C84006CE7F9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		215C09F521FAD64000826608 /* HistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCollectionViewCell.swift; sourceTree = "<group>"; };
-		215C09F921FAE12600826608 /* HistoryCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCollectionReusableView.swift; sourceTree = "<group>"; };
 		21EECFB6215A01F30068AEF3 /* Food Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21EECFB9215A01F40068AEF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21EECFBB215A01F40068AEF3 /* RandomSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomSelectionViewController.swift; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 				212EFDB1216C097100B0A4EA /* RestaurantCellTableViewCell.swift */,
 				2146BAC221F27C27006CE7F9 /* HistoryViewController.swift */,
 				215C09F521FAD64000826608 /* HistoryCollectionViewCell.swift */,
-				215C09F921FAE12600826608 /* HistoryCollectionReusableView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -272,7 +269,6 @@
 			files = (
 				21EECFC2215A01F40068AEF3 /* DataModel.xcdatamodeld in Sources */,
 				21EECFBC215A01F40068AEF3 /* RandomSelectionViewController.swift in Sources */,
-				215C09FA21FAE12600826608 /* HistoryCollectionReusableView.swift in Sources */,
 				212EFDB2216C097100B0A4EA /* RestaurantCellTableViewCell.swift in Sources */,
 				21EECFBA215A01F40068AEF3 /* AppDelegate.swift in Sources */,
 				21EECFCF215A25020068AEF3 /* RequestManager.swift in Sources */,

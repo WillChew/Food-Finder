@@ -330,7 +330,7 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
             }
             
             
-            cell.restaurantImage.sd_setImage(with:URL(string: restaurantsArray[indexPath.row].imageURL) /*,placeholderImage: UIImage(named: "Telephone")*/)
+            cell.restaurantImage.sd_setImage(with:URL(string: restaurantsArray[indexPath.row].imageURL) ,placeholderImage: UIImage(named: "noImage"))
             
             
             

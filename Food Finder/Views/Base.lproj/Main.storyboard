@@ -218,35 +218,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="23U-2G-MtE">
-                                <rect key="frame" x="127" y="44" width="121" height="29"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                                <connections>
-                                    <action selector="pastFutureSegCPressed:" destination="gZk-Rh-bdi" eventType="valueChanged" id="ygz-Uj-GSS"/>
-                                </connections>
-                            </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6HF-hO-qg7">
                                 <rect key="frame" x="0.0" y="364" width="375" height="365"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="egY-6h-Mow">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="egY-6h-Mow">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HistoryCell" id="S17-zR-RV0" customClass="HistoryCollectionViewCell" customModule="Food_Finder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="100" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Telephone" translatesAutoresizingMaskIntoConstraints="NO" id="Fc9-AF-evh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                </imageView>
+                                            </subviews>
                                         </view>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Fc9-AF-evh" secondAttribute="bottom" id="288-ak-Ac2"/>
+                                            <constraint firstItem="Fc9-AF-evh" firstAttribute="top" secondItem="S17-zR-RV0" secondAttribute="top" id="DZW-1Y-ZKj"/>
+                                            <constraint firstItem="Fc9-AF-evh" firstAttribute="leading" secondItem="S17-zR-RV0" secondAttribute="leading" id="JYl-kv-hId"/>
+                                            <constraint firstAttribute="trailing" secondItem="Fc9-AF-evh" secondAttribute="trailing" id="PZx-h3-o6M"/>
+                                        </constraints>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -256,17 +257,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="TIR-DC-Ncy" firstAttribute="trailing" secondItem="23U-2G-MtE" secondAttribute="trailing" constant="127" id="CT0-lb-nEs"/>
-                            <constraint firstItem="23U-2G-MtE" firstAttribute="top" secondItem="TIR-DC-Ncy" secondAttribute="top" id="dVh-bF-1Nx"/>
-                            <constraint firstItem="23U-2G-MtE" firstAttribute="leading" secondItem="TIR-DC-Ncy" secondAttribute="leading" constant="127" id="eGM-ZR-26B"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="TIR-DC-Ncy"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="History" id="32I-er-Aco"/>
                     <connections>
                         <outlet property="historyCollectionView" destination="6HF-hO-qg7" id="lgd-5v-hxg"/>
-                        <outlet property="pastFutureSegControl" destination="23U-2G-MtE" id="e0w-1n-ESJ"/>
+                        <outlet property="tabBar" destination="32I-er-Aco" id="zpe-Da-d7J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEs-Bf-OqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -558,6 +554,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Telephone" width="128" height="128"/>
         <image name="large_0" width="132" height="24"/>
         <image name="magnifying_glass" width="37.5" height="37.5"/>
     </resources>
