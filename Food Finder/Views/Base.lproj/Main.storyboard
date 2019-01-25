@@ -201,9 +201,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <segue destination="gZk-Rh-bdi" kind="relationship" relationship="viewControllers" id="Sju-Wi-qyl"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="WG2-kZ-Vdc"/>
                         <segue destination="t4L-Ml-lkf" kind="relationship" relationship="viewControllers" id="6jk-8y-T6h"/>
-                        <segue destination="gZk-Rh-bdi" kind="relationship" relationship="viewControllers" id="Sju-Wi-qyl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sq4-3G-gGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -218,36 +218,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c6G-ug-UMc">
-                                <rect key="frame" x="0.0" y="80" width="375" height="649"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryCell" id="6rT-kv-pas" customClass="HistoryCellTableViewCell" customModule="Food_Finder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6rT-kv-pas" id="eGk-14-yrc">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fu9-hv-voV">
-                                                    <rect key="frame" x="166" y="12" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="testLabel" destination="Fu9-hv-voV" id="Hhq-az-1aJ"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="gZk-Rh-bdi" id="fXx-n3-no0"/>
-                                    <outlet property="delegate" destination="gZk-Rh-bdi" id="DeO-43-9Se"/>
-                                </connections>
-                            </tableView>
                             <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="23U-2G-MtE">
                                 <rect key="frame" x="127" y="44" width="121" height="29"/>
                                 <segments>
@@ -258,21 +228,44 @@
                                     <action selector="pastFutureSegCPressed:" destination="gZk-Rh-bdi" eventType="valueChanged" id="ygz-Uj-GSS"/>
                                 </connections>
                             </segmentedControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6HF-hO-qg7">
+                                <rect key="frame" x="0.0" y="364" width="375" height="365"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="egY-6h-Mow">
+                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HistoryCell" id="S17-zR-RV0" customClass="HistoryCollectionViewCell" customModule="Food_Finder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="10" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="gZk-Rh-bdi" id="Btn-7F-Ke6"/>
+                                    <outlet property="delegate" destination="gZk-Rh-bdi" id="9RQ-Eh-aGg"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="c6G-ug-UMc" firstAttribute="trailing" secondItem="TIR-DC-Ncy" secondAttribute="trailing" id="5ax-9r-AVf"/>
                             <constraint firstItem="TIR-DC-Ncy" firstAttribute="trailing" secondItem="23U-2G-MtE" secondAttribute="trailing" constant="127" id="CT0-lb-nEs"/>
-                            <constraint firstItem="c6G-ug-UMc" firstAttribute="bottom" secondItem="TIR-DC-Ncy" secondAttribute="bottom" id="Ckv-df-C9R"/>
                             <constraint firstItem="23U-2G-MtE" firstAttribute="top" secondItem="TIR-DC-Ncy" secondAttribute="top" id="dVh-bF-1Nx"/>
                             <constraint firstItem="23U-2G-MtE" firstAttribute="leading" secondItem="TIR-DC-Ncy" secondAttribute="leading" constant="127" id="eGM-ZR-26B"/>
-                            <constraint firstItem="c6G-ug-UMc" firstAttribute="leading" secondItem="TIR-DC-Ncy" secondAttribute="leading" id="fHV-gO-fq6"/>
-                            <constraint firstItem="c6G-ug-UMc" firstAttribute="top" secondItem="23U-2G-MtE" secondAttribute="bottom" constant="8" id="poU-jy-zwZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TIR-DC-Ncy"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="History" id="32I-er-Aco"/>
                     <connections>
+                        <outlet property="historyCollectionView" destination="6HF-hO-qg7" id="lgd-5v-hxg"/>
                         <outlet property="pastFutureSegControl" destination="23U-2G-MtE" id="e0w-1n-ESJ"/>
                     </connections>
                 </viewController>

@@ -125,17 +125,17 @@ class SelectWithOptionsViewController: UIViewController {
         self.view.addSubview(blurEffectView)
         self.view.addSubview(popoverView)
         
-        var frame2 = CGRect.zero
-        frame2.size.height = 256
-        frame2.size.width = 240
+        var mapFrame = CGRect.zero
+        mapFrame.size.height = 256
+        mapFrame.size.width = 240
         
-        var GmapView = UIView(frame: frame2)
-        GmapView.backgroundColor = .black
+        var googleMapView = UIView(frame: mapFrame)
+        googleMapView.backgroundColor = .black
         
         let camera = GMSCameraPosition.camera(withLatitude: selectedRestaurant.latitude, longitude: selectedRestaurant.longitude, zoom: 13.0)
-        let mapView = GMSMapView.map(withFrame: frame2, camera: camera)
+        let mapView = GMSMapView.map(withFrame: mapFrame, camera: camera)
         mapView.layer.cornerRadius = 10
-        GmapView = mapView
+        googleMapView = mapView
         
         
         dismissPopoverTap = UITapGestureRecognizer(target: self, action: #selector(dismissPopover))
@@ -158,7 +158,7 @@ class SelectWithOptionsViewController: UIViewController {
         popoverAddButton.layer.borderWidth = 1
         popoverAddButton.layer.borderColor = UIColor.black.cgColor
         
-        popoverView.addSubview(GmapView)
+        popoverView.addSubview(googleMapView)
     }
     
     @objc func dismissPopover(){
