@@ -12,15 +12,16 @@ import GoogleMaps
 class HistoryViewController: UIViewController {
     
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var historyCollectionView: UICollectionView!
-    
-    
     @IBOutlet weak var tabBar: UITabBarItem!
+    
     var googleMapView = UIView()
     var mapView: GMSMapView?
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
+    
     
     
     override func viewDidLoad() {
@@ -43,18 +44,25 @@ class HistoryViewController: UIViewController {
         mapFrame.size.height = screenHeight * 0.66
         mapFrame.size.width = screenWidth
         
-        
-        
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 12)
-        mapView = GMSMapView.map(withFrame: mapFrame, camera: camera)
+        mapView =   GMSMapView.map(withFrame: mapFrame, camera: camera)
         googleMapView = mapView!
+        self.view.addSubview(googleMapView)
+
+        self.view.addSubview(searchBar)
+        
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.topAnchor.constraint(equalTo: historyCollectionView.topAnchor).isActive = true
+        searchBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        searchBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+//        googleMapView.bringSubviewToFront(searchBar)
         
         //        let marker = GMSMarker()
         //        marker.position = CLLocationCoordinate2DMake(43.642567, -79.387054)
         //        marker.title = "CN Tower"
         //        marker.snippet = "Toronto"
         //        marker.map = mapView
-        self.view.addSubview(googleMapView)
+        
         
         historyCollectionView.translatesAutoresizingMaskIntoConstraints = false
         historyCollectionView.topAnchor.constraint(equalTo: googleMapView.bottomAnchor).isActive = true
@@ -108,14 +116,6 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     //MARK: Searchbar functions
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if (kind == UICollectionView.elementKindSectionHeader) {
-            let headerView: UICollectionReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CollectionViewHeader", for: indexPath)
-            return headerView
-        }
-        return UICollectionReusableView()
-    }
-
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("clicked")
     }

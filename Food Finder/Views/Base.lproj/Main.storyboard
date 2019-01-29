@@ -255,6 +255,14 @@
                                     <outlet property="delegate" destination="gZk-Rh-bdi" id="9RQ-Eh-aGg"/>
                                 </connections>
                             </collectionView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PcP-AM-4fL">
+                                <rect key="frame" x="0.0" y="308" width="375" height="56"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="gZk-Rh-bdi" id="haR-kJ-9ZA"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="TIR-DC-Ncy"/>
@@ -262,6 +270,7 @@
                     <tabBarItem key="tabBarItem" title="History" id="32I-er-Aco"/>
                     <connections>
                         <outlet property="historyCollectionView" destination="6HF-hO-qg7" id="lgd-5v-hxg"/>
+                        <outlet property="searchBar" destination="PcP-AM-4fL" id="ua2-J3-Zwz"/>
                         <outlet property="tabBar" destination="32I-er-Aco" id="zpe-Da-d7J"/>
                     </connections>
                 </viewController>
