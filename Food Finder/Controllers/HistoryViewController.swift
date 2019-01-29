@@ -68,10 +68,6 @@ class HistoryViewController: UIViewController {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.scrollDirection = .horizontal
-        
-        
-        
-        
         historyCollectionView!.collectionViewLayout = layout
     }
     
@@ -79,7 +75,8 @@ class HistoryViewController: UIViewController {
     
 }
 
-extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20
     }
@@ -89,6 +86,8 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.frame.size.width = screenWidth/2
         cell.frame.size.height = screenHeight*0.33
+   
+        
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 1
  
@@ -106,6 +105,24 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         mapView?.camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2DMake(43.642567, -79.387054), zoom: 13)
         googleMapView.reloadInputViews()
     }
+    
+    //MARK: Searchbar functions
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if (kind == UICollectionView.elementKindSectionHeader) {
+            let headerView: UICollectionReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CollectionViewHeader", for: indexPath)
+            return headerView
+        }
+        return UICollectionReusableView()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("clicked")
+    }
+    
+    
+    
+    
     
     
     

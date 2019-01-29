@@ -39,12 +39,9 @@ class RandomSelectionViewController: UIViewController {
     @IBOutlet weak var magnifyingGlassButton: UIButton!
     
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupButtons()
-
-        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
@@ -57,9 +54,18 @@ class RandomSelectionViewController: UIViewController {
         requestManager = RequestManager()
         locationTextField.delegate = self
         theMapView.addSubview(activityIndicator)
+        
         activityIndicator.bounds = theMapView.bounds
+        activityIndicator.center = theMapView.center
         
         
+        
+        
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         
     }
@@ -290,24 +296,6 @@ class RandomSelectionViewController: UIViewController {
     }
     
     
-    //        guard let imageURL = randomRestaurant.imageURL else { return }
-    //        downloadImage(from: imageURL)
-    
-    
-    //MARK: - IGNORE (download images)
-    //    func getData(from urlString: String, completion: @escaping(Data?, URLResponse?, Error?) -> () ) {
-    //        guard let imageURL = URL(string: urlString) else { return }
-    //        URLSession.shared.dataTask(with: imageURL, completionHandler: completion).resume()
-    //    }
-    //
-    //    func downloadImage(from urlString: String) {
-    //        getData(from: urlString) { (data, response, error) in
-    //            guard let data = data, error == nil else { return }
-    //            DispatchQueue.main.async {
-    //                self.restaurantImage.image = UIImage(data: data)
-    //            }
-    //        }
-    //    }
     
     //PRAGMA MARK: Button Actions
     
@@ -354,6 +342,7 @@ extension RandomSelectionViewController: CLLocationManagerDelegate, GMSMapViewDe
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        locationManager.startMonitoringSignificantLocationChanges()
         guard let location = locations.first else {
             return
         }
@@ -363,6 +352,8 @@ extension RandomSelectionViewController: CLLocationManagerDelegate, GMSMapViewDe
         currentLocation = location as CLLocation
         latitude = String(currentLocation.coordinate.latitude)
         longitude = String(currentLocation.coordinate.longitude)
+        
+        locationManager.stopMonitoringSignificantLocationChanges()
         
     }
     
