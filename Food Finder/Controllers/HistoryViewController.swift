@@ -34,7 +34,42 @@ class HistoryViewController: UIViewController {
         
         setupMapAndCollectionView()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
+        
+        
+        
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func keyboardWillShow(sender: Notification) {
+        //        guard let keyboardSize = sender.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
+        //            return
+        //        }
+        //
+        //        let keyboardHeight = keyboardSize.cgRectValue.height
+        //        let viewHeight = UIScreen.main.bounds.size.height
+        //        let remainingScreen = viewHeight - keyboardHeight
+        //        let ChosenUIViewHeight = view.frame.size.height
+        //        let posY = (remainingScreen/2) - (ChosenUIViewHeight/2)
+        
+        //        UIView.animate(withDuration: 0.25) {
+        //            self.view.frame = CGRect(x: self.view.frame.origin.x, y: posY, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        //        }
+        
+        UIView.animate(withDuration: 0.25) {
+            self.view.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y - 200, width: self.view.frame.size.width, height: self.view.frame.size.height)
+        }
+    }
+    
+    @objc func keyboardWillHide(sender: Notification) {
+        //        UIView.animate(withDuration: 0.25) {
+        //            self.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
+        //        }
+        UIView.animate(withDuration: 0.25) {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)}
     }
     
     //MARK: Functions
@@ -48,14 +83,14 @@ class HistoryViewController: UIViewController {
         mapView =   GMSMapView.map(withFrame: mapFrame, camera: camera)
         googleMapView = mapView!
         self.view.addSubview(googleMapView)
-
+        
         self.view.addSubview(searchBar)
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.topAnchor.constraint(equalTo: historyCollectionView.topAnchor).isActive = true
         searchBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         searchBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        googleMapView.bringSubviewToFront(searchBar)
+        //        googleMapView.bringSubviewToFront(searchBar)
         
         //        let marker = GMSMarker()
         //        marker.position = CLLocationCoordinate2DMake(43.642567, -79.387054)
@@ -79,7 +114,7 @@ class HistoryViewController: UIViewController {
         historyCollectionView!.collectionViewLayout = layout
     }
     
-  
+    
     
 }
 
@@ -94,11 +129,11 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.frame.size.width = screenWidth/2
         cell.frame.size.height = screenHeight*0.33
-   
+        
         
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 1
- 
+        
         return cell
     }
     
@@ -117,7 +152,8 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     //MARK: Searchbar functions
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("clicked")
+        print(searchBar.text)
+        searchBar.resignFirstResponder()
     }
     
     
