@@ -12,6 +12,7 @@ import GoogleMaps
 class HistoryViewController: UIViewController {
     
     
+    @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var historyCollectionView: UICollectionView!
     @IBOutlet weak var tabBar: UITabBarItem!
@@ -76,7 +77,8 @@ class HistoryViewController: UIViewController {
     
     fileprivate func setupMapAndCollectionView() {
         var mapFrame = CGRect.zero
-        mapFrame.size.height = screenHeight * 0.66
+        guard let navH = navigationController?.navigationBar.frame.size.height else { return }
+        mapFrame.size.height = (screenHeight * 0.66) - navH
         mapFrame.size.width = screenWidth
         
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 12)
@@ -85,7 +87,7 @@ class HistoryViewController: UIViewController {
         self.view.addSubview(googleMapView)
         
         self.view.addSubview(searchBar)
-        
+        self.view.bringSubviewToFront(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.topAnchor.constraint(equalTo: historyCollectionView.topAnchor).isActive = true
         searchBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
@@ -107,7 +109,7 @@ class HistoryViewController: UIViewController {
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets.zero
-        layout.itemSize = CGSize(width: screenWidth/2, height: screenHeight*0.33)
+        layout.itemSize = CGSize(width: screenWidth/2, height: screenHeight*0.33 - navH)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.scrollDirection = .horizontal
@@ -152,7 +154,10 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     //MARK: Searchbar functions
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBar.text)
+        print("pressed")
+        searchBar.resignFirstResponder()
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     

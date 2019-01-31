@@ -15,6 +15,7 @@ import GoogleMaps
 class SelectWithOptionsViewController: UIViewController {
     //MARK: Outlets
     
+    @IBOutlet weak var listButton: UIButton!
     @IBOutlet weak var restaurantTableView: UITableView!
     @IBOutlet weak var decideButton: UIButton!
     @IBOutlet weak var helperButton: UIButton!
@@ -132,7 +133,7 @@ class SelectWithOptionsViewController: UIViewController {
         var googleMapView = UIView(frame: mapFrame)
         googleMapView.backgroundColor = .black
         
-        let camera = GMSCameraPosition.camera(withLatitude: selectedRestaurant.latitude, longitude: selectedRestaurant.longitude, zoom: 13.0)
+        let camera = GMSCameraPosition.camera(withLatitude: selectedRestaurant.latitude, longitude: selectedRestaurant.longitude, zoom: 15.0)
         let mapView = GMSMapView.map(withFrame: mapFrame, camera: camera)
         mapView.layer.cornerRadius = 10
         googleMapView = mapView
@@ -157,6 +158,9 @@ class SelectWithOptionsViewController: UIViewController {
         popoverAddButton.layer.cornerRadius = 10
         popoverAddButton.layer.borderWidth = 1
         popoverAddButton.layer.borderColor = UIColor.black.cgColor
+        popoverAddButton.setTitle("Add to List", for: .normal)
+        
+        
         
         popoverView.addSubview(googleMapView)
     }
@@ -195,6 +199,9 @@ class SelectWithOptionsViewController: UIViewController {
     }
     
     
+    @IBAction func listButtonPressed(_ sender: UIButton) {
+        
+    }
     
     @IBAction func helperButtonPressed(_ sender: UIButton) {
         print(selectedRestaurantsArray.count)
