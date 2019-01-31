@@ -215,43 +215,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6HF-hO-qg7">
-                                <rect key="frame" x="0.0" y="364" width="375" height="365"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="egY-6h-Mow">
-                                    <size key="itemSize" width="100" height="100"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HistoryCell" id="S17-zR-RV0" customClass="HistoryCollectionViewCell" customModule="Food_Finder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Telephone" translatesAutoresizingMaskIntoConstraints="NO" id="Fc9-AF-evh">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
-                                        <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="Fc9-AF-evh" secondAttribute="bottom" id="288-ak-Ac2"/>
-                                            <constraint firstItem="Fc9-AF-evh" firstAttribute="top" secondItem="S17-zR-RV0" secondAttribute="top" id="DZW-1Y-ZKj"/>
-                                            <constraint firstItem="Fc9-AF-evh" firstAttribute="leading" secondItem="S17-zR-RV0" secondAttribute="leading" id="JYl-kv-hId"/>
-                                            <constraint firstAttribute="trailing" secondItem="Fc9-AF-evh" secondAttribute="trailing" id="PZx-h3-o6M"/>
-                                        </constraints>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="gZk-Rh-bdi" id="Btn-7F-Ke6"/>
-                                    <outlet property="delegate" destination="gZk-Rh-bdi" id="9RQ-Eh-aGg"/>
-                                </connections>
-                            </collectionView>
                             <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" showsCancelButton="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcP-AM-4fL">
                                 <rect key="frame" x="0.0" y="308" width="375" height="56"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -264,9 +227,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="TIR-DC-Ncy"/>
                     </view>
-                    <navigationItem key="navigationItem" id="J6Z-NN-fTD"/>
+                    <navigationItem key="navigationItem" id="J6Z-NN-fTD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Iia-tw-PX8"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="historyCollectionView" destination="6HF-hO-qg7" id="lgd-5v-hxg"/>
                         <outlet property="navBar" destination="J6Z-NN-fTD" id="8m5-u4-A7Z"/>
                         <outlet property="searchBar" destination="PcP-AM-4fL" id="ua2-J3-Zwz"/>
                         <outlet property="tabBar" destination="32I-er-Aco" id="zpe-Da-d7J"/>
@@ -274,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEs-Bf-OqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1066.4000000000001" y="812.807881773399"/>
+            <point key="canvasLocation" x="-97" y="853"/>
         </scene>
         <!--Table-->
         <scene sceneID="i4C-eL-geV">
@@ -595,11 +559,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JYP-7d-BIE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124" y="812.807881773399"/>
+            <point key="canvasLocation" x="-729" y="853"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Telephone" width="128" height="128"/>
         <image name="large_0" width="132" height="24"/>
         <image name="magnifying_glass" width="37.5" height="37.5"/>
     </resources>

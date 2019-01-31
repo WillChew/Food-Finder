@@ -42,23 +42,12 @@ class HistoryViewController: UIViewController {
         
         
         
+        
         // Do any additional setup after loading the view.
     }
     
     @objc func keyboardWillShow(sender: Notification) {
-        //        guard let keyboardSize = sender.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {
-        //            return
-        //        }
-        //
-        //        let keyboardHeight = keyboardSize.cgRectValue.height
-        //        let viewHeight = UIScreen.main.bounds.size.height
-        //        let remainingScreen = viewHeight - keyboardHeight
-        //        let ChosenUIViewHeight = view.frame.size.height
-        //        let posY = (remainingScreen/2) - (ChosenUIViewHeight/2)
-        
-        //        UIView.animate(withDuration: 0.25) {
-        //            self.view.frame = CGRect(x: self.view.frame.origin.x, y: posY, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        //        }
+       
         
         UIView.animate(withDuration: 0.25) {
             self.view.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y - 200, width: self.view.frame.size.width, height: self.view.frame.size.height)
@@ -66,9 +55,7 @@ class HistoryViewController: UIViewController {
     }
     
     @objc func keyboardWillHide(sender: Notification) {
-        //        UIView.animate(withDuration: 0.25) {
-        //            self.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
-        //        }
+       
         UIView.animate(withDuration: 0.25) {
             self.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)}
     }
@@ -149,6 +136,7 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         self.view.addSubview(googleMapView)
         mapView?.camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2DMake(43.642567, -79.387054), zoom: 13)
         googleMapView.reloadInputViews()
+        
     }
     
     //MARK: Searchbar functions

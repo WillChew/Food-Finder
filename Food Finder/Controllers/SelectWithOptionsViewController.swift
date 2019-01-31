@@ -66,6 +66,8 @@ class SelectWithOptionsViewController: UIViewController {
         restaurantTableView.delegate = self
         spinner.isHidden = true
         
+        
+        
     }
     
     //MARK: Functions
