@@ -107,6 +107,14 @@ class SelectWithOptionsViewController: UIViewController {
         helperButton.layer.borderColor = UIColor.black.cgColor
         helperButton.layer.borderWidth = 2
         
+        listButton.setTitle("View List", for: .normal)
+        listButton.titleLabel?.font = font
+        listButton.titleLabel?.textAlignment = .center
+        listButton.layer.cornerRadius = 10
+        listButton.layer.borderColor = UIColor.black.cgColor
+        listButton.layer.borderWidth = 2
+        
+        
         helperButton.setTitle("Find What You Feel Like Eating First", for: .normal)
         helperButton.isEnabled = false
         
@@ -147,6 +155,7 @@ class SelectWithOptionsViewController: UIViewController {
         marker.title = selectedRestaurant.name
         marker.snippet = selectedRestaurant.address
         marker.map = mapView
+        
         
         popoverNameLabel.text = selectedRestaurant.name
         popoverAddressLabel.text = selectedRestaurant.address
@@ -200,7 +209,8 @@ class SelectWithOptionsViewController: UIViewController {
     
     
     @IBAction func listButtonPressed(_ sender: UIButton) {
-        
+        restaurantsArray = selectedRestaurantsArray
+        restaurantTableView.reloadData()
     }
     
     @IBAction func helperButtonPressed(_ sender: UIButton) {
@@ -305,7 +315,10 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell", for: indexPath) as! RestaurantCellTableViewCell
+        
         let restaurant = restaurantsArray[indexPath.row]
+        
+        
         cell.tag = indexPath.row
         if restaurantsArray.count == 0 {
             cell.restaurantNameLabel.text = "No Restaurants Found"
@@ -339,10 +352,9 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
             
             cell.restaurantImage.sd_setImage(with:URL(string: restaurantsArray[indexPath.row].imageURL) ,placeholderImage: UIImage(named: "noImage"))
             
-            
-            
-            
             cell.accessoryType = restaurant.selected == true ? .checkmark : .none
+            
+            
             
         }
         

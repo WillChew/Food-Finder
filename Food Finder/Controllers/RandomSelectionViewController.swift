@@ -42,14 +42,22 @@ class RandomSelectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupButtons()
+        
+        if selectedRestaurant != nil {
+            changeDisplays()
+        } else {
+            nameLabel.text = "No restaurant selected"
+            addressLabel.text = ""
+        }
+        
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 200
         
         
-        nameLabel.text = "No restaurant selected"
-        addressLabel.text = ""
+        
         
         requestManager = RequestManager()
         locationTextField.delegate = self
@@ -57,8 +65,6 @@ class RandomSelectionViewController: UIViewController {
         
         activityIndicator.bounds = theMapView.bounds
         activityIndicator.center = theMapView.center
-        
-        
         
         
     }
@@ -78,12 +84,13 @@ class RandomSelectionViewController: UIViewController {
     func setupButtons() {
         
         tryAgainButton.setTitle("Random Restaurant", for: .normal)
+        tryAgainButton.titleLabel?.textAlignment = .center
         
         
         phoneButton.isHidden = true
         selectButton.layer.cornerRadius = 10
         selectButton.layer.borderColor = UIColor.black.cgColor
-        selectButton.layer.borderWidth = 2
+        selectButton.layer.borderWidth = 1
         if selectedRestaurant == nil {
             selectButton.isHidden = true
         }

@@ -19,14 +19,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Four Barrel Coffee" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sg-8I-k3w">
-                                <rect key="frame" x="0.0" y="494.33333333333331" width="375" height="33.666666666666686"/>
+                                <rect key="frame" x="0.0" y="519" width="375" height="33.666666666666629"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ty0-Cv-aeJ">
-                                <rect key="frame" x="25.666666666666671" y="656" width="134" height="54"/>
+                                <rect key="frame" x="10" y="680" width="355" height="43"/>
                                 <color key="backgroundColor" red="1" green="0.22949634569999999" blue="0.032463684030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="MYD-2a-N7m"/>
+                                </constraints>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -43,32 +46,12 @@
                                     <action selector="searchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Do-wg-7Hq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gry-IR-r2G">
-                                <rect key="frame" x="208.66666666666663" y="656" width="141" height="54"/>
-                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="Vzw-SS-8DJ"/>
-                                </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="View Yelp Page">
-                                            <attributes>
-                                                <font key="NSFont" size="14" name="MarkerFelt-Wide"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="selectRestaurantButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F5p-2e-iGX"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Ggs-SX-jCD" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="87.999999999999972" width="375" height="406.33333333333326"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="431"/>
                                 <gestureRecognizers/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="large_0" translatesAutoresizingMaskIntoConstraints="NO" id="ofo-94-zGX">
-                                <rect key="frame" x="121.66666666666669" y="618" width="132" height="30"/>
+                                <rect key="frame" x="94" y="642.66666666666663" width="132" height="30.333333333333371"/>
                             </imageView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="n7x-K8-8oO">
                                 <rect key="frame" x="10" y="98" width="355" height="30"/>
@@ -117,13 +100,13 @@
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="375 Valencia St" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRK-E4-ILX">
-                                <rect key="frame" x="16" y="536" width="343" height="27.666666666666629"/>
+                                <rect key="frame" x="16" y="560.66666666666663" width="343" height="27.666666666666629"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bJg-BF-2ii">
-                                <rect key="frame" x="94" y="571" width="187" height="40"/>
+                                <rect key="frame" x="94" y="595.66666666666663" width="187" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="(647) 975-1430">
                                     <color key="titleColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -132,41 +115,55 @@
                                     <action selector="makeCallButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VOM-zY-FBr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gry-IR-r2G">
+                                <rect key="frame" x="234" y="641.66666666666663" width="91" height="30.333333333333371"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="View Yelp Page">
+                                            <attributes>
+                                                <font key="NSFont" size="14" name="MarkerFelt-Wide"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="selectRestaurantButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F5p-2e-iGX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="n7x-K8-8oO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="5gC-SX-hdt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n7x-K8-8oO" secondAttribute="trailing" constant="10" id="6Pf-Fk-9Wg"/>
-                            <constraint firstItem="gry-IR-r2G" firstAttribute="leading" secondItem="Ty0-Cv-aeJ" secondAttribute="trailing" constant="49" id="6f3-Ty-70O"/>
                             <constraint firstItem="ofo-94-zGX" firstAttribute="top" secondItem="bJg-BF-2ii" secondAttribute="bottom" constant="7" id="77Z-95-ZRZ"/>
-                            <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25.5" id="9Mz-QM-hnw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gry-IR-r2G" secondAttribute="trailing" constant="50" id="8sW-TJ-ZtG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ggs-SX-jCD" secondAttribute="trailing" id="B9d-h4-rYz"/>
+                            <constraint firstItem="ofo-94-zGX" firstAttribute="leading" secondItem="bJg-BF-2ii" secondAttribute="leading" id="BdR-hA-LuU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xx3-we-i9L" secondAttribute="trailing" constant="10" id="CMU-ye-hOj"/>
+                            <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="top" secondItem="gry-IR-r2G" secondAttribute="bottom" constant="8" id="DHx-bZ-MkM"/>
                             <constraint firstItem="n7x-K8-8oO" firstAttribute="top" secondItem="jYN-fS-ZZC" secondAttribute="bottom" constant="10" id="DuX-5c-zMt"/>
                             <constraint firstItem="6sg-8I-k3w" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EUN-43-oiz"/>
+                            <constraint firstItem="gry-IR-r2G" firstAttribute="top" secondItem="bJg-BF-2ii" secondAttribute="bottom" constant="6" id="Fho-Wu-y5V"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kRK-E4-ILX" secondAttribute="trailing" constant="16" id="GCe-sI-A0c"/>
+                            <constraint firstItem="gry-IR-r2G" firstAttribute="leading" secondItem="ofo-94-zGX" secondAttribute="trailing" constant="8" id="GS0-G4-Rm4"/>
                             <constraint firstItem="jYN-fS-ZZC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="INp-Cb-Fd3"/>
                             <constraint firstItem="kRK-E4-ILX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="JcA-VS-dyh"/>
-                            <constraint firstItem="gry-IR-r2G" firstAttribute="baseline" secondItem="Ty0-Cv-aeJ" secondAttribute="firstBaseline" id="KnF-zw-T7t"/>
                             <constraint firstItem="bJg-BF-2ii" firstAttribute="top" secondItem="kRK-E4-ILX" secondAttribute="bottom" constant="7.3333333333333712" id="L6I-rM-C1s"/>
-                            <constraint firstItem="ofo-94-zGX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L6J-lk-EFQ"/>
-                            <constraint firstItem="gry-IR-r2G" firstAttribute="width" secondItem="Ty0-Cv-aeJ" secondAttribute="width" constant="7" id="Nr7-St-HZR"/>
                             <constraint firstAttribute="trailing" secondItem="6sg-8I-k3w" secondAttribute="trailing" id="Pow-iK-8iW"/>
-                            <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="height" secondItem="ofo-94-zGX" secondAttribute="height" constant="24" id="ZKs-aO-5FD"/>
                             <constraint firstItem="Xx3-we-i9L" firstAttribute="top" secondItem="jYN-fS-ZZC" secondAttribute="bottom" constant="5" id="Zum-i3-LgB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ty0-Cv-aeJ" secondAttribute="bottom" constant="19" id="a1q-QL-NWX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ty0-Cv-aeJ" secondAttribute="trailing" constant="10" id="ajN-56-VbX"/>
                             <constraint firstItem="6sg-8I-k3w" firstAttribute="top" secondItem="Ggs-SX-jCD" secondAttribute="bottom" id="cWQ-dv-Ppf"/>
-                            <constraint firstItem="gry-IR-r2G" firstAttribute="top" secondItem="Ty0-Cv-aeJ" secondAttribute="top" id="d06-mv-uz2"/>
-                            <constraint firstItem="gry-IR-r2G" firstAttribute="height" secondItem="Ty0-Cv-aeJ" secondAttribute="height" id="eAJ-7O-azr"/>
+                            <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="fJG-hR-rud"/>
                             <constraint firstItem="jYN-fS-ZZC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fc0-Nd-UqW"/>
                             <constraint firstItem="Xx3-we-i9L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="gov-Va-oWg"/>
                             <constraint firstItem="Ggs-SX-jCD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="44" id="kOV-Vw-g2p"/>
                             <constraint firstItem="kRK-E4-ILX" firstAttribute="top" secondItem="6sg-8I-k3w" secondAttribute="bottom" constant="8" id="mNL-7a-Zih"/>
                             <constraint firstItem="jYN-fS-ZZC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mQU-J4-jRu"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gry-IR-r2G" secondAttribute="trailing" constant="25.5" id="pd2-Gx-4zL"/>
                             <constraint firstItem="bJg-BF-2ii" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="94" id="qZJ-S4-hKc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ty0-Cv-aeJ" secondAttribute="bottom" constant="6" id="seN-by-WHV"/>
                             <constraint firstItem="Ggs-SX-jCD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tHn-Uf-JRU"/>
-                            <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="top" secondItem="ofo-94-zGX" secondAttribute="bottom" constant="8" id="vgg-aV-Spn"/>
+                            <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="top" secondItem="ofo-94-zGX" secondAttribute="bottom" constant="7" id="vgg-aV-Spn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bJg-BF-2ii" secondAttribute="trailing" constant="94" id="yhv-H2-tFr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -293,7 +290,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Near" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rlj-4Q-bl0">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Near me" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rlj-4Q-bl0">
                                 <rect key="frame" x="16" y="95" width="162" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
