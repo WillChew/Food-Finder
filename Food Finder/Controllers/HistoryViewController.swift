@@ -13,17 +13,20 @@ class HistoryViewController: UIViewController {
     
     
     @IBOutlet weak var navBar: UINavigationItem!
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var historyCollectionView: UICollectionView!
+    @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var tabBar: UITabBarItem!
+    @IBOutlet weak var segControl: UISegmentedControl!
+    
     
     var googleMapView = UIView()
     var mapView: GMSMapView?
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
-    
-    
+    var cViewScreen = UIView()
+    var tableScreen = UIView()
+    let searchBar = UISearchBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +35,16 @@ class HistoryViewController: UIViewController {
         screenWidth = screenSize.width
         screenHeight = screenSize.height
         
+        myTableView.delegate = self
+        myTableView.dataSource = self
+        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
-        setupMapAndCollectionView()
+        setupTableAndCollectionView()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        
+      
         
         
         
@@ -62,46 +68,97 @@ class HistoryViewController: UIViewController {
     
     //MARK: Functions
     
-    fileprivate func setupMapAndCollectionView() {
-        var mapFrame = CGRect.zero
-        guard let navH = navigationController?.navigationBar.frame.size.height else { return }
-        mapFrame.size.height = (screenHeight * 0.66) - navH
-        mapFrame.size.width = screenWidth
+    fileprivate func setupTableAndCollectionView() {
         
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 12)
-        mapView =   GMSMapView.map(withFrame: mapFrame, camera: camera)
-        googleMapView = mapView!
-        self.view.addSubview(googleMapView)
+        cViewScreen.frame = CGRect.zero
+        self.view.addSubview(cViewScreen)
+        cViewScreen.addSubview(historyCollectionView)
         
-        self.view.addSubview(searchBar)
-        self.view.bringSubviewToFront(searchBar)
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.topAnchor.constraint(equalTo: historyCollectionView.topAnchor).isActive = true
-        searchBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        searchBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        //        googleMapView.bringSubviewToFront(searchBar)
-        
-        //        let marker = GMSMarker()
-        //        marker.position = CLLocationCoordinate2DMake(43.642567, -79.387054)
-        //        marker.title = "CN Tower"
-        //        marker.snippet = "Toronto"
-        //        marker.map = mapView
-        
-        
+        cViewScreen.translatesAutoresizingMaskIntoConstraints = false
+        cViewScreen.topAnchor.constraint(equalTo: segControl.bottomAnchor, constant: 6).isActive = true
+        cViewScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        cViewScreen.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        cViewScreen.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        cViewScreen.backgroundColor = .black
         historyCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        historyCollectionView.topAnchor.constraint(equalTo: googleMapView.bottomAnchor).isActive = true
-        historyCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        historyCollectionView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        historyCollectionView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        historyCollectionView.topAnchor.constraint(equalTo: cViewScreen.topAnchor).isActive = true
+        historyCollectionView.bottomAnchor.constraint(equalTo: cViewScreen.bottomAnchor).isActive = true
+        historyCollectionView.leftAnchor.constraint(equalTo: cViewScreen.leftAnchor).isActive = true
+        historyCollectionView.rightAnchor.constraint(equalTo: cViewScreen.rightAnchor).isActive = true
         
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets.zero
-        layout.itemSize = CGSize(width: screenWidth/2, height: screenHeight*0.33 - navH)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        layout.scrollDirection = .horizontal
-        historyCollectionView!.collectionViewLayout = layout
+        
+    
+        
+       
+        
+        
+        tableScreen.frame = CGRect.zero
+        self.view.addSubview(tableScreen)
+          tableScreen.addSubview(myTableView)
+        
+        
+        
+        tableScreen.translatesAutoresizingMaskIntoConstraints = false
+        tableScreen.topAnchor.constraint(equalTo: segControl.bottomAnchor, constant: 6).isActive = true
+        tableScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableScreen.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        tableScreen.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableScreen.backgroundColor = .red
+        
+        
+        myTableView.translatesAutoresizingMaskIntoConstraints = false
+        myTableView.topAnchor.constraint(equalTo: tableScreen.topAnchor).isActive = true
+        myTableView.bottomAnchor.constraint(equalTo: tableScreen.bottomAnchor).isActive = true
+        myTableView.rightAnchor.constraint(equalTo: tableScreen.rightAnchor).isActive = true
+        myTableView.leftAnchor.constraint(equalTo: tableScreen.leftAnchor).isActive = true
+        
+        
+
+        
+      
+        
+//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//        layout.sectionInset = UIEdgeInsets.zero
+//        layout.itemSize = CGSize(width: screenWidth/2, height: screenHeight*0.33 - navH)
+//        layout.minimumInteritemSpacing = 0
+//        layout.minimumLineSpacing = 0
+//        layout.scrollDirection = .horizontal
+//        historyCollectionView!.collectionViewLayout = layout
+        
+        
+        
     }
+    
+    @IBAction func segControllerPressed(_ sender: UISegmentedControl) {
+        if segControl.selectedSegmentIndex == 0 {
+            cViewScreen.alpha = 0
+            tableScreen.alpha = 1
+        } else {
+            cViewScreen.alpha = 1
+            tableScreen.alpha = 0
+        }
+        
+    }
+}
+    
+extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SavedCell", for: indexPath) as! HistoryTableViewCell
+        
+        cell.restaurantPic.image = UIImage(named: "Telephone")
+        cell.restaurantNameLabel.text = "Bang Bang Ice Cream and Bakery"
+        cell.restaurantAddressLabel.text = "1543 Dundas Street West"
+        cell.restaurantRatingLabel.text = "4"
+        
+        
+        return cell
+    }
+    
     
     
     
@@ -116,8 +173,8 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCell", for: indexPath) as! HistoryCollectionViewCell
         
-        cell.frame.size.width = screenWidth/2
-        cell.frame.size.height = screenHeight*0.33
+//        cell.frame.size.width = screenWidth/2
+//        cell.frame.size.height = screenHeight*0.33
         
         
         cell.layer.borderColor = UIColor.white.cgColor
@@ -128,19 +185,20 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Cell Pressed")
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(43.642567, -79.387054)
-        marker.title = "New"
-        marker.snippet = "New"
-        marker.map = mapView
-        self.view.addSubview(googleMapView)
-        mapView?.camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2DMake(43.642567, -79.387054), zoom: 13)
-        googleMapView.reloadInputViews()
+        
         
     }
     
-    //MARK: Searchbar functions
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if (kind == UICollectionView.elementKindSectionHeader) {
+            let headerView: UICollectionReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CollectionViewHeader", for: indexPath)
+            return headerView
+        }
+        return UICollectionReusableView()
+    }
     
+//    MARK: Searchbar functions
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("pressed")
         searchBar.resignFirstResponder()
@@ -148,8 +206,8 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
-    
+
+
     
     
     
