@@ -216,18 +216,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6HF-hO-qg7">
-                                <rect key="frame" x="0.0" y="129" width="375" height="276"/>
+                                <rect key="frame" x="0.0" y="253" width="375" height="276"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="egY-6h-Mow">
                                     <size key="itemSize" width="100" height="100"/>
-                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HistoryCell" id="S17-zR-RV0" customClass="HistoryCollectionViewCell" customModule="Food_Finder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="100" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -247,28 +247,6 @@
                                         </constraints>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="CollectionViewHeader" id="oPy-Jn-TjK" customClass="SearchCollectionReusableView" customModule="Food_Finder" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="q0C-zV-VVP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="gZk-Rh-bdi" id="SwE-sS-sIP"/>
-                                            </connections>
-                                        </searchBar>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="q0C-zV-VVP" secondAttribute="bottom" id="2hk-u6-wIa"/>
-                                        <constraint firstItem="q0C-zV-VVP" firstAttribute="leading" secondItem="oPy-Jn-TjK" secondAttribute="leading" id="Fjy-Y3-nP9"/>
-                                        <constraint firstAttribute="trailing" secondItem="q0C-zV-VVP" secondAttribute="trailing" id="Zmf-UD-gae"/>
-                                        <constraint firstItem="q0C-zV-VVP" firstAttribute="top" secondItem="oPy-Jn-TjK" secondAttribute="top" id="luY-BX-lAW"/>
-                                    </constraints>
-                                    <connections>
-                                        <outlet property="searchBar" destination="q0C-zV-VVP" id="axN-mE-fOS"/>
-                                    </connections>
-                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="gZk-Rh-bdi" id="Btn-7F-Ke6"/>
                                     <outlet property="delegate" destination="gZk-Rh-bdi" id="9RQ-Eh-aGg"/>
@@ -285,20 +263,12 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Oe-oX-3FG">
-                                <rect key="frame" x="0.0" y="413" width="375" height="333"/>
+                                <rect key="frame" x="0.0" y="537" width="375" height="209"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="c7z-Lr-DBE">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="gZk-Rh-bdi" id="b8R-oY-ISz"/>
-                                    </connections>
-                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SavedCell" rowHeight="90" id="Kyo-cK-cPB" customClass="HistoryTableViewCell" customModule="Food_Finder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kyo-cK-cPB" id="BQs-8m-T1V">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="89.666666666666671"/>
@@ -354,12 +324,22 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="c7z-Lr-DBE">
+                                <rect key="frame" x="0.0" y="122" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="gZk-Rh-bdi" id="b8R-oY-ISz"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="TIR-DC-Ncy" firstAttribute="trailing" secondItem="Krk-Gs-T0X" secondAttribute="trailing" constant="85" id="8Uj-wV-POl"/>
                             <constraint firstItem="Krk-Gs-T0X" firstAttribute="top" secondItem="TIR-DC-Ncy" secondAttribute="top" constant="6" id="NoN-jw-o1B"/>
                             <constraint firstItem="Krk-Gs-T0X" firstAttribute="leading" secondItem="TIR-DC-Ncy" secondAttribute="leading" constant="84" id="QJm-s8-FL8"/>
+                            <constraint firstItem="c7z-Lr-DBE" firstAttribute="top" secondItem="Krk-Gs-T0X" secondAttribute="bottom" id="bIz-ia-UaO"/>
+                            <constraint firstItem="c7z-Lr-DBE" firstAttribute="trailing" secondItem="TIR-DC-Ncy" secondAttribute="trailing" id="jQ2-jF-HcZ"/>
+                            <constraint firstItem="c7z-Lr-DBE" firstAttribute="leading" secondItem="TIR-DC-Ncy" secondAttribute="leading" id="ng9-Va-wgA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TIR-DC-Ncy"/>
                     </view>
@@ -370,7 +350,7 @@
                         <outlet property="historyCollectionView" destination="6HF-hO-qg7" id="lgd-5v-hxg"/>
                         <outlet property="myTableView" destination="1Oe-oX-3FG" id="ksE-Yh-9WK"/>
                         <outlet property="navBar" destination="J6Z-NN-fTD" id="8m5-u4-A7Z"/>
-                        <outlet property="searchBar" destination="1Oe-oX-3FG" id="Hz7-wc-Ifh"/>
+                        <outlet property="searchBar" destination="c7z-Lr-DBE" id="tkZ-Cb-Zdf"/>
                         <outlet property="segControl" destination="Krk-Gs-T0X" id="tN1-R5-azi"/>
                         <outlet property="tabBar" destination="32I-er-Aco" id="zpe-Da-d7J"/>
                     </connections>

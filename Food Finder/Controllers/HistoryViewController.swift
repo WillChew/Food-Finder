@@ -17,7 +17,7 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var tabBar: UITabBarItem!
     @IBOutlet weak var segControl: UISegmentedControl!
-    @IBOutlet weak var searchBar: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     
     var googleMapView = UIView()
@@ -38,7 +38,7 @@ class HistoryViewController: UIViewController {
         
         myTableView.delegate = self
         myTableView.dataSource = self
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
         
         setupTableAndCollectionView()
         
@@ -76,11 +76,12 @@ class HistoryViewController: UIViewController {
         cViewScreen.addSubview(historyCollectionView)
         
         cViewScreen.translatesAutoresizingMaskIntoConstraints = false
-        cViewScreen.topAnchor.constraint(equalTo: segControl.bottomAnchor, constant: 6).isActive = true
+        cViewScreen.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
         cViewScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         cViewScreen.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         cViewScreen.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         cViewScreen.backgroundColor = .black
+        
         historyCollectionView.translatesAutoresizingMaskIntoConstraints = false
         historyCollectionView.topAnchor.constraint(equalTo: cViewScreen.topAnchor).isActive = true
         historyCollectionView.bottomAnchor.constraint(equalTo: cViewScreen.bottomAnchor).isActive = true
@@ -94,7 +95,7 @@ class HistoryViewController: UIViewController {
         
         
         tableScreen.translatesAutoresizingMaskIntoConstraints = false
-        tableScreen.topAnchor.constraint(equalTo: segControl.bottomAnchor, constant: 6).isActive = true
+        tableScreen.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
         tableScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableScreen.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableScreen.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
@@ -183,14 +184,7 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         
     }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if (kind == UICollectionView.elementKindSectionHeader) {
-            let headerView: UICollectionReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CollectionViewHeader", for: indexPath)
-            return headerView
-        }
-        return UICollectionReusableView()
-    }
+
     
 //    MARK: Searchbar functions
 
