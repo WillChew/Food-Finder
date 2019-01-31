@@ -17,6 +17,7 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var tabBar: UITabBarItem!
     @IBOutlet weak var segControl: UISegmentedControl!
+    @IBOutlet weak var searchBar: UITableView!
     
     
     var googleMapView = UIView()
@@ -26,7 +27,7 @@ class HistoryViewController: UIViewController {
     var screenHeight: CGFloat!
     var cViewScreen = UIView()
     var tableScreen = UIView()
-    let searchBar = UISearchBar()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,13 +86,7 @@ class HistoryViewController: UIViewController {
         historyCollectionView.bottomAnchor.constraint(equalTo: cViewScreen.bottomAnchor).isActive = true
         historyCollectionView.leftAnchor.constraint(equalTo: cViewScreen.leftAnchor).isActive = true
         historyCollectionView.rightAnchor.constraint(equalTo: cViewScreen.rightAnchor).isActive = true
-        
-        
-    
-        
-       
-        
-        
+
         tableScreen.frame = CGRect.zero
         self.view.addSubview(tableScreen)
           tableScreen.addSubview(myTableView)
