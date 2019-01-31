@@ -71,22 +71,7 @@ class HistoryViewController: UIViewController {
     
     fileprivate func setupTableAndCollectionView() {
         
-        cViewScreen.frame = CGRect.zero
-        self.view.addSubview(cViewScreen)
-        cViewScreen.addSubview(historyCollectionView)
-        
-        cViewScreen.translatesAutoresizingMaskIntoConstraints = false
-        cViewScreen.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
-        cViewScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        cViewScreen.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        cViewScreen.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        cViewScreen.backgroundColor = .black
-        
-        historyCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        historyCollectionView.topAnchor.constraint(equalTo: cViewScreen.topAnchor).isActive = true
-        historyCollectionView.bottomAnchor.constraint(equalTo: cViewScreen.bottomAnchor).isActive = true
-        historyCollectionView.leftAnchor.constraint(equalTo: cViewScreen.leftAnchor).isActive = true
-        historyCollectionView.rightAnchor.constraint(equalTo: cViewScreen.rightAnchor).isActive = true
+    
 
         tableScreen.frame = CGRect.zero
         self.view.addSubview(tableScreen)
@@ -108,17 +93,33 @@ class HistoryViewController: UIViewController {
         myTableView.rightAnchor.constraint(equalTo: tableScreen.rightAnchor).isActive = true
         myTableView.leftAnchor.constraint(equalTo: tableScreen.leftAnchor).isActive = true
         
+        cViewScreen.frame = CGRect.zero
+        self.view.addSubview(cViewScreen)
+        cViewScreen.addSubview(historyCollectionView)
         
+        cViewScreen.translatesAutoresizingMaskIntoConstraints = false
+        cViewScreen.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
+        cViewScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        cViewScreen.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        cViewScreen.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        cViewScreen.backgroundColor = .black
+        
+        historyCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        historyCollectionView.topAnchor.constraint(equalTo: cViewScreen.topAnchor).isActive = true
+        historyCollectionView.bottomAnchor.constraint(equalTo: cViewScreen.bottomAnchor).isActive = true
+        historyCollectionView.leftAnchor.constraint(equalTo: cViewScreen.leftAnchor).isActive = true
+        historyCollectionView.rightAnchor.constraint(equalTo: cViewScreen.rightAnchor).isActive = true
 
         
       
-        
+//        
 //        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
 //        layout.sectionInset = UIEdgeInsets.zero
-//        layout.itemSize = CGSize(width: screenWidth/2, height: screenHeight*0.33 - navH)
+//        
+//        layout.itemSize = CGSize(width: screenWidth/2, height: screenWidth/2)
 //        layout.minimumInteritemSpacing = 0
 //        layout.minimumLineSpacing = 0
-//        layout.scrollDirection = .horizontal
+//        layout.scrollDirection = .vertical
 //        historyCollectionView!.collectionViewLayout = layout
         
         
@@ -127,11 +128,11 @@ class HistoryViewController: UIViewController {
     
     @IBAction func segControllerPressed(_ sender: UISegmentedControl) {
         if segControl.selectedSegmentIndex == 0 {
-            cViewScreen.alpha = 0
-            tableScreen.alpha = 1
-        } else {
             cViewScreen.alpha = 1
             tableScreen.alpha = 0
+        } else {
+            cViewScreen.alpha = 0
+            tableScreen.alpha = 1
         }
         
     }
@@ -169,8 +170,7 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCell", for: indexPath) as! HistoryCollectionViewCell
         
-//        cell.frame.size.width = screenWidth/2
-//        cell.frame.size.height = screenHeight*0.33
+ 
         
         
         cell.layer.borderColor = UIColor.white.cgColor

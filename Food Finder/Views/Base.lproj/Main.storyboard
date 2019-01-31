@@ -219,18 +219,18 @@
                                 <rect key="frame" x="0.0" y="253" width="375" height="276"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="egY-6h-Mow">
-                                    <size key="itemSize" width="100" height="100"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="egY-6h-Mow">
+                                    <size key="itemSize" width="110" height="110"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HistoryCell" id="S17-zR-RV0" customClass="HistoryCollectionViewCell" customModule="Food_Finder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <rect key="frame" x="10" y="0.0" width="110" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Telephone" translatesAutoresizingMaskIntoConstraints="NO" id="Fc9-AF-evh">
@@ -275,8 +275,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="JcT-c6-seN">
-                                                    <rect key="frame" x="102" y="38.333333333333336" width="223" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <rect key="frame" x="102" y="36" width="223" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -287,14 +287,14 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Bang Bang Ice Cream and Bakery" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Plp-2d-sf3">
-                                                    <rect key="frame" x="102" y="6.0000000000000018" width="223" height="23.666666666666671"/>
+                                                    <rect key="frame" x="102" y="6" width="223" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ynj-zB-030">
-                                                    <rect key="frame" x="102" y="60.333333333333336" width="258" height="15.666666666666664"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <rect key="frame" x="102" y="59" width="258" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -311,7 +311,7 @@
                                                 <constraint firstItem="Ynj-zB-030" firstAttribute="trailing" secondItem="BQs-8m-T1V" secondAttribute="trailingMargin" id="bAs-6N-cIC"/>
                                                 <constraint firstItem="JcT-c6-seN" firstAttribute="leading" secondItem="XuE-dF-nIC" secondAttribute="trailing" constant="8" id="bcK-Zq-aiE"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Plp-2d-sf3" secondAttribute="trailing" constant="35" id="fS2-f1-2xP"/>
-                                                <constraint firstItem="JcT-c6-seN" firstAttribute="top" secondItem="Plp-2d-sf3" secondAttribute="bottom" constant="8.6666666666666714" id="xpa-MK-RfY"/>
+                                                <constraint firstItem="JcT-c6-seN" firstAttribute="top" secondItem="Plp-2d-sf3" secondAttribute="bottom" constant="6" id="xpa-MK-RfY"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Ynj-zB-030" secondAttribute="bottom" constant="3" id="zvQ-Rd-Ma9"/>
                                             </constraints>
                                         </tableViewCellContentView>
