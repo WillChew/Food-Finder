@@ -11,7 +11,8 @@ import UIKit
 class NewEntryTableViewController: UITableViewController {
     
     @IBOutlet weak var restaurantImage: UIImageView!
-    @IBOutlet weak var pictureCaptionTextField: UITextField!
+   
+    @IBOutlet weak var pictureCaptionTextView: UITextView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
@@ -30,12 +31,13 @@ class NewEntryTableViewController: UITableViewController {
         restaurantImage.layer.borderColor = UIColor.black.cgColor
         restaurantImage.layer.borderWidth = 2
         
-        
-        
-        
+        pictureCaptionTextView.textColor = .lightGray
+        pictureCaptionTextView.text = "Write a caption..."
         
         
     }
+    
+    
     
     @objc func pickImage() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -77,7 +79,7 @@ class NewEntryTableViewController: UITableViewController {
 
 }
 
-extension NewEntryTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension NewEntryTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
@@ -90,6 +92,29 @@ extension NewEntryTableViewController: UIImagePickerControllerDelegate, UINaviga
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.isNavigationBarHidden = false
         dismiss(animated: true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if pictureCaptionTextView.textColor == .lightGray && pictureCaptionTextView.isFirstResponder {
+            pictureCaptionTextView.text = nil
+            
+            pictureCaptionTextView.textColor = .black
+            pictureCaptionTextView.autocapitalizationType = .words
+            pictureCaptionTextView.isScrollEnabled = false
+            
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if pictureCaptionTextView.text.isEmpty || pictureCaptionTextView.text == "" {
+            pictureCaptionTextView.textColor = .lightGray
+            pictureCaptionTextView.text = "Write a caption..."
+        }
     }
     
 }

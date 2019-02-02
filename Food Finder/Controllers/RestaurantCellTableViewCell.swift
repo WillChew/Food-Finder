@@ -22,7 +22,6 @@ class RestaurantCellTableViewCell: UITableViewCell {
         restaurantImage.layer.borderWidth = 2
         restaurantImage.layer.borderColor = UIColor.black.cgColor
         
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
