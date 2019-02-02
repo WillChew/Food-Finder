@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import SDWebImage
 import GoogleMaps
+import SafariServices
 
 
 class SelectWithOptionsViewController: UIViewController {
@@ -80,10 +81,10 @@ class SelectWithOptionsViewController: UIViewController {
             helperButton.setTitle("Tap And Hold to Select Some Restaurants", for: .normal)
             helperButton.isEnabled = false
         } else if selectedRestaurantsArray.count == 1 {
-            helperButton.setTitle("Choose Previously Picked Restaurant", for: .normal)
+            helperButton.setTitle("View Yelp Page of \(selectedRestaurantsArray[0].name)", for: .normal)
             helperButton.isEnabled = true
         } else {
-            helperButton.setTitle("Pick From \(selectedRestaurantsArray.count) Restaurants", for: .normal)
+            helperButton.setTitle("Help Me Pick From These \(selectedRestaurantsArray.count) Restaurants", for: .normal)
             helperButton.isEnabled = true
         }
     }
@@ -176,6 +177,7 @@ class SelectWithOptionsViewController: UIViewController {
         popoverView.addSubview(googleMapView)
     }
     
+    
     @objc func dismissPopover(){
         removePopoverViewBlur()
         self.view.removeGestureRecognizer(dismissPopoverTap)
@@ -184,6 +186,13 @@ class SelectWithOptionsViewController: UIViewController {
     func removePopoverViewBlur(){
         popoverView.removeFromSuperview()
         blurEffectView.removeFromSuperview()
+    }
+    
+    func showYelpPage(_ url: String){
+        
+        guard let yelpUrl = URL(string: url) else { return }
+        let vc = SFSafariViewController(url: yelpUrl)
+        present(vc, animated: true, completion: nil)
     }
     
     //MARK: Buttons
@@ -213,10 +222,20 @@ class SelectWithOptionsViewController: UIViewController {
     @IBAction func listButtonPressed(_ sender: UIButton) {
         restaurantsArray = selectedRestaurantsArray
         restaurantTableView.reloadData()
+        
+        let scrollIndexPath: IndexPath = IndexPath(row: NSNotFound, section: 0)
+        restaurantTableView.scrollToRow(at: scrollIndexPath, at: .top, animated: true)
+
+        
     }
     
     @IBAction func helperButtonPressed(_ sender: UIButton) {
-        print(selectedRestaurantsArray.count)
+        guard let randomSelectedRestaurant = selectedRestaurantsArray.randomElement() else { return }
+        print(randomSelectedRestaurant.name)
+        
+        showYelpPage(randomSelectedRestaurant.url)
+        
+        
     }
     
     

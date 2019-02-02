@@ -88,9 +88,9 @@ class RandomSelectionViewController: UIViewController {
         
         
         phoneButton.isHidden = true
-        selectButton.layer.cornerRadius = 10
-        selectButton.layer.borderColor = UIColor.black.cgColor
-        selectButton.layer.borderWidth = 1
+//        selectButton.layer.cornerRadius = 10
+//        selectButton.layer.borderColor = UIColor.black.cgColor
+//        selectButton.layer.borderWidth = 1
         if selectedRestaurant == nil {
             selectButton.isHidden = true
         }
