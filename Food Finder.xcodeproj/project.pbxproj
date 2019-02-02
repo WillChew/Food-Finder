@@ -83,10 +83,10 @@
 				21EECFBB215A01F40068AEF3 /* RandomSelectionViewController.swift */,
 				212EFDAF216C069100B0A4EA /* SelectWithOptionsViewController.swift */,
 				2146BAC221F27C27006CE7F9 /* HistoryViewController.swift */,
+				21845B1B22058E2D00E15B43 /* NewEntryTableViewController.swift */,
 				212EFDB1216C097100B0A4EA /* RestaurantCellTableViewCell.swift */,
 				215C09F521FAD64000826608 /* HistoryCollectionViewCell.swift */,
 				21845B19220307F600E15B43 /* HistoryTableViewCell.swift */,
-				21845B1B22058E2D00E15B43 /* NewEntryTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
