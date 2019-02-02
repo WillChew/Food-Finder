@@ -13,7 +13,7 @@ import GoogleMaps
 import SafariServices
 
 
-class SelectWithOptionsViewController: UIViewController {
+class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     //MARK: Outlets
     
     @IBOutlet weak var listButton: UIButton!
@@ -55,12 +55,14 @@ class SelectWithOptionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getLocationUpdate()
         setupButtons()
         
         
         self.searchTermTextField.delegate = self
         self.locationTextField.delegate = self
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKB))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
@@ -172,9 +174,9 @@ class SelectWithOptionsViewController: UIViewController {
         popoverAddButton.layer.borderColor = UIColor.black.cgColor
         popoverAddButton.setTitle("Add to List", for: .normal)
         
-        
-        
         popoverView.addSubview(googleMapView)
+        
+        self.view.bringSubviewToFront(popoverView)
     }
     
     

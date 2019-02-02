@@ -13,6 +13,7 @@
 		2146BACA21F72C84006CE7F9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BAC921F72C84006CE7F9 /* Restaurant.swift */; };
 		215C09F621FAD64000826608 /* HistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C09F521FAD64000826608 /* HistoryCollectionViewCell.swift */; };
 		21845B1A220307F600E15B43 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21845B19220307F600E15B43 /* HistoryTableViewCell.swift */; };
+		21845B1C22058E2D00E15B43 /* NewEntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21845B1B22058E2D00E15B43 /* NewEntryTableViewController.swift */; };
 		21EECFBA215A01F40068AEF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFB9215A01F40068AEF3 /* AppDelegate.swift */; };
 		21EECFBC215A01F40068AEF3 /* RandomSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFBB215A01F40068AEF3 /* RandomSelectionViewController.swift */; };
 		21EECFBF215A01F40068AEF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EECFBD215A01F40068AEF3 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		2146BAC921F72C84006CE7F9 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		215C09F521FAD64000826608 /* HistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		21845B19220307F600E15B43 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		21845B1B22058E2D00E15B43 /* NewEntryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewEntryTableViewController.swift; path = "Food Finder/Controllers/NewEntryTableViewController.swift"; sourceTree = SOURCE_ROOT; };
 		21EECFB6215A01F30068AEF3 /* Food Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21EECFB9215A01F40068AEF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21EECFBB215A01F40068AEF3 /* RandomSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomSelectionViewController.swift; sourceTree = "<group>"; };
@@ -80,10 +82,11 @@
 			children = (
 				21EECFBB215A01F40068AEF3 /* RandomSelectionViewController.swift */,
 				212EFDAF216C069100B0A4EA /* SelectWithOptionsViewController.swift */,
-				212EFDB1216C097100B0A4EA /* RestaurantCellTableViewCell.swift */,
 				2146BAC221F27C27006CE7F9 /* HistoryViewController.swift */,
+				212EFDB1216C097100B0A4EA /* RestaurantCellTableViewCell.swift */,
 				215C09F521FAD64000826608 /* HistoryCollectionViewCell.swift */,
 				21845B19220307F600E15B43 /* HistoryTableViewCell.swift */,
+				21845B1B22058E2D00E15B43 /* NewEntryTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				21845B1A220307F600E15B43 /* HistoryTableViewCell.swift in Sources */,
 				212EFDB0216C069100B0A4EA /* SelectWithOptionsViewController.swift in Sources */,
 				2146BACA21F72C84006CE7F9 /* Restaurant.swift in Sources */,
+				21845B1C22058E2D00E15B43 /* NewEntryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

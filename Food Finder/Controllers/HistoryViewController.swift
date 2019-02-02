@@ -20,6 +20,8 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     
+    
+    
     var googleMapView = UIView()
     var mapView: GMSMapView?
     var screenSize: CGRect!
@@ -27,6 +29,7 @@ class HistoryViewController: UIViewController {
     var screenHeight: CGFloat!
     var cViewScreen = UIView()
     var tableScreen = UIView()
+
     
     
     override func viewDidLoad() {
@@ -53,6 +56,8 @@ class HistoryViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    //MARK: Functions
+    
     @objc func keyboardWillShow(sender: Notification) {
        
         
@@ -66,8 +71,9 @@ class HistoryViewController: UIViewController {
         UIView.animate(withDuration: 0.25) {
             self.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)}
     }
+
     
-    //MARK: Functions
+    
     
     fileprivate func setupTableAndCollectionView() {
         
@@ -126,6 +132,18 @@ class HistoryViewController: UIViewController {
         
     }
     
+    func addPopoverView(){
+      
+        
+    }
+    
+    @IBAction func addButtonPressed(_ sender: Any) {
+
+        
+        
+    }
+    
+   
     @IBAction func segControllerPressed(_ sender: UISegmentedControl) {
         if segControl.selectedSegmentIndex == 0 {
             cViewScreen.alpha = 1
