@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class NewEntryTableViewController: UITableViewController {
     
@@ -18,12 +19,17 @@ class NewEntryTableViewController: UITableViewController {
     @IBOutlet weak var tagsTextField: UITextField!
     
     var imagePicker = UIImagePickerController()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var visitDate: Date!
     
     
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(pickImage))
         restaurantImage.addGestureRecognizer(imageTap)
@@ -54,6 +60,7 @@ class NewEntryTableViewController: UITableViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
+        visitDate = sender.date
         dateTextField.text = dateFormatter.string(from: sender.date)
     }
     
@@ -97,11 +104,37 @@ class NewEntryTableViewController: UITableViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
-        print("Saved")
+        
+        let newEntry = Entry(context:self.context)
+        newEntry.name = nameTextField.text
+        if pictureCaptionTextView.text == "Write a caption..." {
+            pictureCaptionTextView.text = ""
+        } else {
+        newEntry.caption = pictureCaptionTextView.text
+        }
+        newEntry.date = visitDate
+        newEntry.address = addressTextField.text
+        
+        if let img = restaurantImage.image {
+            let data = img.pngData() as Data?
+            newEntry.image = data
+        }
+    
+        
+        print("Pressed")
+        saveItems()
+        
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
+    func saveItems(){
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context \(error)")
+        }
+    }
     
-
 }
 
 extension NewEntryTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
@@ -109,7 +142,9 @@ extension NewEntryTableViewController: UIImagePickerControllerDelegate, UINaviga
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             
+            restaurantImage.contentMode = .scaleToFill
             restaurantImage.image = editedImage
+            
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -139,6 +174,12 @@ extension NewEntryTableViewController: UIImagePickerControllerDelegate, UINaviga
         if pictureCaptionTextView.text.isEmpty || pictureCaptionTextView.text == "" {
             pictureCaptionTextView.textColor = .lightGray
             pictureCaptionTextView.text = "Write a caption..."
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if nameTextField.text != "" {
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
     

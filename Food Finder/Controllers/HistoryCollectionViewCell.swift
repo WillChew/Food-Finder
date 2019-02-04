@@ -10,4 +10,5 @@ import UIKit
 
 class HistoryCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var restaurantPicture: UIImageView!
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import CoreData
 
 class HistoryViewController: UIViewController {
     
@@ -29,11 +30,15 @@ class HistoryViewController: UIViewController {
     var screenHeight: CGFloat!
     var cViewScreen = UIView()
     var tableScreen = UIView()
-
+    var entriesArray = [Entry]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -43,12 +48,12 @@ class HistoryViewController: UIViewController {
         myTableView.dataSource = self
         
         
-        setupTableAndCollectionView()
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-//        
-      
+        
+        //        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        //
+        
         
         
         
@@ -56,10 +61,21 @@ class HistoryViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadItems()
+        setupTableAndCollectionView()
+        
+        
+        
+        
+    }
+    
     //MARK: Functions
     
     @objc func keyboardWillShow(sender: Notification) {
-       
+        
         
         UIView.animate(withDuration: 0.25) {
             self.view.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y - 200, width: self.view.frame.size.width, height: self.view.frame.size.height)
@@ -67,21 +83,21 @@ class HistoryViewController: UIViewController {
     }
     
     @objc func keyboardWillHide(sender: Notification) {
-       
+        
         UIView.animate(withDuration: 0.25) {
             self.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)}
     }
-
+    
     
     
     
     fileprivate func setupTableAndCollectionView() {
         
-    
-
+        
+        
         tableScreen.frame = CGRect.zero
         self.view.addSubview(tableScreen)
-          tableScreen.addSubview(myTableView)
+        tableScreen.addSubview(myTableView)
         
         
         
@@ -115,35 +131,28 @@ class HistoryViewController: UIViewController {
         historyCollectionView.bottomAnchor.constraint(equalTo: cViewScreen.bottomAnchor).isActive = true
         historyCollectionView.leftAnchor.constraint(equalTo: cViewScreen.leftAnchor).isActive = true
         historyCollectionView.rightAnchor.constraint(equalTo: cViewScreen.rightAnchor).isActive = true
-
-        
-      
-//        
-//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-//        layout.sectionInset = UIEdgeInsets.zero
-//        
-//        layout.itemSize = CGSize(width: screenWidth/2, height: screenWidth/2)
-//        layout.minimumInteritemSpacing = 0
-//        layout.minimumLineSpacing = 0
-//        layout.scrollDirection = .vertical
-//        historyCollectionView!.collectionViewLayout = layout
-        
-        
         
     }
     
-    func addPopoverView(){
-      
-        
+    func loadItems(with request:NSFetchRequest<Entry> = Entry.fetchRequest()) {
+        do {
+            entriesArray = try context.fetch(request)
+        } catch {
+            print("Error loading entries \(error)")
+        }
+        myTableView.reloadData()
+        historyCollectionView.reloadData()
     }
+    
+    
     
     @IBAction func addButtonPressed(_ sender: Any) {
-
+        
         
         
     }
     
-   
+    
     @IBAction func segControllerPressed(_ sender: UISegmentedControl) {
         if segControl.selectedSegmentIndex == 0 {
             cViewScreen.alpha = 1
@@ -155,22 +164,37 @@ class HistoryViewController: UIViewController {
         
     }
 }
-    
+
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return entriesArray.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedCell", for: indexPath) as! HistoryTableViewCell
         
-        cell.restaurantPic.image = UIImage(named: "Telephone")
-        cell.restaurantNameLabel.text = "Bang Bang Ice Cream and Bakery"
-        cell.restaurantAddressLabel.text = "1543 Dundas Street West"
-        cell.restaurantRatingLabel.text = "4"
         
         
+        if let imageData = entriesArray[indexPath.row].image {
+            cell.restaurantPic.image = UIImage(data: imageData)
+            
+        }
+        
+        
+        cell.restaurantNameLabel.text = entriesArray[indexPath.row].name
+        cell.restaurantAddressLabel.text = entriesArray[indexPath.row].address
+        
+        
+        let formatter = DateFormatter()
+        formatter.timeStyle = .none
+        formatter.dateStyle = .medium
+        
+        if let visitDate = entriesArray[indexPath.row].date {
+            
+            let date = formatter.string(from: visitDate)
+            cell.restaurantRatingLabel.text = date
+        }
         return cell
     }
     
@@ -182,17 +206,19 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
 extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return entriesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCell", for: indexPath) as! HistoryCollectionViewCell
         
- 
         
+        if let imageData = entriesArray[indexPath.row].image {
+            cell.restaurantPicture.image = UIImage(data: imageData)
+        }
         
-        cell.layer.borderColor = UIColor.white.cgColor
-        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 2
         
         return cell
     }
@@ -202,10 +228,10 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         
     }
-
     
-//    MARK: Searchbar functions
-
+    
+    //    MARK: Searchbar functions
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("pressed")
         searchBar.resignFirstResponder()
@@ -213,8 +239,8 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-
-
+    
+    
     
     
     

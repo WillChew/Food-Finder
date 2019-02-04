@@ -216,15 +216,15 @@
                                 <rect key="frame" x="0.0" y="253" width="375" height="276"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="egY-6h-Mow">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="egY-6h-Mow">
                                     <size key="itemSize" width="110" height="110"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="10"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HistoryCell" id="S17-zR-RV0" customClass="HistoryCollectionViewCell" customModule="Food_Finder" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="0.0" width="110" height="110"/>
+                                        <rect key="frame" x="10" y="10" width="110" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
@@ -242,6 +242,9 @@
                                             <constraint firstItem="Fc9-AF-evh" firstAttribute="leading" secondItem="S17-zR-RV0" secondAttribute="leading" id="JYl-kv-hId"/>
                                             <constraint firstAttribute="trailing" secondItem="Fc9-AF-evh" secondAttribute="trailing" id="PZx-h3-o6M"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="restaurantPicture" destination="Fc9-AF-evh" id="0Hj-wV-Eb1"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -758,10 +761,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Restaurant Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kof-1M-x2S">
-                                                    <rect key="frame" x="135" y="6" width="224" height="30"/>
+                                                    <rect key="frame" x="135.33333333333337" y="6" width="223.66666666666663" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="OWq-mp-Lqs" id="mA3-Vv-R94"/>
                                                     </connections>
@@ -792,7 +795,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date Visted" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pab-7K-A1E">
-                                                    <rect key="frame" x="135.33333333333331" y="6" width="224" height="30"/>
+                                                    <rect key="frame" x="135.33333333333337" y="6" width="223.66666666666663" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
