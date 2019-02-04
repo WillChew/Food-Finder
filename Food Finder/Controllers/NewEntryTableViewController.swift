@@ -11,7 +11,6 @@ import UIKit
 class NewEntryTableViewController: UITableViewController {
     
     @IBOutlet weak var restaurantImage: UIImageView!
-   
     @IBOutlet weak var pictureCaptionTextView: UITextView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
@@ -20,10 +19,12 @@ class NewEntryTableViewController: UITableViewController {
     
     var imagePicker = UIImagePickerController()
     
+    
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(pickImage))
         restaurantImage.addGestureRecognizer(imageTap)
         
@@ -34,9 +35,27 @@ class NewEntryTableViewController: UITableViewController {
         pictureCaptionTextView.textColor = .lightGray
         pictureCaptionTextView.text = "Write a caption..."
         
+        let datePickerView: UIDatePicker = UIDatePicker()
+        datePickerView.datePickerMode = .date
+        dateTextField.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        self.view.addGestureRecognizer(tapGesture)
+        
+        self.navigationController?.navigationItem.title = "New Entry"
         
     }
+    @objc func viewTapped() {
+        self.view.endEditing(true)
+    }
     
+    @objc func datePickerValueChanged(sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateTextField.text = dateFormatter.string(from: sender.date)
+    }
     
     
     @objc func pickImage() {
@@ -76,6 +95,12 @@ class NewEntryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+        print("Saved")
+    }
+    
+    
 
 }
 
@@ -105,7 +130,7 @@ extension NewEntryTableViewController: UIImagePickerControllerDelegate, UINaviga
             
             pictureCaptionTextView.textColor = .black
             pictureCaptionTextView.autocapitalizationType = .words
-            pictureCaptionTextView.isScrollEnabled = false
+            
             
         }
     }
