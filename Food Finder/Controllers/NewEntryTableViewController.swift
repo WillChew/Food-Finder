@@ -21,11 +21,17 @@ class NewEntryTableViewController: UITableViewController {
     var imagePicker = UIImagePickerController()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var visitDate: Date!
+    let dateFormatter = DateFormatter()
     
     
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        
+        
+        dateTextField.text = dateFormatter.string(from: Date())
         
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         
@@ -57,9 +63,7 @@ class NewEntryTableViewController: UITableViewController {
     }
     
     @objc func datePickerValueChanged(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
+       
         visitDate = sender.date
         dateTextField.text = dateFormatter.string(from: sender.date)
     }

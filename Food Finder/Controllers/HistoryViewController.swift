@@ -49,10 +49,10 @@ class HistoryViewController: UIViewController {
         
         
         
-        
-        //        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        //        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        //
+//
+//                NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//                NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//
         
         
         
@@ -134,7 +134,10 @@ class HistoryViewController: UIViewController {
         
     }
     
-    func loadItems(with request:NSFetchRequest<Entry> = Entry.fetchRequest()) {
+    func loadItems(with request:NSFetchRequest<Entry> = Entry.fetchRequest(), predicate: NSPredicate? = nil) {
+        
+        
+        request.predicate = predicate
         do {
             entriesArray = try context.fetch(request)
         } catch {
@@ -178,7 +181,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let imageData = entriesArray[indexPath.row].image {
             cell.restaurantPic.image = UIImage(data: imageData)
-            
+        } else {
+            cell.restaurantPic.image = UIImage(named: "noImage")
         }
         
         
@@ -198,6 +202,9 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
     
     
@@ -215,6 +222,8 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         if let imageData = entriesArray[indexPath.row].image {
             cell.restaurantPicture.image = UIImage(data: imageData)
+        } else {
+            cell.restaurantPicture.image = UIImage(named: "noImage")
         }
         
         cell.layer.borderColor = UIColor.black.cgColor
@@ -233,11 +242,36 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     //    MARK: Searchbar functions
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("pressed")
+       
+        let request: NSFetchRequest<Entry> = Entry.fetchRequest()
+        let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchBar.text!)
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        
+        if searchBar.text != "" {
+        loadItems(with: request, predicate: predicate)
+        } else {
+            loadItems()
+        }
+        
+        
+        
+        
         searchBar.resignFirstResponder()
     }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadItems()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
     }
     
     
