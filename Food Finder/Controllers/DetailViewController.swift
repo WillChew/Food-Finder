@@ -38,6 +38,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         }
         restaurantNameLabel.text = entry.name
         captionTextView.text = entry.caption
+        restaurantAddressLabel.text = entry.address
+        
+        
+        saveButton.layer.cornerRadius = 10
+        saveButton.layer.borderWidth = 2
+        saveButton.layer.borderColor = UIColor.black.cgColor
+        saveButton.backgroundColor = .blue
 
         // Do any additional setup after loading the view.
     }
