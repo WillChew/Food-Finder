@@ -16,7 +16,6 @@ class HistoryViewController: UIViewController {
     @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var historyCollectionView: UICollectionView!
     @IBOutlet weak var myTableView: UITableView!
-    @IBOutlet weak var tabBar: UITabBarItem!
     @IBOutlet weak var segControl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -73,6 +72,10 @@ class HistoryViewController: UIViewController {
     }
     
     //MARK: Functions
+    
+    func printEntries(){
+        entriesArray.forEach({print($0.name!)})
+    }
     
     @objc func keyboardWillShow(sender: Notification) {
         
@@ -181,6 +184,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         
         if let imageData = entriesArray[indexPath.row].image {
             cell.restaurantPic.image = UIImage(data: imageData)
+            cell.restaurantPic.contentMode = .scaleToFill
         } else {
             cell.restaurantPic.image = UIImage(named: "noImage")
         }
@@ -197,7 +201,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         if let visitDate = entriesArray[indexPath.row].date {
             
             let date = formatter.string(from: visitDate)
-            cell.restaurantRatingLabel.text = date
+            cell.restaurantDateLabel.text = date
         }
         return cell
     }
@@ -206,10 +210,39 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+//
+//        }
+//    }
     
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let deleteEntry = self.entriesArray[indexPath.row]
+        
+        if editingStyle == .delete {
+            context.delete(deleteEntry)
+            
+            do {
+                try context.save()
+            } catch {
+                print("Error deleting")
+            }
+        }
+        
+        
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Entry")
+        
+        do {
+            entriesArray = try context.fetch(fetchRequest) as! [Entry]
+        } catch {
+            print("Error fetching Data from DB")
+        }
+        tableView.reloadData()
+        
+    }
 }
-
 extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -13,7 +13,7 @@ class HistoryTableViewCell: UITableViewCell {
     @IBOutlet weak var restaurantPic: UIImageView!
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var restaurantAddressLabel: UILabel!
-    @IBOutlet weak var restaurantRatingLabel: UILabel!
+    @IBOutlet weak var restaurantDateLabel: UILabel!
     
     
     override func awakeFromNib() {

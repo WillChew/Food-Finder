@@ -24,7 +24,7 @@ class NewEntryTableViewController: UITableViewController {
     let dateFormatter = DateFormatter()
     
     
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         dateFormatter.dateStyle = .medium
@@ -63,7 +63,7 @@ class NewEntryTableViewController: UITableViewController {
     }
     
     @objc func datePickerValueChanged(sender: UIDatePicker) {
-       
+        
         visitDate = sender.date
         dateTextField.text = dateFormatter.string(from: sender.date)
     }
@@ -114,16 +114,21 @@ class NewEntryTableViewController: UITableViewController {
         if pictureCaptionTextView.text == "Write a caption..." {
             pictureCaptionTextView.text = ""
         } else {
-        newEntry.caption = pictureCaptionTextView.text
+            newEntry.caption = pictureCaptionTextView.text
         }
-        newEntry.date = visitDate
+        
+        if visitDate == nil {
+            newEntry.date = Date()
+        } else {
+            newEntry.date = visitDate
+        }
         newEntry.address = addressTextField.text
         
         if let img = restaurantImage.image {
             let data = img.pngData() as Data?
             newEntry.image = data
         }
-    
+        
         
         print("Pressed")
         saveItems()
