@@ -22,7 +22,7 @@ class NewEntryTableViewController: UITableViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var visitDate: Date!
     let dateFormatter = DateFormatter()
-    
+    var entry: Entry!
     
     
     override func viewWillAppear(_ animated: Bool) {

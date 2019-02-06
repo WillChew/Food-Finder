@@ -273,7 +273,11 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Cell Pressed")
+        
+        
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+        vc.entry = entriesArray[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
         
         
     }
