@@ -10,14 +10,6 @@ import UIKit
 import CoreData
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
-
-    @IBOutlet weak var restaurantImage: UIImageView!
-    @IBOutlet weak var captionTextView: UITextView!
-    @IBOutlet weak var restaurantNameLabel: UILabel!
-    @IBOutlet weak var restaurantAddressLabel: UILabel!
-    
-    @IBOutlet weak var blurView: UIView!
-    @IBOutlet weak var dateLabel: UILabel!
     
     
     var entry: Entry!
@@ -25,13 +17,19 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     let dateFormatter = DateFormatter()
     var newDate: Date!
     
+
+    @IBOutlet weak var restaurantImage: UIImageView!
+    @IBOutlet weak var captionTextView: UITextView!
+    @IBOutlet weak var restaurantNameLabel: UILabel!
+    @IBOutlet weak var restaurantAddressLabel: UILabel!
+    @IBOutlet weak var blurView: UIView!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var editDateTextField: UITextField!
-    
     @IBOutlet weak var editNameTextF: UITextField!
-    
     @IBOutlet weak var editAddressTextF: UITextField!
-    
     @IBOutlet weak var saveButton: UIButton!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
