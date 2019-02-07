@@ -16,7 +16,7 @@ class NewEntryTableViewController: UITableViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
-    @IBOutlet weak var tagsTextField: UITextField!
+    
     
     var imagePicker = UIImagePickerController()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
