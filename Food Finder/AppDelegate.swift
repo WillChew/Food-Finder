@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        GMSServices.provideAPIKey("AIzaSyDyzUyoVZhSaSCjlmI0xeGtx6pYVihCXDk")
+        GMSServices.provideAPIKey("AIzaSyCSo0wyvFNqRcXNBfJbrqV8DHaU_qhrphM")
         
         
         
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     lazy var persistentContainer: NSPersistentContainer = {
        
-        let container = NSPersistentContainer(name: "DataModel")
+        let container = NSPersistentContainer(name: "EntryData")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                

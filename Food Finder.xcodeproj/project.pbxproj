@@ -11,6 +11,7 @@
 		212EFDB2216C097100B0A4EA /* RestaurantCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EFDB1216C097100B0A4EA /* RestaurantCellTableViewCell.swift */; };
 		2146BAC321F27C27006CE7F9 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BAC221F27C27006CE7F9 /* HistoryViewController.swift */; };
 		2146BACA21F72C84006CE7F9 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BAC921F72C84006CE7F9 /* Restaurant.swift */; };
+		2147480C220D4F76004C132B /* EntryData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21CB5296220D42B300AEED6C /* EntryData.xcdatamodeld */; };
 		215C09F621FAD64000826608 /* HistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215C09F521FAD64000826608 /* HistoryCollectionViewCell.swift */; };
 		21845B1A220307F600E15B43 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21845B19220307F600E15B43 /* HistoryTableViewCell.swift */; };
 		21845B1C22058E2D00E15B43 /* NewEntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21845B1B22058E2D00E15B43 /* NewEntryTableViewController.swift */; };
@@ -18,7 +19,6 @@
 		21EECFBA215A01F40068AEF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFB9215A01F40068AEF3 /* AppDelegate.swift */; };
 		21EECFBC215A01F40068AEF3 /* RandomSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFBB215A01F40068AEF3 /* RandomSelectionViewController.swift */; };
 		21EECFBF215A01F40068AEF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EECFBD215A01F40068AEF3 /* Main.storyboard */; };
-		21EECFC2215A01F40068AEF3 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFC0215A01F40068AEF3 /* DataModel.xcdatamodeld */; };
 		21EECFC4215A01F70068AEF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21EECFC3215A01F70068AEF3 /* Assets.xcassets */; };
 		21EECFC7215A01F70068AEF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EECFC5215A01F70068AEF3 /* LaunchScreen.storyboard */; };
 		21EECFCF215A25020068AEF3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFCE215A25020068AEF3 /* RequestManager.swift */; };
@@ -33,6 +33,7 @@
 		215C09F521FAD64000826608 /* HistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		21845B19220307F600E15B43 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		21845B1B22058E2D00E15B43 /* NewEntryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewEntryTableViewController.swift; path = "Food Finder/Controllers/NewEntryTableViewController.swift"; sourceTree = SOURCE_ROOT; };
+		21CB5297220D42B300AEED6C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		21E4E2A5220AD62C00D102B2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = "Food Finder/Controllers/DetailViewController.swift"; sourceTree = SOURCE_ROOT; };
 		21EECFB6215A01F30068AEF3 /* Food Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21EECFB9215A01F40068AEF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +120,7 @@
 				2146BAC521F27C3F006CE7F9 /* Views */,
 				2146BAC421F27C33006CE7F9 /* Model */,
 				21EECFB9215A01F40068AEF3 /* AppDelegate.swift */,
+				21CB5296220D42B300AEED6C /* EntryData.xcdatamodeld */,
 				21EECFC3215A01F70068AEF3 /* Assets.xcassets */,
 				21EECFC8215A01F70068AEF3 /* Info.plist */,
 			);
@@ -274,13 +276,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21EECFC2215A01F40068AEF3 /* DataModel.xcdatamodeld in Sources */,
 				21EECFBC215A01F40068AEF3 /* RandomSelectionViewController.swift in Sources */,
 				212EFDB2216C097100B0A4EA /* RestaurantCellTableViewCell.swift in Sources */,
 				21E4E2A6220AD62C00D102B2 /* DetailViewController.swift in Sources */,
 				21EECFBA215A01F40068AEF3 /* AppDelegate.swift in Sources */,
 				21EECFCF215A25020068AEF3 /* RequestManager.swift in Sources */,
 				215C09F621FAD64000826608 /* HistoryCollectionViewCell.swift in Sources */,
+				2147480C220D4F76004C132B /* EntryData.xcdatamodeld in Sources */,
 				2146BAC321F27C27006CE7F9 /* HistoryViewController.swift in Sources */,
 				21845B1A220307F600E15B43 /* HistoryTableViewCell.swift in Sources */,
 				212EFDB0216C069100B0A4EA /* SelectWithOptionsViewController.swift in Sources */,
@@ -491,6 +493,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		21CB5296220D42B300AEED6C /* EntryData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				21CB5297220D42B300AEED6C /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 21CB5297220D42B300AEED6C /* DataModel.xcdatamodel */;
+			path = EntryData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		21EECFC0215A01F40068AEF3 /* DataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
