@@ -425,7 +425,7 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
             tableView.reloadRows(at: [indexPath], with: .automatic)
             
         }
-        add.backgroundColor = .green
+        add.backgroundColor = .lightGray
         
         return [add]
     }

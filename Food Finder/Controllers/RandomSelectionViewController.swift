@@ -78,6 +78,12 @@ class RandomSelectionViewController: UIViewController {
         let alert = UIAlertController(title: "Restaurant Finder", message: "What would you like to eat today?", preferredStyle: .alert)
         let helpAction = UIAlertAction(title: "Find Something Near Me", style: .default) { (_) in
             self.findRestaurants()
+            
+            let font = UIFont(name: "MarkerFelt-Wide", size: 14)!
+            let attributedTitle = NSAttributedString(string: "Try Another One", attributes: [NSAttributedString.Key.font : font])
+            
+            
+            self.tryAgainButton.setAttributedTitle(attributedTitle, for: .normal)
         }
         let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
         alert.addAction(helpAction)
@@ -92,8 +98,7 @@ class RandomSelectionViewController: UIViewController {
     //MARK: Functions
     
     func setupButtons() {
-        
-        tryAgainButton.setTitle("Find Another One", for: .normal)
+       
         tryAgainButton.titleLabel?.textAlignment = .center
         
         

@@ -30,7 +30,6 @@ class NewEntryTableViewController: UITableViewController {
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         
-        
         dateTextField.text = dateFormatter.string(from: Date())
         
         self.navigationItem.rightBarButtonItem?.isEnabled = false
@@ -43,7 +42,6 @@ class NewEntryTableViewController: UITableViewController {
         
         restaurantImage.layer.borderColor = UIColor.black.cgColor
         restaurantImage.layer.borderWidth = 2
-        
         pictureCaptionTextView.textColor = .lightGray
         pictureCaptionTextView.text = "Write a caption..."
         

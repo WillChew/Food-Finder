@@ -24,7 +24,7 @@ class HistoryViewController: UIViewController {
     
     var googleMapView = UIView()
     var mapView: GMSMapView?
-    var screenSize: CGRect!
+    
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
     var cViewScreen = UIView()
@@ -34,31 +34,15 @@ class HistoryViewController: UIViewController {
     
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      
         
-        
-        screenSize = UIScreen.main.bounds
-        screenWidth = screenSize.width
-        screenHeight = screenSize.height
-        
-        myTableView.delegate = self
-        myTableView.dataSource = self
-        
-        
-        
-
-                NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-                NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-
-        
-        
-        
-        
-        
-        // Do any additional setup after loading the view.
     }
+    
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,35 +51,11 @@ class HistoryViewController: UIViewController {
         setupTableAndCollectionView()
         
         
-        
-        
     }
     
     //MARK: Functions
     
-    func printEntries(){
-        entriesArray.forEach({print($0.name!)})
-    }
-    
-    @objc func keyboardWillShow(sender: Notification) {
-        
-        
-        UIView.animate(withDuration: 0.25) {
-            self.view.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y - 200, width: self.view.frame.size.width, height: self.view.frame.size.height)
-        }
-    }
-    
-    @objc func keyboardWillHide(sender: Notification) {
-        
-        UIView.animate(withDuration: 0.25) {
-            self.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)}
-    }
-    
-    
-    
-    
     fileprivate func setupTableAndCollectionView() {
-        
         
         
         tableScreen.frame = CGRect.zero
@@ -177,7 +137,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         if entriesArray.isEmpty == true {
             return 1
         } else {
-        return entriesArray.count
+            return entriesArray.count
         }
     }
     
@@ -191,29 +151,29 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             cell.restaurantAddressLabel.text = ""
             cell.restaurantDateLabel.text = ""
         } else {
-        if let imageData = entriesArray[indexPath.row].image {
-            cell.restaurantPic.image = UIImage(data: imageData)
-            cell.restaurantPic.contentMode = .scaleToFill
+            if let imageData = entriesArray[indexPath.row].image {
+                cell.restaurantPic.image = UIImage(data: imageData)
+                cell.restaurantPic.contentMode = .scaleToFill
+                
+                
+            } else {
+                cell.restaurantPic.image = UIImage(named: "noImage")
+            }
             
             
-        } else {
-            cell.restaurantPic.image = UIImage(named: "noImage")
-        }
-        
-        
-        cell.restaurantNameLabel.text = entriesArray[indexPath.row].name
-        cell.restaurantAddressLabel.text = entriesArray[indexPath.row].address
-        
-        
-        let formatter = DateFormatter()
-        formatter.timeStyle = .none
-        formatter.dateStyle = .medium
-        
-        if let visitDate = entriesArray[indexPath.row].date {
+            cell.restaurantNameLabel.text = entriesArray[indexPath.row].name
+            cell.restaurantAddressLabel.text = entriesArray[indexPath.row].address
             
-            let date = formatter.string(from: visitDate)
-            cell.restaurantDateLabel.text = date
-        }
+            
+            let formatter = DateFormatter()
+            formatter.timeStyle = .none
+            formatter.dateStyle = .medium
+            
+            if let visitDate = entriesArray[indexPath.row].date {
+                
+                let date = formatter.string(from: visitDate)
+                cell.restaurantDateLabel.text = date
+            }
         }
         
         cell.restaurantPic.layer.borderWidth = 2
@@ -229,9 +189,9 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         if entriesArray.isEmpty == true {
             performSegue(withIdentifier: "newEntrySegue", sender: self)
         } else {
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        vc.entry = entriesArray[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+            vc.entry = entriesArray[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }
@@ -295,7 +255,7 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 2
-            
+        
         
         return cell
     }
@@ -305,10 +265,10 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         if entriesArray.isEmpty == true {
             performSegue(withIdentifier: "newEntrySegue", sender: self)
         } else {
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        vc.entry = entriesArray[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
-        
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+            vc.entry = entriesArray[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         }
     }
     
@@ -316,28 +276,25 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     //    MARK: Searchbar functions
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-       
+        
         let request: NSFetchRequest<Entry> = Entry.fetchRequest()
         let predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchBar.text!)
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         
         if searchBar.text != "" {
-        loadItems(with: request, predicate: predicate)
+            loadItems(with: request, predicate: predicate)
         } else {
             loadItems()
         }
-        
-        
-        
-        
+  
         searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-
+    
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
