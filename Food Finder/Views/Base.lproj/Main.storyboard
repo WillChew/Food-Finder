@@ -249,6 +249,8 @@
                                 <connections>
                                     <outlet property="dataSource" destination="gZk-Rh-bdi" id="Btn-7F-Ke6"/>
                                     <outlet property="delegate" destination="gZk-Rh-bdi" id="9RQ-Eh-aGg"/>
+                                    <outlet property="dragDelegate" destination="gZk-Rh-bdi" id="foZ-z4-H3d"/>
+                                    <outlet property="dropDelegate" destination="gZk-Rh-bdi" id="nv9-qs-WVC"/>
                                 </connections>
                             </collectionView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Krk-Gs-T0X">
