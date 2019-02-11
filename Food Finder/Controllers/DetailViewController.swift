@@ -17,7 +17,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     let dateFormatter = DateFormatter()
     var newDate: Date!
     
-
+    
     @IBOutlet weak var restaurantImage: UIImageView!
     @IBOutlet weak var captionTextView: UITextView!
     @IBOutlet weak var restaurantNameLabel: UILabel!
@@ -31,9 +31,24 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupInitialLoad()
         
+        
+    }
+    
+    @objc func viewTapped(){
+        self.view.endEditing(true)
+    }
+    
+    @objc func datePickerValueChanged(sender: UIDatePicker) {
+        editDateTextField.text = dateFormatter.string(from: sender.date)
+        newDate = sender.date
+    }
+    fileprivate func setupInitialLoad() {
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         saveButton.isHidden = true
@@ -62,7 +77,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         saveButton.layer.borderWidth = 2
         saveButton.layer.borderColor = UIColor.black.cgColor
         saveButton.backgroundColor = .blue
-
+        
         blurView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         restaurantNameLabel.alpha = 1
         
@@ -75,17 +90,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         self.view.addGestureRecognizer(tapGesture)
         
-       
-        // Do any additional setup after loading the view.
-    }
-    
-    @objc func viewTapped(){
-        self.view.endEditing(true)
-    }
-    
-    @objc func datePickerValueChanged(sender: UIDatePicker) {
-        editDateTextField.text = dateFormatter.string(from: sender.date)
-        newDate = sender.date
+        navigationItem.title = entry.name
     }
     
     
@@ -103,13 +108,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         editAddressTextF.text = entry.address
         captionTextView.text = entry.caption
         if let date = entry.date {
-           
+            
             editDateTextField.text = dateFormatter.string(from: date)
         }
         
         captionTextView.backgroundColor = .white
         
         self.navigationItem.rightBarButtonItem?.isEnabled = false
+        navigationItem.title = "Edit Entry"
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -121,8 +127,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-   
-
+    
+    
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         
         restaurantAddressLabel.isHidden = false
@@ -130,7 +136,20 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         dateLabel.isHidden = false
         restaurantAddressLabel.text = editAddressTextF.text
         restaurantNameLabel.text = editNameTextF.text
-        dateLabel.text = dateFormatter.string(from: newDate)
+        
+        
+        if newDate != nil {
+            dateLabel.text = dateFormatter.string(from: newDate)
+        } else if entry.date != nil {
+            guard let saveDate = entry.date else { return }
+            dateLabel.text = dateFormatter.string(from: saveDate)
+        } else {
+            dateLabel.text = "No date"
+        }
+        
+        
+        
+        
         
         saveButton.isHidden = true
         editNameTextF.isHidden = true
@@ -143,8 +162,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         entry.setValue(captionTextView.text, forKey: "caption")
         entry.setValue(editNameTextF.text, forKey: "name")
         entry.setValue(editAddressTextF.text, forKey: "address")
-        entry.setValue(newDate, forKey: "date")
         
+        navigationItem.title = entry.name
+        
+        if newDate != nil {
+            entry.setValue(newDate, forKey: "date")
+        } else {
+            guard let saveDate = entry.date else { return }
+            entry.setValue(saveDate, forKey: "date")
+        }
         do {
             try context.save()
         } catch {

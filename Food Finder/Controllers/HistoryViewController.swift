@@ -180,11 +180,15 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedCell", for: indexPath) as! HistoryTableViewCell
         
+       
+        
         
         
         if let imageData = entriesArray[indexPath.row].image {
             cell.restaurantPic.image = UIImage(data: imageData)
             cell.restaurantPic.contentMode = .scaleToFill
+            
+            
         } else {
             cell.restaurantPic.image = UIImage(named: "noImage")
         }
@@ -203,6 +207,11 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             let date = formatter.string(from: visitDate)
             cell.restaurantDateLabel.text = date
         }
+        
+        cell.restaurantPic.layer.borderWidth = 2
+        cell.restaurantPic.layer.borderColor = UIColor.black.cgColor
+        
+        
         return cell
     }
     
