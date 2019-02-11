@@ -48,10 +48,10 @@ class HistoryViewController: UIViewController {
         
         
         
-//
-//                NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-//                NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-//
+
+                NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+
         
         
         
@@ -173,17 +173,24 @@ class HistoryViewController: UIViewController {
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return entriesArray.count
         
+        if entriesArray.isEmpty == true {
+            return 1
+        } else {
+        return entriesArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedCell", for: indexPath) as! HistoryTableViewCell
         
-       
         
-        
-        
+        if entriesArray.isEmpty == true {
+            cell.restaurantPic.image = UIImage(named: "plus")
+            cell.restaurantNameLabel.text = "Add New Entry"
+            cell.restaurantAddressLabel.text = ""
+            cell.restaurantDateLabel.text = ""
+        } else {
         if let imageData = entriesArray[indexPath.row].image {
             cell.restaurantPic.image = UIImage(data: imageData)
             cell.restaurantPic.contentMode = .scaleToFill
@@ -207,6 +214,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             let date = formatter.string(from: visitDate)
             cell.restaurantDateLabel.text = date
         }
+        }
         
         cell.restaurantPic.layer.borderWidth = 2
         cell.restaurantPic.layer.borderColor = UIColor.black.cgColor
@@ -218,13 +226,13 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        
+        if entriesArray.isEmpty == true {
+            performSegue(withIdentifier: "newEntrySegue", sender: self)
+        } else {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         vc.entry = entriesArray[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
-        
-        
-        
+        }
         
     }
     
@@ -262,33 +270,46 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
 extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return entriesArray.count
+        
+        if entriesArray.isEmpty == false {
+            return entriesArray.count
+        } else {
+            return 1
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HistoryCell", for: indexPath) as! HistoryCollectionViewCell
         
-        
-        if let imageData = entriesArray[indexPath.row].image {
-            cell.restaurantPicture.image = UIImage(data: imageData)
+        if entriesArray.isEmpty == true {
+            cell.restaurantPicture.image = UIImage(named: "plus")
         } else {
-            cell.restaurantPicture.image = UIImage(named: "noImage")
+            if let imageData = entriesArray[indexPath.row].image {
+                cell.restaurantPicture.image = UIImage(data: imageData)
+            } else {
+                cell.restaurantPicture.image = UIImage(named: "noImage")
+            }
         }
+        
         
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 2
+            
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        
+        if entriesArray.isEmpty == true {
+            performSegue(withIdentifier: "newEntrySegue", sender: self)
+        } else {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         vc.entry = entriesArray[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
         
-        
+        }
     }
     
     

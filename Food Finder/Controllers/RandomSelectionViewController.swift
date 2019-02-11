@@ -39,41 +39,51 @@ class RandomSelectionViewController: UIViewController {
     @IBOutlet weak var magnifyingGlassButton: UIButton!
     
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupButtons()
-        
+
         if selectedRestaurant != nil {
             changeDisplays()
         } else {
             nameLabel.text = "No restaurant selected"
             addressLabel.text = ""
         }
-        
-        
+
+
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 200
-        
-        
-        
-        
+
+
+
+
         requestManager = RequestManager()
         locationTextField.delegate = self
         theMapView.addSubview(activityIndicator)
-        
+
         activityIndicator.bounds = theMapView.bounds
         activityIndicator.center = theMapView.center
-        
+
+       
         
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let alert = UIAlertController(title: "Restaurant Finder", message: "What would you like to eat today?", preferredStyle: .alert)
+        let helpAction = UIAlertAction(title: "Find Something Near Me", style: .default) { (_) in
+            self.findRestaurants()
+        }
+        let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        alert.addAction(helpAction)
+        alert.addAction(cancelAction)
         
-        
+        self.present(alert, animated: true, completion: nil)
     }
     
   
@@ -83,7 +93,7 @@ class RandomSelectionViewController: UIViewController {
     
     func setupButtons() {
         
-        tryAgainButton.setTitle("Random Restaurant", for: .normal)
+        tryAgainButton.setTitle("Find Another One", for: .normal)
         tryAgainButton.titleLabel?.textAlignment = .center
         
         
