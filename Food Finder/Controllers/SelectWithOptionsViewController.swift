@@ -119,6 +119,10 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
         listButton.layer.borderColor = UIColor.black.cgColor
         listButton.layer.borderWidth = 2
         
+        oneDollarSignButton.layer.cornerRadius = oneDollarSignButton.frame.width/2
+        twoDollarSignsButton.layer.cornerRadius = twoDollarSignsButton.frame.width/2
+        threeDollarSignsButton.layer.cornerRadius = threeDollarSignsButton.frame.width/2
+        fourDollarSignsButton.layer.cornerRadius = fourDollarSignsButton.frame.width/2
         
         helperButton.setTitle("Find What You Feel Like Eating First", for: .normal)
         helperButton.isEnabled = false
