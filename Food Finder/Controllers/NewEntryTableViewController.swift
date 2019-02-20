@@ -23,6 +23,10 @@ class NewEntryTableViewController: UITableViewController {
     var visitDate: Date!
     let dateFormatter = DateFormatter()
     var entry: Entry!
+    var savedCaption: String!
+    var savedName: String!
+    var savedAddress: String!
+    var savedDate: String!
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,20 +34,37 @@ class NewEntryTableViewController: UITableViewController {
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         
-        dateTextField.text = dateFormatter.string(from: Date())
         
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        pictureCaptionTextView.text = savedCaption != nil ? savedCaption : "Write a caption"
+        
+        if savedCaption != nil {
+            pictureCaptionTextView.text = savedCaption
+            pictureCaptionTextView.textColor = .black
+        } else {
+            pictureCaptionTextView.text = "Write a caption"
+            pictureCaptionTextView.textColor = .lightGray
+        }
+        
+        
+        if savedName != nil {
+            nameTextField.text = savedName
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            nameTextField.text = ""
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+        
+        addressTextField.text = savedAddress != nil ? savedAddress : ""
+        dateTextField.text = savedDate != nil ? savedDate : dateFormatter.string(from: Date())
+        
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(pickImage))
         restaurantImage.addGestureRecognizer(imageTap)
-        
-        
         restaurantImage.layer.borderColor = UIColor.black.cgColor
         restaurantImage.layer.borderWidth = 2
-        pictureCaptionTextView.textColor = .lightGray
-        pictureCaptionTextView.text = "Write a caption..."
+        
+        
         
         let datePickerView: UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = .date
@@ -68,6 +89,29 @@ class NewEntryTableViewController: UITableViewController {
     
     
     @objc func pickImage() {
+        
+        if pictureCaptionTextView.text != "Write a caption" {
+            UserDefaults.standard.set(pictureCaptionTextView.text, forKey: "caption")
+            savedCaption = UserDefaults.standard.string(forKey: "caption")
+        }
+        
+        if nameTextField.text != "" {
+            UserDefaults.standard.set(nameTextField.text, forKey: "name")
+            savedName = UserDefaults.standard.string(forKey: "name")
+        }
+        
+        if addressTextField.text != "" {
+            UserDefaults.standard.set(addressTextField.text, forKey: "address")
+            savedAddress = UserDefaults.standard.string(forKey: "address")
+        }
+        
+        if dateTextField.text != dateFormatter.string(from: Date()){
+            UserDefaults.standard.set(dateTextField.text, forKey: "date")
+            savedDate = UserDefaults.standard.string(forKey: "date")
+        }
+        
+        
+        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
             self.openCamera()
@@ -130,7 +174,7 @@ class NewEntryTableViewController: UITableViewController {
         
         print("Pressed")
         saveItems()
-        
+       
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -181,12 +225,23 @@ extension NewEntryTableViewController: UIImagePickerControllerDelegate, UINaviga
         if pictureCaptionTextView.text.isEmpty || pictureCaptionTextView.text == "" {
             pictureCaptionTextView.textColor = .lightGray
             pictureCaptionTextView.text = "Write a caption..."
+            UserDefaults.standard.removeObject(forKey: "caption")
+            savedCaption = nil
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if nameTextField.text != "" {
             self.navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            UserDefaults.standard.removeObject(forKey: "name")
+            savedName = nil
+        }
+    
+        
+        if addressTextField.text == "" {
+            UserDefaults.standard.removeObject(forKey: "address")
+            savedAddress = nil
         }
     }
     

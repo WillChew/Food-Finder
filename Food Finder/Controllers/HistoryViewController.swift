@@ -49,7 +49,10 @@ class HistoryViewController: UIViewController {
         
         loadItems()
         setupTableAndCollectionView()
-        
+        UserDefaults.standard.removeObject(forKey: "caption")
+        UserDefaults.standard.removeObject(forKey: "name")
+        UserDefaults.standard.removeObject(forKey: "address")
+        UserDefaults.standard.removeObject(forKey: "date")
         
     }
     
