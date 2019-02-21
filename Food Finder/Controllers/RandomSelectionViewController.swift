@@ -83,13 +83,13 @@ class RandomSelectionViewController: UIViewController {
             
             let font = UIFont(name: "MarkerFelt-Wide", size: 14)!
             let attributedTitle = NSAttributedString(string: "Try Another One", attributes: [NSAttributedString.Key.font : font])
-            
-            
             self.tryAgainButton.setAttributedTitle(attributedTitle, for: .normal)
         }
         let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
         alert.addAction(helpAction)
         alert.addAction(cancelAction)
+        alert.view.tintColor = .black
+        
         
         self.present(alert, animated: true, completion: nil)
         
@@ -111,9 +111,6 @@ class RandomSelectionViewController: UIViewController {
         
         
         phoneButton.isHidden = true
-//        selectButton.layer.cornerRadius = 10
-//        selectButton.layer.borderColor = UIColor.black.cgColor
-//        selectButton.layer.borderWidth = 1
         if selectedRestaurant == nil {
             selectButton.isHidden = true
         }
@@ -121,6 +118,12 @@ class RandomSelectionViewController: UIViewController {
         tryAgainButton.layer.cornerRadius = 10
         tryAgainButton.layer.borderWidth = 2
         tryAgainButton.layer.borderColor = UIColor.black.cgColor
+        
+        tryAgainButton.layer.masksToBounds = false
+        tryAgainButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        tryAgainButton.layer.shadowOpacity = 1.0
+        tryAgainButton.layer.shadowRadius = 0
+        tryAgainButton.layer.shadowOffset = CGSize(width: 0, height: 3.5)
         
         
     }

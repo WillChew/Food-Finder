@@ -99,6 +99,12 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
         decideButton.layer.borderWidth = 2
         decideButton.backgroundColor = .gray
         
+        decideButton.layer.masksToBounds = false
+        decideButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        decideButton.layer.shadowOpacity = 1.0
+        decideButton.layer.shadowRadius = 0
+        decideButton.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        
         priceButtonArray.append(oneDollarSignButton)
         priceButtonArray.append(twoDollarSignsButton)
         priceButtonArray.append(threeDollarSignsButton)
@@ -113,12 +119,25 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
         helperButton.layer.borderColor = UIColor.black.cgColor
         helperButton.layer.borderWidth = 2
         
+        helperButton.layer.masksToBounds = false
+        helperButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        helperButton.layer.shadowOpacity = 1.0
+        helperButton.layer.shadowRadius = 0
+        helperButton.layer.shadowOffset = CGSize(width: 0, height: 3.5)
+        
         listButton.setTitle("View List", for: .normal)
         listButton.titleLabel?.font = font
         listButton.titleLabel?.textAlignment = .center
         listButton.layer.cornerRadius = 10
         listButton.layer.borderColor = UIColor.black.cgColor
         listButton.layer.borderWidth = 2
+        
+        listButton.layer.masksToBounds = false
+        listButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        listButton.layer.shadowOpacity = 1.0
+        listButton.layer.shadowRadius = 0
+        listButton.layer.shadowOffset = CGSize(width: 0, height: 3.5)
+        
         
         oneDollarSignButton.layer.cornerRadius = oneDollarSignButton.frame.width/2
         twoDollarSignsButton.layer.cornerRadius = twoDollarSignsButton.frame.width/2
