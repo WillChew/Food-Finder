@@ -433,6 +433,7 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
             
             if self.restaurantsArray[indexPath.row].selected == true {
                 self.selectedRestaurantsArray.append(self.restaurantsArray[indexPath.row])
+                
             } else {
                 self.selectedRestaurantsArray = self.selectedRestaurantsArray.filter
                     { $0.selected == true }
