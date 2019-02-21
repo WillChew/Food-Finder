@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationUsageDescription</key>
+	<string>Food Finder wants to help you find food near you. Will you allow this app to know your current location?</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to camera</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>

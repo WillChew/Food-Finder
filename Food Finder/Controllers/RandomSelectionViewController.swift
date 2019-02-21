@@ -43,31 +43,33 @@ class RandomSelectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+       
+        
         setupButtons()
-
+        
         if selectedRestaurant != nil {
             changeDisplays()
         } else {
             nameLabel.text = "No restaurant selected"
             addressLabel.text = ""
         }
-
-
+        
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 200
-
-
-
-
+        locationManager.startUpdatingLocation()
+        
+        
+        
         requestManager = RequestManager()
         locationTextField.delegate = self
         theMapView.addSubview(activityIndicator)
-
+        
         activityIndicator.bounds = theMapView.bounds
         activityIndicator.center = theMapView.center
-
+        
        
         
     }
@@ -90,6 +92,12 @@ class RandomSelectionViewController: UIViewController {
         alert.addAction(cancelAction)
         
         self.present(alert, animated: true, completion: nil)
+        
+        
+       
+        
+        
+        
     }
     
   
@@ -352,6 +360,7 @@ class RandomSelectionViewController: UIViewController {
 }
 //MARK: Map and location delegate methods
 extension RandomSelectionViewController: CLLocationManagerDelegate, GMSMapViewDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status == .authorizedWhenInUse else { return }
         
@@ -370,7 +379,7 @@ extension RandomSelectionViewController: CLLocationManagerDelegate, GMSMapViewDe
         }
         
         theMapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 13, bearing: 0, viewingAngle: 0)
-        
+        theMapView.isMyLocationEnabled = true
         currentLocation = location as CLLocation
         latitude = String(currentLocation.coordinate.latitude)
         longitude = String(currentLocation.coordinate.longitude)

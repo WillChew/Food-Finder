@@ -67,6 +67,7 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         restaurantTableView.delegate = self
+        spinner.center = restaurantTableView.center
         spinner.isHidden = true
         
         
