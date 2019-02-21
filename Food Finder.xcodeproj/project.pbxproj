@@ -19,7 +19,7 @@
 		21EECFBA215A01F40068AEF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFB9215A01F40068AEF3 /* AppDelegate.swift */; };
 		21EECFBC215A01F40068AEF3 /* RandomSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFBB215A01F40068AEF3 /* RandomSelectionViewController.swift */; };
 		21EECFBF215A01F40068AEF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EECFBD215A01F40068AEF3 /* Main.storyboard */; };
-		21EECFC4215A01F70068AEF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21EECFC3215A01F70068AEF3 /* Assets.xcassets */; };
+		21EECFC4215A01F70068AEF3 /* assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21EECFC3215A01F70068AEF3 /* assets.xcassets */; };
 		21EECFC7215A01F70068AEF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EECFC5215A01F70068AEF3 /* LaunchScreen.storyboard */; };
 		21EECFCF215A25020068AEF3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EECFCE215A25020068AEF3 /* RequestManager.swift */; };
 		706208A8940CE890B20190D6 /* Pods_Food_Finder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690C50F0CA11A296FCFB5F1E /* Pods_Food_Finder.framework */; };
@@ -40,7 +40,7 @@
 		21EECFBB215A01F40068AEF3 /* RandomSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomSelectionViewController.swift; sourceTree = "<group>"; };
 		21EECFBE215A01F40068AEF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21EECFC1215A01F40068AEF3 /* Food_Finder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Food_Finder.xcdatamodel; sourceTree = "<group>"; };
-		21EECFC3215A01F70068AEF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		21EECFC3215A01F70068AEF3 /* assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = assets.xcassets; sourceTree = "<group>"; };
 		21EECFC6215A01F70068AEF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21EECFC8215A01F70068AEF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21EECFCE215A25020068AEF3 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 				2146BAC421F27C33006CE7F9 /* Model */,
 				21EECFB9215A01F40068AEF3 /* AppDelegate.swift */,
 				21CB5296220D42B300AEED6C /* EntryData.xcdatamodeld */,
-				21EECFC3215A01F70068AEF3 /* Assets.xcassets */,
+				21EECFC3215A01F70068AEF3 /* assets.xcassets */,
 				21EECFC8215A01F70068AEF3 /* Info.plist */,
 			);
 			path = "Food Finder";
@@ -207,7 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21EECFC7215A01F70068AEF3 /* LaunchScreen.storyboard in Resources */,
-				21EECFC4215A01F70068AEF3 /* Assets.xcassets in Resources */,
+				21EECFC4215A01F70068AEF3 /* assets.xcassets in Resources */,
 				21EECFBF215A01F40068AEF3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

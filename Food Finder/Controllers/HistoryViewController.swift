@@ -295,6 +295,7 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
         searchBar.resignFirstResponder()
     }
     

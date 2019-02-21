@@ -98,21 +98,11 @@
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="375 Valencia St" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRK-E4-ILX">
-                                <rect key="frame" x="122.5" y="626.5" width="169" height="30"/>
+                                <rect key="frame" x="117.5" y="626.5" width="179" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bJg-BF-2ii">
-                                <rect key="frame" x="117.5" y="663" width="179" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="(647) 975-1430">
-                                    <color key="titleColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="makeCallButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VOM-zY-FBr"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gry-IR-r2G">
                                 <rect key="frame" x="281" y="711" width="108" height="30"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -129,26 +119,36 @@
                                     <action selector="selectRestaurantButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F5p-2e-iGX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bJg-BF-2ii">
+                                <rect key="frame" x="117.5" y="661" width="179" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="(647) 975-1430">
+                                    <color key="titleColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="makeCallButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VOM-zY-FBr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bJg-BF-2ii" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="30I-YG-TFP"/>
-                            <constraint firstItem="ofo-94-zGX" firstAttribute="centerX" secondItem="bJg-BF-2ii" secondAttribute="centerX" id="4z5-qq-j6j"/>
                             <constraint firstItem="n7x-K8-8oO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="5gC-SX-hdt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n7x-K8-8oO" secondAttribute="trailing" constant="10" id="6Pf-Fk-9Wg"/>
-                            <constraint firstItem="ofo-94-zGX" firstAttribute="top" secondItem="bJg-BF-2ii" secondAttribute="bottom" constant="6.3300000000000001" id="77Z-95-ZRZ"/>
-                            <constraint firstItem="kRK-E4-ILX" firstAttribute="centerX" secondItem="6sg-8I-k3w" secondAttribute="centerX" id="82K-iU-RV8"/>
+                            <constraint firstItem="ofo-94-zGX" firstAttribute="top" secondItem="bJg-BF-2ii" secondAttribute="bottom" constant="8.5" id="77Z-95-ZRZ"/>
+                            <constraint firstItem="kRK-E4-ILX" firstAttribute="width" secondItem="bJg-BF-2ii" secondAttribute="width" id="A9i-YL-kGt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ggs-SX-jCD" secondAttribute="trailing" id="B9d-h4-rYz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xx3-we-i9L" secondAttribute="trailing" constant="10" id="CMU-ye-hOj"/>
                             <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="top" secondItem="gry-IR-r2G" secondAttribute="bottom" constant="8" id="DHx-bZ-MkM"/>
                             <constraint firstItem="n7x-K8-8oO" firstAttribute="top" secondItem="jYN-fS-ZZC" secondAttribute="bottom" constant="10" id="DuX-5c-zMt"/>
-                            <constraint firstItem="gry-IR-r2G" firstAttribute="top" secondItem="bJg-BF-2ii" secondAttribute="bottom" constant="6" id="Fho-Wu-y5V"/>
+                            <constraint firstItem="gry-IR-r2G" firstAttribute="top" secondItem="bJg-BF-2ii" secondAttribute="bottom" constant="8" id="Fho-Wu-y5V"/>
+                            <constraint firstItem="kRK-E4-ILX" firstAttribute="leading" secondItem="bJg-BF-2ii" secondAttribute="leading" id="Hga-uQ-hYR"/>
                             <constraint firstItem="jYN-fS-ZZC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="INp-Cb-Fd3"/>
-                            <constraint firstItem="bJg-BF-2ii" firstAttribute="top" secondItem="kRK-E4-ILX" secondAttribute="bottom" constant="6.3300000000000001" id="L6I-rM-C1s"/>
-                            <constraint firstItem="bJg-BF-2ii" firstAttribute="centerX" secondItem="kRK-E4-ILX" secondAttribute="centerX" id="RWM-Aj-4qX"/>
+                            <constraint firstItem="ofo-94-zGX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KlC-Uf-QGa"/>
+                            <constraint firstItem="bJg-BF-2ii" firstAttribute="top" secondItem="kRK-E4-ILX" secondAttribute="bottom" constant="4.5" id="L6I-rM-C1s"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gry-IR-r2G" secondAttribute="trailing" constant="25" id="Vp6-6e-C5i"/>
                             <constraint firstItem="Xx3-we-i9L" firstAttribute="top" secondItem="jYN-fS-ZZC" secondAttribute="bottom" constant="5" id="Zum-i3-LgB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ty0-Cv-aeJ" secondAttribute="trailing" constant="16" id="ajN-56-VbX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bJg-BF-2ii" secondAttribute="trailing" symbolic="YES" id="asS-5h-iYy"/>
                             <constraint firstItem="6sg-8I-k3w" firstAttribute="top" secondItem="Ggs-SX-jCD" secondAttribute="bottom" id="cWQ-dv-Ppf"/>
                             <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="fJG-hR-rud"/>
                             <constraint firstItem="jYN-fS-ZZC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fc0-Nd-UqW"/>
@@ -159,6 +159,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ty0-Cv-aeJ" secondAttribute="bottom" constant="10" id="seN-by-WHV"/>
                             <constraint firstItem="Ggs-SX-jCD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tHn-Uf-JRU"/>
                             <constraint firstItem="gry-IR-r2G" firstAttribute="leading" secondItem="ofo-94-zGX" secondAttribute="trailing" constant="8" id="twl-Vs-C3i"/>
+                            <constraint firstItem="6sg-8I-k3w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uSq-0Q-Tko"/>
+                            <constraint firstItem="kRK-E4-ILX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vZC-JU-8qO"/>
                             <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="top" secondItem="ofo-94-zGX" secondAttribute="bottom" constant="7.3399999999999999" id="vgg-aV-Spn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -180,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1101" y="133"/>
+            <point key="canvasLocation" x="1098.5507246376812" y="132.58928571428572"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1Bc-QG-2cD">
@@ -215,17 +217,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="egY-6h-Mow">
-                                    <size key="itemSize" width="110" height="110"/>
+                                    <size key="itemSize" width="125" height="125"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HistoryCell" id="S17-zR-RV0" customClass="HistoryCollectionViewCell" customModule="Food_Finder" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="10" width="110" height="110"/>
+                                        <rect key="frame" x="10" y="10" width="125" height="125"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="110" height="110"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="Fc9-AF-evh">
