@@ -101,7 +101,7 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
         
         decideButton.layer.masksToBounds = false
         decideButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        decideButton.layer.shadowOpacity = 1.0
+        decideButton.layer.shadowOpacity = 0.5
         decideButton.layer.shadowRadius = 0
         decideButton.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         
@@ -121,9 +121,9 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
         
         helperButton.layer.masksToBounds = false
         helperButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        helperButton.layer.shadowOpacity = 1.0
+        helperButton.layer.shadowOpacity = 0.5
         helperButton.layer.shadowRadius = 0
-        helperButton.layer.shadowOffset = CGSize(width: 0, height: 3.5)
+        helperButton.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         
         listButton.setTitle("View List", for: .normal)
         listButton.titleLabel?.font = font
@@ -134,9 +134,9 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
         
         listButton.layer.masksToBounds = false
         listButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        listButton.layer.shadowOpacity = 1.0
+        listButton.layer.shadowOpacity = 0.5
         listButton.layer.shadowRadius = 0
-        listButton.layer.shadowOffset = CGSize(width: 0, height: 3.5)
+        listButton.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         
         
         oneDollarSignButton.layer.cornerRadius = oneDollarSignButton.frame.width/2

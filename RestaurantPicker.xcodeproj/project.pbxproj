@@ -35,7 +35,7 @@
 		21845B1B22058E2D00E15B43 /* NewEntryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewEntryTableViewController.swift; path = "Food Finder/Controllers/NewEntryTableViewController.swift"; sourceTree = SOURCE_ROOT; };
 		21CB5297220D42B300AEED6C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		21E4E2A5220AD62C00D102B2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = "Food Finder/Controllers/DetailViewController.swift"; sourceTree = SOURCE_ROOT; };
-		21EECFB6215A01F30068AEF3 /* Food Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21EECFB6215A01F30068AEF3 /* RestaurantPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21EECFB9215A01F40068AEF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21EECFBB215A01F40068AEF3 /* RandomSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomSelectionViewController.swift; sourceTree = "<group>"; };
 		21EECFBE215A01F40068AEF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		21EECFB7215A01F30068AEF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				21EECFB6215A01F30068AEF3 /* Food Finder.app */,
+				21EECFB6215A01F30068AEF3 /* RestaurantPicker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,9 +147,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		21EECFB5215A01F30068AEF3 /* Food Finder */ = {
+		21EECFB5215A01F30068AEF3 /* RestaurantPicker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21EECFCB215A01F70068AEF3 /* Build configuration list for PBXNativeTarget "Food Finder" */;
+			buildConfigurationList = 21EECFCB215A01F70068AEF3 /* Build configuration list for PBXNativeTarget "RestaurantPicker" */;
 			buildPhases = (
 				88D42F780497E982D4ECEBD0 /* [CP] Check Pods Manifest.lock */,
 				21EECFB2215A01F30068AEF3 /* Sources */,
@@ -162,9 +162,9 @@
 			);
 			dependencies = (
 			);
-			name = "Food Finder";
+			name = RestaurantPicker;
 			productName = "Food Finder";
-			productReference = 21EECFB6215A01F30068AEF3 /* Food Finder.app */;
+			productReference = 21EECFB6215A01F30068AEF3 /* RestaurantPicker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -183,7 +183,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 21EECFB1215A01F30068AEF3 /* Build configuration list for PBXProject "Food Finder" */;
+			buildConfigurationList = 21EECFB1215A01F30068AEF3 /* Build configuration list for PBXProject "RestaurantPicker" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -196,7 +196,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				21EECFB5215A01F30068AEF3 /* Food Finder */,
+				21EECFB5215A01F30068AEF3 /* RestaurantPicker */,
 			);
 		};
 /* End PBXProject section */
@@ -440,7 +440,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.williamchew.Food-Finder";
+				PRODUCT_BUNDLE_IDENTIFIER = com.williamchew.RestaurantPicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -461,7 +461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.williamchew.Food-Finder";
+				PRODUCT_BUNDLE_IDENTIFIER = com.williamchew.RestaurantPicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -472,7 +472,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		21EECFB1215A01F30068AEF3 /* Build configuration list for PBXProject "Food Finder" */ = {
+		21EECFB1215A01F30068AEF3 /* Build configuration list for PBXProject "RestaurantPicker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21EECFC9215A01F70068AEF3 /* Debug */,
@@ -481,7 +481,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21EECFCB215A01F70068AEF3 /* Build configuration list for PBXNativeTarget "Food Finder" */ = {
+		21EECFCB215A01F70068AEF3 /* Build configuration list for PBXNativeTarget "RestaurantPicker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21EECFCC215A01F70068AEF3 /* Debug */,

@@ -121,9 +121,9 @@ class RandomSelectionViewController: UIViewController {
         
         tryAgainButton.layer.masksToBounds = false
         tryAgainButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        tryAgainButton.layer.shadowOpacity = 1.0
+        tryAgainButton.layer.shadowOpacity = 0.5
         tryAgainButton.layer.shadowRadius = 0
-        tryAgainButton.layer.shadowOffset = CGSize(width: 0, height: 3.5)
+        tryAgainButton.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         
         
     }

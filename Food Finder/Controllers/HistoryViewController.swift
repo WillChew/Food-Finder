@@ -153,11 +153,11 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
             cell.restaurantNameLabel.text = "Add New Entry"
             cell.restaurantAddressLabel.text = ""
             cell.restaurantDateLabel.text = ""
+            cell.restaurantPic.contentMode = .scaleAspectFill
         } else {
             if let imageData = entriesArray[indexPath.row].image {
                 cell.restaurantPic.image = UIImage(data: imageData)
                 cell.restaurantPic.contentMode = .scaleToFill
-                
                 
             } else {
                 cell.restaurantPic.image = UIImage(named: "noImage")

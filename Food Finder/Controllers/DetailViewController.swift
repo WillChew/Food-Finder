@@ -48,6 +48,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     fileprivate func setupInitialLoad() {
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
+        restaurantImage.contentMode = .scaleToFill
         saveButton.isHidden = true
         editAddressTextF.isHidden = true
         editNameTextF.isHidden = true
