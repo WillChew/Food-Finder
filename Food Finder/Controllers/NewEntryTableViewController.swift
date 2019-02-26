@@ -174,7 +174,7 @@ class NewEntryTableViewController: UITableViewController {
         
         print("Pressed")
         saveItems()
-       
+        
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -237,7 +237,7 @@ extension NewEntryTableViewController: UIImagePickerControllerDelegate, UINaviga
             UserDefaults.standard.removeObject(forKey: "name")
             savedName = nil
         }
-    
+        
         
         if addressTextField.text == "" {
             UserDefaults.standard.removeObject(forKey: "address")
