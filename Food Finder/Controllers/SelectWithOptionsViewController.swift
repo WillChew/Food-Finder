@@ -49,6 +49,7 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
     var blurEffectView = UIVisualEffectView()
     var selectedRestaurant: Restaurant!
     var dismissPopoverTap: UITapGestureRecognizer!
+    var restaurant: Restaurant!
     
     
     
@@ -329,7 +330,15 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
     
     @IBAction func yelpButtonPressed(_ sender: UIButton) {
         
+        guard let cell = sender.superview?.superview as? RestaurantCellTableViewCell, let indexPath = restaurantTableView.indexPath(for: cell) else { return }
+        restaurant = restaurantsArray[indexPath.row]
+        
+        let urlStr = restaurant.url
+        showYelpPage(urlStr)
+        
     }
+    
+
     
     
     
@@ -358,6 +367,8 @@ extension SelectWithOptionsViewController: CLLocationManagerDelegate, UITextFiel
     }
     
     
+    
+    
 }
 
 extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -373,7 +384,7 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell", for: indexPath) as! RestaurantCellTableViewCell
         
-        let restaurant = restaurantsArray[indexPath.row]
+        restaurant = restaurantsArray[indexPath.row]
         
         
         cell.tag = indexPath.row
@@ -408,6 +419,7 @@ extension SelectWithOptionsViewController: UITableViewDataSource, UITableViewDel
             
             
             cell.restaurantImage.sd_setImage(with:URL(string: restaurantsArray[indexPath.row].imageURL) ,placeholderImage: UIImage(named: "noImage"))
+            cell.reviewCountLabel.text = "Based on \(restaurant.reviewCount) Reviews"
             
             cell.accessoryType = restaurant.selected == true ? .checkmark : .none
             
