@@ -16,7 +16,7 @@ import SafariServices
 class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     //MARK: Outlets
     
-  
+    
     @IBOutlet weak var listButton: UIButton!
     @IBOutlet weak var restaurantTableView: UITableView!
     @IBOutlet weak var decideButton: UIButton!
@@ -33,7 +33,7 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
     @IBOutlet weak var popoverDismissButton: UIButton!
     @IBOutlet weak var popoverAddressLabel: UILabel!
     @IBOutlet weak var popoverAddButton: UIButton!
-
+    
     
     
     
@@ -254,7 +254,7 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
         
         let scrollIndexPath: IndexPath = IndexPath(row: NSNotFound, section: 0)
         restaurantTableView.scrollToRow(at: scrollIndexPath, at: .top, animated: true)
-
+        
         
     }
     
@@ -338,7 +338,7 @@ class SelectWithOptionsViewController: UIViewController, UIPopoverPresentationCo
         
     }
     
-
+    
     
     
     

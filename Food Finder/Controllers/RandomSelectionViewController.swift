@@ -44,15 +44,15 @@ class RandomSelectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        
         
         setupButtons()
         
-        if selectedRestaurant != nil {
-            changeDisplays()
-        } else {
+        if selectedRestaurant == nil {
             nameLabel.text = "No restaurant selected"
             addressLabel.text = ""
+            ratingImage.isHidden = true
+            phoneButton.isHidden = true
         }
         
         
@@ -89,34 +89,28 @@ class RandomSelectionViewController: UIViewController {
         alert.addAction(helpAction)
         alert.addAction(cancelAction)
         alert.view.tintColor = .black
-        self.navigationController?.setToolbarHidden(true, animated: animated)
-
+        
+        
+        
+        
         
         self.present(alert, animated: true, completion: nil)
         
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setToolbarHidden(false, animated: animated)
-    }
-    
-  
-    
     
     //MARK: Functions
     
     func setupButtons() {
-       
+        
         tryAgainButton.titleLabel?.textAlignment = .center
         
         
-        phoneButton.isHidden = true
         if selectedRestaurant == nil {
             selectButton.isHidden = true
         }
-        ratingImage.isHidden = true
+        
         tryAgainButton.layer.cornerRadius = 10
         tryAgainButton.layer.borderWidth = 2
         tryAgainButton.layer.borderColor = UIColor.black.cgColor
@@ -360,8 +354,8 @@ class RandomSelectionViewController: UIViewController {
         
         findRestaurants()
     }
-   
-
+    
+    
     
 }
 //MARK: Map and location delegate methods
@@ -401,7 +395,7 @@ extension RandomSelectionViewController: CLLocationManagerDelegate, GMSMapViewDe
     }
     
     func showYelpPage(_ url: String){
-       
+        
         guard let yelpUrl = URL(string: url) else { return }
         let vc = SFSafariViewController(url: yelpUrl)
         present(vc, animated: true, completion: nil)

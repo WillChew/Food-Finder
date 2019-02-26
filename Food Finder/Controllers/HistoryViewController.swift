@@ -39,11 +39,11 @@ class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
+        
         
     }
     
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -291,7 +291,7 @@ extension HistoryViewController: UICollectionViewDelegate, UICollectionViewDataS
         } else {
             loadItems()
         }
-  
+        
         searchBar.resignFirstResponder()
     }
     
