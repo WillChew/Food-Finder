@@ -70,7 +70,6 @@ class RandomSelectionViewController: UIViewController {
         activityIndicator.bounds = theMapView.bounds
         activityIndicator.center = theMapView.center
         
-       
         
     }
     
@@ -89,15 +88,17 @@ class RandomSelectionViewController: UIViewController {
         alert.addAction(helpAction)
         alert.addAction(cancelAction)
         alert.view.tintColor = .black
-        
+        self.navigationController?.setToolbarHidden(true, animated: animated)
+
         
         self.present(alert, animated: true, completion: nil)
         
         
-       
-        
-        
-        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setToolbarHidden(false, animated: animated)
     }
     
   
