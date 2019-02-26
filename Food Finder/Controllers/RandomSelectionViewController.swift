@@ -26,6 +26,7 @@ class RandomSelectionViewController: UIViewController {
     private let locationManager = CLLocationManager()
     
     
+    @IBOutlet weak var reviewCountLabel: UILabel!
     @IBOutlet weak var selectButton: UIButton!
     @IBOutlet weak var tryAgainButton: UIButton!
     @IBOutlet weak var phoneButton: UIButton!
@@ -297,6 +298,7 @@ class RandomSelectionViewController: UIViewController {
         self.nameLabel.text = randomRestaurant.name
         self.addressLabel.text = randomRestaurant.address
         self.getRatingImage(restaurantRating)
+        self.reviewCountLabel.text = "Based on \(randomRestaurant.reviewCount) Reviews"
         
         if randomRestaurant.phone == "" {
             phoneButton.titleLabel?.text = ""

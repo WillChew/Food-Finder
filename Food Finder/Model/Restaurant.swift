@@ -20,9 +20,10 @@ class Restaurant {
     var latitude : Double
     var longitude : Double
     var selected : Bool
+    var reviewCount: Int
     
    
-    init(name: String, selected: Bool, id: String, imageURL: String, phone: String, rating: Double, url: String, address: String, latitude: Double, longitude: Double){
+    init(name: String, selected: Bool, id: String, imageURL: String, phone: String, rating: Double, url: String, address: String, latitude: Double, longitude: Double, reviewCount: Int){
         self.name = name
         self.selected = false
         self.id = id
@@ -33,6 +34,7 @@ class Restaurant {
         self.address = address
         self.latitude = latitude
         self.longitude = longitude
+        self.reviewCount = reviewCount
     }
     
     

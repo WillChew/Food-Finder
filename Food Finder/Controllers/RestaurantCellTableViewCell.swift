@@ -14,6 +14,7 @@ class RestaurantCellTableViewCell: UITableViewCell {
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var restaurantAddress: UILabel!
     @IBOutlet weak var restaurantRatingImage: UIImageView!
+    @IBOutlet weak var reviewCountLabel: UILabel!
     
     
     override func awakeFromNib() {

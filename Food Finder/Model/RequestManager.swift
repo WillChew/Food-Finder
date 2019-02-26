@@ -56,9 +56,9 @@ class RequestManager {
                 guard let locationDict = restaurant["location"] as? Dictionary<String,Any?>, let address = locationDict["address1"] as? String, let coordinates = restaurant["coordinates"] as? Dictionary<String,Any?>, let latitude = coordinates["latitude"] as? Double, let longitude = coordinates["longitude"] as? Double, let rating = restaurant["rating"] as? Double else { return }
 //                let rating = restaurant["rating"] as? Double
 
-                guard let id = restaurant["id"] as? String, let imageURL = restaurant["image_url"] as? String, let phone = restaurant["phone"] as? String, let url = restaurant["url"] as? String else { return }
+                guard let id = restaurant["id"] as? String, let imageURL = restaurant["image_url"] as? String, let phone = restaurant["phone"] as? String, let url = restaurant["url"] as? String, let reviewCount = restaurant["review_count"] as? Int else { return }
                 
-                let newRestaurant = Restaurant(name: restaurant["name"] as! String, selected: false, id: id, imageURL: imageURL, phone: phone, rating: rating, url: url, address: address, latitude: latitude, longitude: longitude)
+                let newRestaurant = Restaurant(name: restaurant["name"] as! String, selected: false, id: id, imageURL: imageURL, phone: phone, rating: rating, url: url, address: address, latitude: latitude, longitude: longitude, reviewCount: reviewCount)
                 
                 
                     

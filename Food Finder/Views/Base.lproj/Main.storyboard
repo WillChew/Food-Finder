@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Four Barrel Coffee" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sg-8I-k3w">
-                                <rect key="frame" x="98.5" y="585" width="217.5" height="33.5"/>
+                                <rect key="frame" x="98.5" y="602.5" width="217.5" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Ggs-SX-jCD" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="585"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="602.5"/>
                                 <gestureRecognizers/>
                             </view>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="n7x-K8-8oO">
@@ -78,38 +78,22 @@
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="large_0" translatesAutoresizingMaskIntoConstraints="NO" id="ofo-94-zGX">
-                                <rect key="frame" x="141" y="700" width="132" height="41.5"/>
+                                <rect key="frame" x="141" y="717.5" width="132" height="24"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="375 Valencia St" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRK-E4-ILX">
-                                <rect key="frame" x="117.5" y="626.5" width="179" height="30"/>
+                                <rect key="frame" x="117.5" y="644" width="179" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bJg-BF-2ii">
-                                <rect key="frame" x="117.5" y="661" width="179" height="42"/>
+                                <rect key="frame" x="117.5" y="678.5" width="179" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="(647) 975-1430">
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="makeCallButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VOM-zY-FBr"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gry-IR-r2G">
-                                <rect key="frame" x="300" y="705" width="98" height="30"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="View Yelp Page">
-                                            <attributes>
-                                                <font key="NSFont" size="14" name="MarkerFelt-Wide"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="selectRestaurantButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F5p-2e-iGX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xx3-we-i9L">
@@ -123,6 +107,25 @@
                                     <action selector="magnifyingGlassButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g9s-Gf-bTF"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNU-gK-280">
+                                <rect key="frame" x="12" y="735" width="117" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gry-IR-r2G">
+                                <rect key="frame" x="287" y="708" width="82" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gry-IR-r2G" secondAttribute="height" multiplier="24:13" constant="10" id="Ot8-du-buC"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="yelpTrade">
+                                    <attributedString key="attributedTitle"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectRestaurantButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F5p-2e-iGX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -131,28 +134,31 @@
                             <constraint firstItem="kRK-E4-ILX" firstAttribute="width" secondItem="bJg-BF-2ii" secondAttribute="width" id="A9i-YL-kGt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ggs-SX-jCD" secondAttribute="trailing" id="B9d-h4-rYz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xx3-we-i9L" secondAttribute="trailing" id="CMU-ye-hOj"/>
-                            <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="top" secondItem="gry-IR-r2G" secondAttribute="bottom" constant="14" id="DHx-bZ-MkM"/>
-                            <constraint firstItem="gry-IR-r2G" firstAttribute="top" secondItem="bJg-BF-2ii" secondAttribute="bottom" constant="2" id="Fho-Wu-y5V"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n7x-K8-8oO" secondAttribute="trailing" constant="10" id="HCC-et-VO1"/>
                             <constraint firstItem="kRK-E4-ILX" firstAttribute="leading" secondItem="bJg-BF-2ii" secondAttribute="leading" id="Hga-uQ-hYR"/>
                             <constraint firstItem="bJg-BF-2ii" firstAttribute="top" secondItem="kRK-E4-ILX" secondAttribute="bottom" constant="4.5" id="L6I-rM-C1s"/>
                             <constraint firstItem="n7x-K8-8oO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="OEj-4h-XNi"/>
-                            <constraint firstItem="gry-IR-r2G" firstAttribute="leading" secondItem="ofo-94-zGX" secondAttribute="trailing" constant="27" id="VRa-Rt-uOk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gry-IR-r2G" secondAttribute="trailing" constant="16" id="Vp6-6e-C5i"/>
+                            <constraint firstItem="gry-IR-r2G" firstAttribute="top" secondItem="Ggs-SX-jCD" secondAttribute="bottom" constant="105.5" id="Pwn-Y2-7TN"/>
+                            <constraint firstItem="ofo-94-zGX" firstAttribute="leading" secondItem="QNU-gK-280" secondAttribute="trailing" constant="12" id="UAM-Kv-L4S"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gry-IR-r2G" secondAttribute="trailing" constant="45" id="Usa-fd-uxH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ty0-Cv-aeJ" secondAttribute="trailing" constant="16" id="ajN-56-VbX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bJg-BF-2ii" secondAttribute="trailing" symbolic="YES" id="asS-5h-iYy"/>
                             <constraint firstItem="6sg-8I-k3w" firstAttribute="top" secondItem="Ggs-SX-jCD" secondAttribute="bottom" id="cWQ-dv-Ppf"/>
                             <constraint firstItem="Xx3-we-i9L" firstAttribute="top" secondItem="n7x-K8-8oO" secondAttribute="top" id="d3g-wQ-qGN"/>
                             <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="fJG-hR-rud"/>
                             <constraint firstItem="Xx3-we-i9L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="gov-Va-oWg"/>
+                            <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="top" secondItem="QNU-gK-280" secondAttribute="bottom" constant="14" id="gtj-bJ-rsJ"/>
                             <constraint firstItem="Ggs-SX-jCD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-44" id="jnM-bu-8sR"/>
                             <constraint firstItem="kRK-E4-ILX" firstAttribute="top" secondItem="6sg-8I-k3w" secondAttribute="bottom" constant="8" id="mNL-7a-Zih"/>
                             <constraint firstItem="n7x-K8-8oO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mRW-Ea-NEz"/>
+                            <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="top" secondItem="gry-IR-r2G" secondAttribute="bottom" constant="2" id="nPQ-f7-oTu"/>
+                            <constraint firstItem="gry-IR-r2G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="287" id="pco-ns-68R"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ty0-Cv-aeJ" secondAttribute="bottom" constant="10" id="seN-by-WHV"/>
                             <constraint firstItem="Ggs-SX-jCD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tHn-Uf-JRU"/>
                             <constraint firstItem="6sg-8I-k3w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uSq-0Q-Tko"/>
                             <constraint firstItem="kRK-E4-ILX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vZC-JU-8qO"/>
                             <constraint firstItem="Ty0-Cv-aeJ" firstAttribute="top" secondItem="ofo-94-zGX" secondAttribute="bottom" constant="7.3399999999999999" id="vgg-aV-Spn"/>
+                            <constraint firstItem="QNU-gK-280" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="zdL-Bu-zSp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -164,6 +170,7 @@
                         <outlet property="nameLabel" destination="6sg-8I-k3w" id="OKx-1h-IaF"/>
                         <outlet property="phoneButton" destination="bJg-BF-2ii" id="fGt-Gr-fY7"/>
                         <outlet property="ratingImage" destination="ofo-94-zGX" id="yH0-Fo-yIO"/>
+                        <outlet property="reviewCountLabel" destination="QNU-gK-280" id="Hek-KY-Hj8"/>
                         <outlet property="searchButton" destination="hZ5-qq-M0R" id="Pbe-UT-70k"/>
                         <outlet property="searchStackView" destination="n7x-K8-8oO" id="g1s-0O-WEC"/>
                         <outlet property="selectButton" destination="gry-IR-r2G" id="Rgm-tz-j09"/>
@@ -397,39 +404,63 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="4er-Le-Fy5">
-                                                    <rect key="frame" x="103" y="32" width="166" height="18"/>
+                                                    <rect key="frame" x="107" y="32" width="252" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lzu-cm-6p8">
-                                                    <rect key="frame" x="16" y="11" width="79" height="68"/>
+                                                    <rect key="frame" x="20" y="11" width="79" height="68"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="lzu-cm-6p8" secondAttribute="height" multiplier="79:68" id="GyN-y9-BEC"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Bang Bang Ice Cream and Bakery" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V91-Ca-ZVv">
-                                                    <rect key="frame" x="103" y="6" width="166" height="24"/>
+                                                    <rect key="frame" x="107" y="6" width="252" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" image="large_0" translatesAutoresizingMaskIntoConstraints="NO" id="1KD-hN-fg6">
-                                                    <rect key="frame" x="103" y="55" width="42" height="24"/>
+                                                    <rect key="frame" x="107" y="55" width="132" height="24"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UoY-O8-hNv">
+                                                    <rect key="frame" x="367" y="55" width="41" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="UoY-O8-hNv" secondAttribute="height" multiplier="41:24" id="eki-Mx-u3u"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="yelpBurst"/>
+                                                    <connections>
+                                                        <action selector="yelpButtonPressed:" destination="t4L-Ml-lkf" eventType="touchUpInside" id="kPN-iC-wfV"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Based on 7777 Ratings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y78-0f-P3z">
+                                                    <rect key="frame" x="248" y="61" width="111" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="4er-Le-Fy5" firstAttribute="leading" secondItem="lzu-cm-6p8" secondAttribute="trailing" constant="8" id="5GT-Gn-9nf"/>
+                                                <constraint firstItem="y78-0f-P3z" firstAttribute="leading" secondItem="lzu-cm-6p8" secondAttribute="trailing" constant="149" id="5QF-mw-QOG"/>
                                                 <constraint firstAttribute="trailing" secondItem="1KD-hN-fg6" secondAttribute="trailing" constant="175" id="8CU-Jo-ieu"/>
                                                 <constraint firstItem="V91-Ca-ZVv" firstAttribute="top" secondItem="QEN-fn-XQg" secondAttribute="topMargin" constant="-5" id="Abg-dq-BfR"/>
                                                 <constraint firstItem="V91-Ca-ZVv" firstAttribute="leading" secondItem="lzu-cm-6p8" secondAttribute="trailing" constant="8" id="Fy4-gW-l12"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="V91-Ca-ZVv" secondAttribute="trailing" constant="35" id="RYS-bc-7da"/>
                                                 <constraint firstItem="1KD-hN-fg6" firstAttribute="bottom" secondItem="lzu-cm-6p8" secondAttribute="bottom" id="SPb-Mo-XLD"/>
+                                                <constraint firstItem="y78-0f-P3z" firstAttribute="top" secondItem="QEN-fn-XQg" secondAttribute="top" constant="61" id="YMC-z8-tNb"/>
                                                 <constraint firstItem="lzu-cm-6p8" firstAttribute="leading" secondItem="QEN-fn-XQg" secondAttribute="leadingMargin" id="aNM-IB-S6I"/>
+                                                <constraint firstItem="UoY-O8-hNv" firstAttribute="top" secondItem="QEN-fn-XQg" secondAttribute="top" constant="55" id="aqm-Qy-9Xv"/>
                                                 <constraint firstItem="lzu-cm-6p8" firstAttribute="top" secondItem="QEN-fn-XQg" secondAttribute="topMargin" id="ezN-1o-8My"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="4er-Le-Fy5" secondAttribute="trailing" constant="35" id="fUn-IW-1hs"/>
+                                                <constraint firstAttribute="bottom" secondItem="UoY-O8-hNv" secondAttribute="bottom" constant="10.5" id="hd3-3Q-RIs"/>
                                                 <constraint firstItem="1KD-hN-fg6" firstAttribute="leading" secondItem="lzu-cm-6p8" secondAttribute="trailing" constant="8" id="idu-VE-uyA"/>
+                                                <constraint firstAttribute="bottom" secondItem="y78-0f-P3z" secondAttribute="bottom" constant="16.5" id="jgL-Vc-te2"/>
                                                 <constraint firstItem="4er-Le-Fy5" firstAttribute="top" secondItem="V91-Ca-ZVv" secondAttribute="bottom" constant="2" id="qBQ-iH-ZW2"/>
+                                                <constraint firstItem="UoY-O8-hNv" firstAttribute="leading" secondItem="lzu-cm-6p8" secondAttribute="trailing" constant="268" id="qaB-4Y-dex"/>
+                                                <constraint firstAttribute="trailing" secondItem="UoY-O8-hNv" secondAttribute="trailing" constant="6" id="rOg-I3-lBM"/>
+                                                <constraint firstAttribute="trailing" secondItem="y78-0f-P3z" secondAttribute="trailing" constant="55" id="scK-RJ-9Um"/>
                                                 <constraint firstItem="1KD-hN-fg6" firstAttribute="top" secondItem="4er-Le-Fy5" secondAttribute="bottom" constant="5" id="wCV-5c-B44"/>
                                                 <constraint firstItem="lzu-cm-6p8" firstAttribute="bottom" secondItem="QEN-fn-XQg" secondAttribute="bottomMargin" id="zWI-Oo-LOs"/>
                                             </constraints>
@@ -439,6 +470,7 @@
                                             <outlet property="restaurantImage" destination="lzu-cm-6p8" id="ktj-ku-a8f"/>
                                             <outlet property="restaurantNameLabel" destination="V91-Ca-ZVv" id="khe-1t-zEZ"/>
                                             <outlet property="restaurantRatingImage" destination="1KD-hN-fg6" id="zlR-Kr-G3q"/>
+                                            <outlet property="reviewCountLabel" destination="y78-0f-P3z" id="eOV-bQ-AYg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -679,7 +711,7 @@
                     <viewLayoutGuide key="safeArea" id="UeE-eQ-Ijo"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2140.5797101449275" y="132.58928571428572"/>
+            <point key="canvasLocation" x="2139.130434782609" y="132.58928571428572"/>
         </scene>
         <!--New Entry-->
         <scene sceneID="pWs-Ci-jY1">
@@ -1029,6 +1061,8 @@
         <image name="magnifying_glass" width="37.5" height="37.5"/>
         <image name="map" width="30" height="30"/>
         <image name="plus" width="375" height="375"/>
+        <image name="yelpBurst" width="90" height="90"/>
+        <image name="yelpTrade" width="250" height="160"/>
     </resources>
     <color key="tintColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
